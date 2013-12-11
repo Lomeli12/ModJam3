@@ -1,0 +1,21 @@
+[
+{
+  "modid" : "PayNoAttentionHere",
+  "name" : "Pay No Attention Here",
+  "version" : "1.0.0",
+  "url" : "http://www.anthony-lomeli.net/",
+  "credits" : "",
+  "authors": [
+    "Lomeli12"
+  ],
+  "description": "",
+  "logoFile" : "",
+  "updateUrl" : "",
+  "parent" : "",
+  "screenshots": [
+  ],
+  "dependencies": [
+    "Forge"
+  ]
+}
+]
