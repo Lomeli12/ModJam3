@@ -15,10 +15,12 @@ import net.lomeli.cb.abilities.CrystalAbility;
 
 public class AbilityMorphaReach extends CrystalAbility {
 
+    @Override
     public EnumAbilityType abilityType() {
         return EnumAbilityType.NEGATIVE;
     }
 
+    @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
         int radius = 5;
         List<?> entityList = worldObj.getEntitiesWithinAABB(EntityLivingBase.class,

@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import net.lomeli.cb.abilities.water.AbilityMorphaReach;
+import net.lomeli.cb.abilities.air.AbilityRagingWinds;
 
 public class ItemDebugTool extends Item{
 
@@ -20,7 +20,7 @@ public class ItemDebugTool extends Item{
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10){
         if(!par3World.isRemote){
-            new AbilityMorphaReach().enviromentalEffect(par3World, par4, par5, par6, new Random());
+            new AbilityRagingWinds().enviromentalEffect(par3World, par4, par5, par6, new Random());
         }
         return true;
     }
