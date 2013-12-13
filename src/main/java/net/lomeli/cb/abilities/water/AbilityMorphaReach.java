@@ -27,7 +27,7 @@ public class AbilityMorphaReach extends CrystalAbility {
                 AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1).expand(radius, radius, radius));
         for(Object entityObj : entityList) {
             if(entityObj != null && entityObj instanceof EntityLivingBase) {
-                EntityLivingBase entity = (EntityLivingBase)entityObj;
+                EntityLivingBase entity = (EntityLivingBase) entityObj;
                 boolean flag = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.disableDamage;
                 if(!entity.canBreatheUnderwater() && entity.isPotionActive(Potion.waterBreathing.id) && !flag) {
                     entity.setAir(decreaseAirSupply(entity.getAir(), entity, rand));

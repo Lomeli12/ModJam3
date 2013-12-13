@@ -8,7 +8,7 @@ import net.lomeli.cb.abilities.earth.AbilityNatureDevourer;
 import net.lomeli.cb.abilities.earth.AbilityNatureTouch;
 import net.lomeli.cb.abilities.earth.AbilityTerrainDesecrator;
 
-public class ElementEarth implements IElement{
+public class ElementEarth implements IElement {
 
     @Override
     public CrystalAbility dominantPositive() {

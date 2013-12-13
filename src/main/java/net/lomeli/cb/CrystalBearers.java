@@ -14,20 +14,20 @@ import net.lomeli.cb.lib.Strings;
 @Mod(modid = Strings.MOD_ID, name = Strings.MOD_NAME, version = Strings.VERSION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class CrystalBearers {
-    
+
     @SuppressWarnings("unused")
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event){
+    public void preInit(FMLPreInitializationEvent event) {
         Item debug = new ItemDebugTool(500);
-    }
-    
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event){
-        
     }
 
     @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event){
-        
+    public void init(FMLInitializationEvent event) {
+
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+
     }
 }

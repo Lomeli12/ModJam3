@@ -13,13 +13,14 @@ import net.minecraft.world.World;
 import net.lomeli.cb.abilities.CrystalAbility;
 
 public class AbilityAnimalLove extends CrystalAbility {
-    private Class[] entityClassList = { EntityPig.class, EntityHorse.class, EntityCow.class, EntityChicken.class, EntitySheep.class };
+    private Class[] entityClassList = { EntityPig.class, EntityHorse.class, EntityCow.class, EntityChicken.class,
+            EntitySheep.class };
 
     @Override
     public EnumAbilityType abilityType() {
         return EnumAbilityType.POSITIVE;
     }
-    
+
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
         if(rand.nextInt(10000) < 150000) {
@@ -27,18 +28,19 @@ public class AbilityAnimalLove extends CrystalAbility {
             Class<EntityLivingBase> entityClass = entityClassList[rand.nextInt(entityClassList.length)];
             try {
                 System.out.println("Making entity");
-                EntityLivingBase entity = (EntityLivingBase) entityClass.getConstructor(new Class[] { World.class } ).newInstance(new Object[] { worldObj });
-                if(entity != null){
+                EntityLivingBase entity = (EntityLivingBase) entityClass.getConstructor(new Class[] { World.class }).newInstance(
+                        new Object[] { worldObj });
+                if(entity != null) {
                     entity.posX = x;
                     entity.posY = y;
                     entity.posZ = z;
                     System.out.println("Spawn");
                     worldObj.spawnEntityInWorld(entity);
                 }
-            }catch(Exception e){
+            }catch(Exception e) {
                 e.printStackTrace();
             }
-            
+
         }
     }
 }

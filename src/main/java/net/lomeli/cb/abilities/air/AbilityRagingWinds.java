@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
 
-public class AbilityRagingWinds extends CrystalAbility{
+public class AbilityRagingWinds extends CrystalAbility {
     @Override
     public EnumAbilityType abilityType() {
         return EnumAbilityType.NEGATIVE;
@@ -22,7 +22,7 @@ public class AbilityRagingWinds extends CrystalAbility{
                 AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1).expand(radius, radius, radius));
         for(Object entityObj : entityList) {
             if(entityObj != null && entityObj instanceof EntityLivingBase) {
-                EntityLivingBase entity = (EntityLivingBase)entityObj;
+                EntityLivingBase entity = (EntityLivingBase) entityObj;
                 entity.motionY += 1.0F;
             }
         }

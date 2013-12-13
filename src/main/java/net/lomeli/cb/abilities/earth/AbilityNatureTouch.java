@@ -42,7 +42,7 @@ public class AbilityNatureTouch extends CrystalAbility {
                     int id = worldObj.getBlockId(x1, y1, z1);
                     if(id == 0) {
                         if(Block.plantRed.canPlaceBlockAt(worldObj, x1, y1, z1)) {
-                            if(rand.nextInt(10000) < 3050) 
+                            if(rand.nextInt(10000) < 3050)
                                 worldObj.setBlock(x1, y1, z1, this.blockList.get(rand.nextInt(this.blockList.size())));
                         }
                     }
