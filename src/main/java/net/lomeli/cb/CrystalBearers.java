@@ -1,7 +1,5 @@
 package net.lomeli.cb;
 
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -31,7 +29,7 @@ public class CrystalBearers {
 
         ModBlocks.loadBlocks();
 
-        Item debug = new ItemDebugTool(500);
+        new ItemDebugTool(500);
     }
 
     @Mod.EventHandler

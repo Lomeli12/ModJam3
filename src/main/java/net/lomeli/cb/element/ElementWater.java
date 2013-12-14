@@ -6,7 +6,9 @@ import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.water.AbilityDrenchedEarth;
 import net.lomeli.cb.abilities.water.AbilityMoistSoil;
 import net.lomeli.cb.abilities.water.AbilityMorphaReach;
+import net.lomeli.cb.abilities.water.AbilityPowerWater;
 import net.lomeli.cb.abilities.water.AbilityReplenishWater;
+import net.lomeli.cb.abilities.water.AbilityShardPowerWater;
 
 public class ElementWater implements IElement {
     private int id;
@@ -33,12 +35,12 @@ public class ElementWater implements IElement {
 
     @Override
     public CrystalAbility dominantNeutral() {
-        return null;
+        return new AbilityShardPowerWater();
     }
 
     @Override
     public CrystalAbility recessiveNeutral() {
-        return null;
+        return new AbilityPowerWater();
     }
 
     @Override

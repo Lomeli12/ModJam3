@@ -6,7 +6,9 @@ import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.earth.AbilityAnimalLove;
 import net.lomeli.cb.abilities.earth.AbilityNatureDevourer;
 import net.lomeli.cb.abilities.earth.AbilityNatureTouch;
+import net.lomeli.cb.abilities.earth.AbilityPowerEarth;
 import net.lomeli.cb.abilities.earth.AbilityTerrainDesecrator;
+import net.lomeli.cb.abilities.earth.AbilityShardPowerEarth;
 
 public class ElementEarth implements IElement {
     private int id;
@@ -28,12 +30,12 @@ public class ElementEarth implements IElement {
 
     @Override
     public CrystalAbility dominantNeutral() {
-        return null;
+        return new AbilityShardPowerEarth();
     }
 
     @Override
     public CrystalAbility recessiveNeutral() {
-        return null;
+        return new AbilityPowerEarth();
     }
 
     @Override

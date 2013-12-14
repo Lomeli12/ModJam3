@@ -6,7 +6,9 @@ import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.dark.AbilityEnrichedEarth;
 import net.lomeli.cb.abilities.dark.AbilityMagnetism;
 import net.lomeli.cb.abilities.dark.AbilityOreater;
+import net.lomeli.cb.abilities.dark.AbilityPowerDark;
 import net.lomeli.cb.abilities.dark.AbilitySpeardDark;
+import net.lomeli.cb.abilities.dark.AbilityShardPowerDark;
 
 public class ElementDark implements IElement {
 
@@ -34,14 +36,12 @@ public class ElementDark implements IElement {
 
     @Override
     public CrystalAbility dominantNeutral() {
-        // TODO Auto-generated method stub
-        return null;
+        return new AbilityShardPowerDark();
     }
 
     @Override
     public CrystalAbility recessiveNeutral() {
-        // TODO Auto-generated method stub
-        return null;
+        return new AbilityPowerDark();
     }
 
     @Override

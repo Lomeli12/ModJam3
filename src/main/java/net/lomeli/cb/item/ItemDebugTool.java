@@ -12,7 +12,6 @@ import net.lomeli.cb.abilities.DebugAbility;
 import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.lib.Strings;
-import net.lomeli.cb.tile.ICrystal;
 import net.lomeli.cb.tile.TileCrystal;
 
 public class ItemDebugTool extends Item {

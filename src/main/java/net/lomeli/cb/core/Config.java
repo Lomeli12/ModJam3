@@ -28,5 +28,6 @@ public class Config {
         BlockIds.crystalID = config.get(block, "crystal", 453).getInt(453);
         BlockIds.smelteryID = config.get(block, "smeltery", 454).getInt(454);
         BlockIds.crystalizerID = config.get(block, "crystalizer", 455).getInt(455);
+        BlockIds.shardBlockID = config.get(block, "shardBlock", 456).getInt(456);
     }
 }

@@ -6,7 +6,9 @@ import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.fire.AbilityBainOfIce;
 import net.lomeli.cb.abilities.fire.AbilityBlockSmelter;
 import net.lomeli.cb.abilities.fire.AbilityCombustable;
+import net.lomeli.cb.abilities.fire.AbilityPowerFire;
 import net.lomeli.cb.abilities.fire.AbilitySpontanousCombustion;
+import net.lomeli.cb.abilities.fire.AbilityShardPowerFire;
 
 public class ElementFire implements IElement {
     private int id;
@@ -33,12 +35,12 @@ public class ElementFire implements IElement {
 
     @Override
     public CrystalAbility dominantNeutral() {
-        return null;
+        return new AbilityShardPowerFire();
     }
 
     @Override
     public CrystalAbility recessiveNeutral() {
-        return null;
+        return new AbilityPowerFire();
     }
 
     @Override

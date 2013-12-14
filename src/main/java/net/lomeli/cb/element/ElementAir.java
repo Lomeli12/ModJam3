@@ -7,6 +7,8 @@ import net.lomeli.cb.abilities.air.AbilityAirBubble;
 import net.lomeli.cb.abilities.air.AbilityFalless;
 import net.lomeli.cb.abilities.air.AbilityRagingWinds;
 import net.lomeli.cb.abilities.air.AbilityToxicAir;
+import net.lomeli.cb.abilities.air.AbilityShardPowerAir;
+import net.lomeli.cb.abilities.air.AbilityPowerAir;
 
 public class ElementAir implements IElement {
     private int id;
@@ -33,12 +35,12 @@ public class ElementAir implements IElement {
 
     @Override
     public CrystalAbility dominantNeutral() {
-        return null;
+        return new AbilityShardPowerAir();
     }
 
     @Override
     public CrystalAbility recessiveNeutral() {
-        return null;
+        return new AbilityPowerAir();
     }
 
     @Override
