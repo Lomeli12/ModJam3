@@ -15,7 +15,7 @@ import net.lomeli.cb.tile.TileCrystal;
 public class ElementRegistry {
 
     private static Random rand;
-    private static List<IElement> elements = new ArrayList<IElement>();
+    public static List<IElement> elements = new ArrayList<IElement>();
 
     public static IElement fire, water, earth, air, dark;
 
@@ -47,7 +47,7 @@ public class ElementRegistry {
     }
 
     public static void writeBasic(ItemStack item, int firstElement, int secondElement, int powerElement) {
-        writeElementToItem(item, firstElement, rand.nextInt(4), secondElement, rand.nextInt(4), powerElement, false);
+        writeElementToItem(item, firstElement, rand.nextInt(2), secondElement, rand.nextInt(2), powerElement, false);
     }
 
     public static int getElementID(IElement element) {

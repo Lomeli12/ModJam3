@@ -8,9 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
 
+import net.minecraftforge.fluids.Fluid;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.lib.Strings;
 
 public class ItemShard extends ItemCB implements IShard{
@@ -57,5 +60,17 @@ public class ItemShard extends ItemCB implements IShard{
     public String getItemDisplayName(ItemStack stack) {
         String unlocalizedName = stack.getUnlocalizedName();
         return StatCollector.translateToLocal(unlocalizedName + "." + stack.getItemDamage());
+    }
+
+    @Override
+    public Fluid getFluid(ItemStack stack) {
+        switch(stack.getItemDamage()){
+            case 0: return FluidElements.fireFluid;
+            case 1: return FluidElements.waterFluid;
+            case 2: return FluidElements.earthFluid;
+            case 3: return FluidElements.airFluid;
+            case 4: return FluidElements.darkFluid;
+            default: return null;
+        }
     }
 }

@@ -17,11 +17,12 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.element.FluidElements;
+import net.lomeli.cb.item.ModItems;
 
 public class TileCrystalizer extends TileEntity implements IFluidHandler {
     private FluidTank tank1, tank2, tank3;
     private ItemStack heldItem;
-    private int tick;
+    private int tick, firstEle, secondEle, thirdEle;
     private boolean crystal;
 
     public TileCrystalizer() {
@@ -46,16 +47,16 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
                     }
                 }
             }else {
-                int firstEle = 0, secondEle = 0, thridEle = 0;
                 if(crystal && ++tick >= 500) {
                     tick = 0;
                     crystal = false;
-                    throwCrystalIntoChest(secondEle, thridEle, firstEle);
+                    throwCrystalIntoChest(secondEle, thirdEle, firstEle);
                 }
 
                 if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null && tank2.getFluid() != null
                         && tank2.getFluid().getFluid() != null && tank3.getFluid() != null && tank3.getFluid().getFluid() != null) {
                     if(tank1.getFluidAmount() >= 1000 && tank2.getFluidAmount() >= 1000 && tank3.getFluidAmount() >= 1000) {
+                        System.out.println("Ready");
                         if(tank1.getFluidAmount() >= 1000) {
                             firstEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
                             tank1.drain(1000, true);
@@ -65,7 +66,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
                             tank2.drain(1000, true);
                         }
                         if(tank3.getFluidAmount() >= 1000) {
-                            thridEle = FluidElements.getFluidElement(tank3.getFluid().getFluid()).getElementID();
+                            thirdEle = FluidElements.getFluidElement(tank3.getFluid().getFluid()).getElementID();
                             tank3.drain(1000, true);
                         }
                         crystal = true;
@@ -77,7 +78,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        ForgeDirection dir = ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)).getOpposite();
+        ForgeDirection dir = ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
         ForgeDirection left = ForgeDirection.UNKNOWN, right = ForgeDirection.UNKNOWN;
 
         if(dir == ForgeDirection.NORTH || dir == ForgeDirection.SOUTH) {
@@ -91,9 +92,9 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
         if(from == dir)
             return tank1.fill(resource, doFill);
         else if(from == left)
-            return tank1.fill(resource, doFill);
+            return tank2.fill(resource, doFill);
         else if(from == right)
-            return tank1.fill(resource, doFill);
+            return tank3.fill(resource, doFill);
         return 0;
     }
 
@@ -120,18 +121,20 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
             right = ForgeDirection.SOUTH;
         }
 
-        if(from == dir) {
-            if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null)
-                return tank1.getFluid().getFluid().equals(fluid);
-            return true;
-        }else if(from == left) {
-            if(tank2.getFluid() != null && tank2.getFluid().getFluid() != null)
-                return tank2.getFluid().getFluid().equals(fluid);
-            return true;
-        }else if(from == right) {
-            if(tank3.getFluid() != null && tank3.getFluid().getFluid() != null)
-                return tank3.getFluid().getFluid().equals(fluid);
-            return true;
+        if(fluid != null) {
+            if(from == dir) {
+                if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null)
+                    return tank1.getFluid().getFluid().equals(fluid);
+                return true;
+            }else if(from == left) {
+                if(tank2.getFluid() != null && tank2.getFluid().getFluid() != null)
+                    return tank2.getFluid().getFluid().equals(fluid);
+                return true;
+            }else if(from == right) {
+                if(tank3.getFluid() != null && tank3.getFluid().getFluid() != null)
+                    return tank3.getFluid().getFluid().equals(fluid);
+                return true;
+            }
         }
         return false;
     }
@@ -153,22 +156,18 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
     }
 
     public void writeTag(NBTTagCompound tag) {
-        if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null){
-            tag.setInteger("Amount1", tank1.getFluidAmount());
-            tag.setInteger("FluidID1", tank1.getFluid().fluidID);
-        }
-        if(tank2.getFluid() != null && tank2.getFluid().getFluid() != null){
-            tag.setInteger("Amount2", tank2.getFluidAmount());
-            tag.setInteger("FluidID2", tank2.getFluid().fluidID);
-        }
-        if(tank3.getFluid() != null && tank3.getFluid().getFluid() != null){
-            tag.setInteger("Amount3", tank3.getFluidAmount());
-            tag.setInteger("FluidID3", tank3.getFluid().fluidID);
-        }
-        if(heldItem != null){
+        tank1.writeToNBT(tag);
+        tank2.writeToNBT(tag);
+        tank3.writeToNBT(tag);
+        if(heldItem != null) {
             tag.setInteger("HeldItemID", heldItem.itemID);
             tag.setInteger("HeldItemMeta", heldItem.getItemDamage());
         }
+        tag.setInteger("firstEle", firstEle);
+        tag.setInteger("secondEle", secondEle);
+        tag.setInteger("neutralEle", thirdEle);
+        tag.setBoolean("crystal", crystal);
+        tag.setInteger("tick", tick);
     }
 
     @Override
@@ -178,10 +177,16 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
     }
 
     public void readNBT(NBTTagCompound tag) {
-        tank1.setFluid(new FluidStack(tag.getInteger("FluidId1"), tag.getInteger("Amount1")));
-        tank2.setFluid(new FluidStack(tag.getInteger("FluidId2"), tag.getInteger("Amount2")));
-        tank3.setFluid(new FluidStack(tag.getInteger("FluidId3"), tag.getInteger("Amount3")));
+        tank1.readFromNBT(tag);
+        tank2.readFromNBT(tag);
+        tank3.readFromNBT(tag);
         heldItem = new ItemStack(tag.getInteger("HeldItemID"), 1, tag.getInteger("HeldItemMeta"));
+        
+        firstEle = tag.getInteger("firstEle");
+        secondEle = tag.getInteger("secondEle");
+        thirdEle = tag.getInteger("neutralEle");
+        crystal = tag.getBoolean("crystal");
+        tick = tag.getInteger("tick");
     }
 
     @Override
@@ -201,7 +206,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
 
     public void throwCrystalIntoChest(int i, int j, int k) {
         boolean placedItem = false;
-        ItemStack finishedCrystal = new ItemStack(70, 1, 1);
+        ItemStack finishedCrystal = new ItemStack(ModItems.crystalItem.itemID, 1, 1);
         ElementRegistry.writeBasic(finishedCrystal, i, j, k);
         TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
         if(tile != null) {

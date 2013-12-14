@@ -18,7 +18,7 @@ public class CrystalAbility {
     }
 
     public int cost() {
-        return 0;
+        return 10;
     }
 
 }

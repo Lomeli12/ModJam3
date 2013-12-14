@@ -37,7 +37,7 @@ public class AbilityMagnetism extends CrystalAbility {
             for(int y1 = y - radius; y1 <= y + 5; y1++)
                 for(int z1 = z - radius; z1 <= z + 5; z1++) {
                     int id = worldObj.getBlockId(x1, y1, z1);
-                    if(rand.nextInt(10000) < 50000) {
+                    if(rand.nextInt(10000) < 15) {
                         int xDis = x1 - x, yDis = y1 - y, zDis = z1 - z;
                         int xMove = xDis < 0 ? 1 : xDis > 0 ? -1 : x1;
                         int yMove = yDis < 0 ? 1 : yDis > 0 ? -1 : y1;
@@ -52,5 +52,10 @@ public class AbilityMagnetism extends CrystalAbility {
                         }
                     }
                 }
+    }
+    
+    @Override
+    public int cost() {
+        return 300;
     }
 }

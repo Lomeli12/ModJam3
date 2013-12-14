@@ -1,5 +1,7 @@
 package net.lomeli.cb.tile;
 
+import java.util.Random;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -7,15 +9,29 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.abilities.DebugAbility;
+import net.lomeli.cb.element.ElementRegistry;
 
 public class TileCrystal extends TileEntity implements ICrystal {
-
+    private Random rand;
     private int energy;
     private boolean active, natural;
     private CrystalAbility[] abilities;
+    public int firstEle, secondEle, thridEle, ability1ID, ability2ID;
+    public boolean abilitiesSet, passiveAbility;
 
     public TileCrystal() {
+        rand = new Random();
         abilities = new CrystalAbility[3];
+        if(!abilitiesSet) {
+            firstEle = rand.nextInt(ElementRegistry.elements.size());
+            secondEle = rand.nextInt(ElementRegistry.elements.size());
+            ability1ID = rand.nextInt(4);
+            ability2ID = rand.nextInt(4);
+            abilitiesSet = true;
+            setIsNatural(false);
+            this.setPowerAbility(new DebugAbility());
+        }
     }
 
     @Override
@@ -37,6 +53,13 @@ public class TileCrystal extends TileEntity implements ICrystal {
                     abilityTwo().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                     this.active = false;
                 }
+            }else {
+                this.setAbilityOne(ElementRegistry.elements.get(firstEle).abilities()[ability1ID]);
+                this.setAbilityTwo(ElementRegistry.elements.get(secondEle).abilities()[ability2ID]);
+                if(passiveAbility)
+                    this.setPowerAbility(ElementRegistry.elements.get(thridEle).recessiveNeutral());
+                else
+                    this.setPowerAbility(ElementRegistry.elements.get(thridEle).dominantNeutral());
             }
         }
     }
@@ -111,6 +134,17 @@ public class TileCrystal extends TileEntity implements ICrystal {
     public void writeTag(NBTTagCompound tag) {
         tag.setInteger("power", this.energy);
         tag.setBoolean("active", this.active);
+        tag.setBoolean("abilitiesSet", abilitiesSet);
+        tag.setBoolean("natural", this.natural);
+        tag.setInteger("element1", firstEle);
+        tag.setInteger("element2", secondEle);
+
+        tag.setInteger("ability1", ability1ID);
+        tag.setInteger("ability2", ability2ID);
+        if(!this.natural) {
+            tag.setBoolean("ability3", passiveAbility);
+            tag.setInteger("element3", thridEle);
+        }
     }
 
     @Override
@@ -122,6 +156,16 @@ public class TileCrystal extends TileEntity implements ICrystal {
     public void readNBT(NBTTagCompound tag) {
         this.energy = tag.getInteger("power");
         this.active = tag.getBoolean("active");
+        this.natural = tag.getBoolean("natural");
+        this.abilitiesSet = tag.getBoolean("abilitiesSet");
+        this.firstEle = tag.getInteger("element1");
+        this.secondEle = tag.getInteger("element2");
+        this.ability1ID = tag.getInteger("ability1");
+        this.ability2ID = tag.getInteger("ability2");
+        if(!natural) {
+            this.thridEle = tag.getInteger("element3");
+            this.passiveAbility = tag.getBoolean("ability3");
+        }
     }
 
     @Override

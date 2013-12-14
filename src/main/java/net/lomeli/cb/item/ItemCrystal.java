@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 
 import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.element.ElementRegistry;
+import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.TileCrystal;
 
 public class ItemCrystal extends ItemCB{
@@ -17,7 +18,7 @@ public class ItemCrystal extends ItemCB{
         super(par1, "crystal");
         this.blockID = ModBlocks.crystal.blockID;
         this.setMaxStackSize(1);
-        this.setUnlocalizedName("crystal");
+        this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":crystal");
     }
     
     @Override
@@ -92,6 +93,14 @@ public class ItemCrystal extends ItemCB{
                 ((TileCrystal) tile).setAbilityOne(ElementRegistry.getAbilityOne(stack));
                 ((TileCrystal) tile).setAbilityTwo(ElementRegistry.getAbilityTwo(stack));
                 ((TileCrystal) tile).setPowerAbility(ElementRegistry.getPower(stack));
+                ((TileCrystal) tile).abilitiesSet = true;
+                ((TileCrystal) tile).firstEle = stack.getTagCompound().getInteger("element1");;
+                ((TileCrystal) tile).secondEle = stack.getTagCompound().getInteger("element2");
+                ((TileCrystal) tile).thridEle = stack.getTagCompound().getInteger("powerElement");
+                ((TileCrystal) tile).ability1ID = stack.getTagCompound().getInteger("element1Ability");
+                ((TileCrystal) tile).ability2ID = stack.getTagCompound().getInteger("element2Ability");
+                ((TileCrystal) tile).passiveAbility = stack.getTagCompound().getBoolean("powerElementAbility");
+                ((TileCrystal) tile).setIsNatural(false);
             }
         }
 

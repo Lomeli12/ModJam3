@@ -32,7 +32,7 @@ public class AbilityOreater extends CrystalAbility {
 
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
-        int radius = 5;
+        int radius = 10;
 
         for(int x1 = x - radius; x1 <= x + 5; x1++)
             for(int y1 = y - radius; y1 <= y + 5; y1++)
@@ -43,5 +43,10 @@ public class AbilityOreater extends CrystalAbility {
                             worldObj.setBlock(x1, y1, z1, Block.stone.blockID);
                     }
                 }
+    }
+    
+    @Override
+    public int cost() {
+        return 50;
     }
 }

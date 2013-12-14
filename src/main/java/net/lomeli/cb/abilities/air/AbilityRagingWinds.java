@@ -23,7 +23,9 @@ public class AbilityRagingWinds extends CrystalAbility {
         for(Object entityObj : entityList) {
             if(entityObj != null && entityObj instanceof EntityLivingBase) {
                 EntityLivingBase entity = (EntityLivingBase) entityObj;
-                entity.motionY += 1.0F;
+                entity.motionY += 0.5F;
+                entity.motionX += 0.5F;
+                entity.motionZ += 0.5F;
             }
         }
     }

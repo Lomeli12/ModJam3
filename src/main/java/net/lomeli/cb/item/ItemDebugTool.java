@@ -7,6 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+
 import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.abilities.DebugAbility;
 import net.lomeli.cb.block.ModBlocks;
@@ -28,7 +31,27 @@ public class ItemDebugTool extends Item {
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8,
             float par9, float par10) {
-        return useItem(itemStack, player, world, x, y, z, par7, par8, par9, par10);
+        if(!world.isRemote) {
+            TileEntity tile = world.getBlockTileEntity(x, y, z);
+            if(tile != null) {
+                if(tile instanceof IFluidHandler) {
+                    System.out.println(tile.toString());
+                    if(((IFluidHandler) tile).getTankInfo(null) != null) {
+                        for(FluidTankInfo tank : ((IFluidHandler) tile).getTankInfo(null)) {
+                            System.out.println(tank.toString());
+                            if(tank != null && tank.fluid != null && tank.fluid.getFluid() != null) {
+                                
+                                player.addChatMessage(tank.fluid.getFluid().getLocalizedName() + ": " + tank.fluid.amount + "/"
+                                        + tank.capacity);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+        // return useItem(itemStack, player, world, x, y, z, par7, par8, par9,
+        // par10);
     }
 
     public boolean useItem(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6,

@@ -29,3 +29,9 @@ tile.crystalbearers:crystalizer.name=Crystalizer
 tile.crystalbearers:smelter.name=Crystal Smelter
 
 itemGroup.crystalbearers=Crystal Bearers
+
+fluid.liquidFireCrystal=Liquid Fire Crystal
+fluid.liquidWaterCrystal=Liquid Wave Crystal
+fluid.liquidEarthCrystal=Liquid Terra Crystal
+fluid.liquidAirCrystal=Liquid Aer Crystal
+fluid.liquidDarkCrystal=Liquid Shadow Crystal

@@ -16,6 +16,7 @@ public class ModItems {
         new ItemDebugTool(500);
 
         shard = new ItemShard(ItemIds.shardID);
+        
         for(int i = 0; i < shards.length; i++) {
             shards[i] = new ItemStack(shard, 1, i);
         }

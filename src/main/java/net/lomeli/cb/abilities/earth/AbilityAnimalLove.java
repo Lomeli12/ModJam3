@@ -26,8 +26,10 @@ public class AbilityAnimalLove extends CrystalAbility {
                 EntityLivingBase entity = (EntityLivingBase) ((SpawnListEntry) list.get(rand.nextInt(list.size()))).entityClass
                         .getConstructor(new Class[] { World.class }).newInstance(new Object[] { worldObj });
                 if(entity != null) {
-                    entity.setLocationAndAngles(x, y + 1, z, rand.nextFloat() * 360.0F, 0.0F);
-                    worldObj.spawnEntityInWorld(entity);
+                    if(rand.nextInt(10000) < 50) {
+                        entity.setLocationAndAngles(x, y + 1, z, rand.nextFloat() * 360.0F, 0.0F);
+                        worldObj.spawnEntityInWorld(entity);
+                    }
                 }
             }catch(Exception e) {
                 e.printStackTrace();

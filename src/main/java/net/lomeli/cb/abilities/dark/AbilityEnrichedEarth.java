@@ -37,10 +37,15 @@ public class AbilityEnrichedEarth extends CrystalAbility {
             for(int y1 = y - radius; y1 <= y + 5; y1++)
                 for(int z1 = z - radius; z1 <= z + 5; z1++) {
                     int id = worldObj.getBlockId(x1, y1, z1);
-                    if(rand.nextInt(10000) < 50) {
+                    if(rand.nextInt(10000) < 5) {
                         if(id == Block.stone.blockID)
                             worldObj.setBlock(x1, y1, z1, this.blockList.get(rand.nextInt(this.blockList.size())));
                     }
                 }
+    }
+    
+    @Override
+    public int cost() {
+        return 400;
     }
 }

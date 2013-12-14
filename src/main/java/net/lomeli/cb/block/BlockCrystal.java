@@ -10,7 +10,7 @@ import net.lomeli.cb.tile.TileCrystal;
 public class BlockCrystal extends BlockCB implements ITileEntityProvider {
 
     public BlockCrystal(int par1) {
-        super(par1, Material.glass, "crystal");
+        super(par1, Material.glass, "shardBlock_0");
     }
 
     @Override

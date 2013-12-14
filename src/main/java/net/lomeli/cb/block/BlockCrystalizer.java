@@ -3,20 +3,41 @@ package net.lomeli.cb.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.TileCrystalizer;
 
 public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
-
+    @SideOnly(Side.CLIENT)
+    private Icon[] iconArray;
+    
     public BlockCrystalizer(int par1) {
         super(par1, Material.iron, "crystalizer_");
         this.setUnlocalizedName("crystalizer");
+    }
+    
+    @Override
+    public void registerIcons(IconRegister par1IconRegister) {
+        iconArray = new Icon[4];
+        for(int i = 0; i < iconArray.length; i++) {
+            iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.blockTexture + i);
+        }
+    }
+    
+    @Override
+    public Icon getIcon(int side, int meta) {
+        return side == 0 ? iconArray[3] : side == 1 ? iconArray[1] : side == meta ? iconArray[0] : iconArray[2];
     }
     
     @Override

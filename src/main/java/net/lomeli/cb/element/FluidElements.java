@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import net.lomeli.cb.item.IShard;
 import net.lomeli.cb.item.ModItems;
 
 public class FluidElements {
@@ -53,8 +54,8 @@ public class FluidElements {
     }
 
     public static Fluid getFluidBaseOnStack(ItemStack stack) {
-        if(stack != null && shardList.containsKey(new ItemStack(stack.itemID, 1, stack.getItemDamage())))
-            return shardList.get(new ItemStack(stack.itemID, 1, stack.getItemDamage()));
+        if(stack != null && stack.getItem() instanceof IShard)
+            return ((IShard)stack.getItem()).getFluid(stack);
         return null;
     }
 }

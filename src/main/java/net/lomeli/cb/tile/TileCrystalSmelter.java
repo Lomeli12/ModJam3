@@ -47,17 +47,19 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
             if(inventory[0] != null && inventory[0].getItem() instanceof IShard && heatLevel >= 200) {
                 if(inventory[0].stackSize == 64) {
+                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
                     if(++cookTime >= 500) {
-                        
-                        cookTime = 0;
                         Fluid itemFluid = FluidElements.getFluidBaseOnStack(inventory[0]);
-                        if(itemFluid != null){
+                        if(itemFluid != null) {
+                            System.out.println(itemFluid.getLocalizedName());
                             FluidStack crystalFluid = new FluidStack(itemFluid, 1000);
-                            if(crystalFluid != null){
+                            if(crystalFluid != null) {
                                 fill(null, crystalFluid, true);
                                 setInventorySlotContents(0, null);
+                                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
                             }
                         }
+                        cookTime = 0;
                     }
                 }
             }
@@ -69,12 +71,12 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
                             if(((TileCrystalizer) tile)
                                     .canFill(DirectionUtil.getDirectionFromTile(
                                             worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile), tank.getFluid()
-                                            .getFluid()))
-                                tank.drain(
-                                        ((TileCrystalizer) tile).fill(
-                                                DirectionUtil.getDirectionFromTile(
-                                                        worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile),
-                                                tank.getFluid(), true), true);
+                                            .getFluid())) {
+                                tank.drain(((TileCrystalizer) tile).fill(
+                                        DirectionUtil.getDirectionFromTile(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord),
+                                                tile).getOpposite(), tank.getFluid(), true), true);
+                                break;
+                            }
                         }
                     }
                 }
@@ -245,10 +247,10 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
         tag.setTag("Items", nbttaglist);
 
-        if(tank.getFluid() != null && tank.getFluid().getFluid() != null) {
-            tag.setInteger("Amount", tank.getFluidAmount());
-            tag.setInteger("FluidID", tank.getFluid().fluidID);
-        }
+        tank.writeToNBT(tag);
+
+        tag.setInteger("heatLevel", heatLevel);
+        tag.setInteger("cookTime", cookTime);
     }
 
     @Override
@@ -267,7 +269,10 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
                 this.inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
-        tank.setFluid(new FluidStack(tag.getInteger("FluidId"), tag.getInteger("Amount")));
+        tank.readFromNBT(tag);
+
+        cookTime = tag.getInteger("cookTime");
+        heatLevel = tag.getInteger("heatLevel");
     }
 
     @Override
@@ -288,8 +293,11 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
     public void addItemToSlot(ItemStack stack) {
         if(this.isItemValidForSlot(0, stack)) {
             if(inventory[0] != null) {
-                stack.stackSize--;
-                inventory[0].stackSize--;
+                if(stack.itemID == inventory[0].itemID && stack.getItemDamage() == inventory[0].getItemDamage()
+                        && inventory[0].stackSize < 64) {
+                    stack.stackSize--;
+                    inventory[0].stackSize++;
+                }
             }else {
                 stack.stackSize--;
                 inventory[0] = new ItemStack(stack.itemID, 1, stack.getItemDamage());
