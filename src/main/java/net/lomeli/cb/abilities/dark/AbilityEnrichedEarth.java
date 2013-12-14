@@ -9,11 +9,10 @@ import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
 
-public class AbilityOreater extends CrystalAbility {
-    
+public class AbilityEnrichedEarth extends CrystalAbility{
     private List<Integer> blockList;
     
-    public AbilityOreater(){
+    public AbilityEnrichedEarth(){
         this.blockList = new ArrayList<Integer>();
         this.blockList.add(Block.oreCoal.blockID);
         this.blockList.add(Block.oreDiamond.blockID);
@@ -32,15 +31,15 @@ public class AbilityOreater extends CrystalAbility {
 
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
-        int radius = 5;
+        int radius = 30;
 
         for(int x1 = x - radius; x1 <= x + 5; x1++)
             for(int y1 = y - radius; y1 <= y + 5; y1++)
                 for(int z1 = z - radius; z1 <= z + 5; z1++) {
                     int id = worldObj.getBlockId(x1, y1, z1);
-                    if(rand.nextInt(10000) < 4500) {
-                        if(this.blockList.contains(id))
-                            worldObj.setBlock(x1, y1, z1, Block.stone.blockID);
+                    if(rand.nextInt(10000) < 50) {
+                        if(id == Block.stone.blockID)
+                            worldObj.setBlock(x1, y1, z1, this.blockList.get(rand.nextInt(this.blockList.size())));
                     }
                 }
     }

@@ -7,6 +7,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -22,7 +23,7 @@ public class AbilityMorphaReach extends CrystalAbility {
 
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
-        int radius = 5;
+        int radius = 30;
         List<?> entityList = worldObj.getEntitiesWithinAABB(EntityLivingBase.class,
                 AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1).expand(radius, radius, radius));
         for(Object entityObj : entityList) {
@@ -30,6 +31,7 @@ public class AbilityMorphaReach extends CrystalAbility {
                 EntityLivingBase entity = (EntityLivingBase) entityObj;
                 boolean flag = entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.disableDamage;
                 if(!entity.canBreatheUnderwater() && entity.isPotionActive(Potion.waterBreathing.id) && !flag) {
+                    entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5000, 2));
                     entity.setAir(decreaseAirSupply(entity.getAir(), entity, rand));
 
                     if(entity.getAir() == -20) {

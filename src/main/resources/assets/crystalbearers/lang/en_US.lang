@@ -1,4 +1,8 @@
 element.crystalbearers:earthElement=Earth
+element.crystalbearers:airElement=Air
+element.crystalbearers:waterElement=Water
+element.crystalbearers:fireElement=Fire
+element.crystalbearers:darkElement=Dark
 
 item.crystalbearers:itemDebug.name=Item Debug
 
