@@ -9,7 +9,13 @@ import net.lomeli.cb.abilities.earth.AbilityNatureTouch;
 import net.lomeli.cb.abilities.earth.AbilityTerrainDesecrator;
 
 public class ElementEarth implements IElement {
-
+    private int id;
+    
+    public ElementEarth setID(int id){
+        this.id = id;
+        return this;
+    }
+    
     @Override
     public CrystalAbility dominantPositive() {
         return new AbilityNatureTouch();
@@ -45,4 +51,13 @@ public class ElementEarth implements IElement {
         return StatCollector.translateToLocal("element.crystalbearers:earthElement");
     }
 
+    @Override
+    public int getElementID() {
+        return id;
+    }
+
+    @Override
+    public CrystalAbility[] abilities() {
+        return new CrystalAbility[] { dominantPositive(), recessivePositive(), dominantNegative(), recessiveNegative() };
+    }
 }

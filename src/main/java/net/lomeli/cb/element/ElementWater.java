@@ -9,6 +9,12 @@ import net.lomeli.cb.abilities.water.AbilityMorphaReach;
 import net.lomeli.cb.abilities.water.AbilityReplenishWater;
 
 public class ElementWater implements IElement {
+    private int id;
+    
+    public ElementWater setID(int id){
+        this.id = id;
+        return this;
+    }
 
     @Override
     public String getLocalizedName() {
@@ -45,4 +51,13 @@ public class ElementWater implements IElement {
         return new AbilityMorphaReach();
     }
 
+    @Override
+    public int getElementID() {
+        return id;
+    }
+
+    @Override
+    public CrystalAbility[] abilities() {
+        return new CrystalAbility[] { dominantPositive(), recessivePositive(), dominantNegative(), recessiveNegative() };
+    }
 }

@@ -9,7 +9,13 @@ import net.lomeli.cb.abilities.air.AbilityRagingWinds;
 import net.lomeli.cb.abilities.air.AbilityToxicAir;
 
 public class ElementAir implements IElement {
-
+    private int id;
+    
+    public ElementAir setID(int id){
+        this.id = id;
+        return this;
+    }
+    
     @Override
     public String getLocalizedName() {
         return StatCollector.translateToLocal("element.crystalbearers:airElement");
@@ -43,6 +49,16 @@ public class ElementAir implements IElement {
     @Override
     public CrystalAbility recessiveNegative() {
         return new AbilityToxicAir();
+    }
+
+    @Override
+    public int getElementID() {
+        return id;
+    }
+
+    @Override
+    public CrystalAbility[] abilities() {
+        return new CrystalAbility[] { dominantPositive(), recessivePositive(), dominantNegative(), recessiveNegative() };
     }
 
 }

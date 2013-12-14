@@ -23,21 +23,18 @@ public class TileCrystal extends TileEntity implements ICrystal {
         super.updateEntity();
         if(!worldObj.isRemote){
             if(abilityOne() != null && abilityTwo() != null && powerAbility() != null){
-                System.out.println(this.abilityOne().toString());
-                System.out.println(this.abilityTwo().toString());
-                System.out.println(this.powerAbility().toString());
                 if(getPower() < getMaxPower())
                     powerAbility().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                 
                 this.usePower(abilityOne().cost());
                 if(this.canActivate()){
-                    abilityOne();
+                    abilityOne().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                     this.active = false;
                 }
                 
                 this.usePower(abilityTwo().cost());
                 if(this.canActivate()){
-                    abilityTwo();
+                    abilityTwo().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                     this.active = false;
                 }
             }

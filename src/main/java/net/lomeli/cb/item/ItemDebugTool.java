@@ -1,7 +1,5 @@
 package net.lomeli.cb.item;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,15 +9,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.DebugAbility;
-import net.lomeli.cb.abilities.dark.AbilityMagnetism;
 import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.ICrystal;
+import net.lomeli.cb.tile.TileCrystal;
 
 public class ItemDebugTool extends Item {
 
     private int blockID;
+
     public ItemDebugTool(int par1) {
         super(par1);
         this.setCreativeTab(CreativeTabs.tabTools);
@@ -30,18 +29,7 @@ public class ItemDebugTool extends Item {
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8,
             float par9, float par10) {
-        boolean bool = useItem(itemStack, player, world, x, y, z, par7, par8, par9, par10);
-
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
-        if(tile != null) {
-            if(tile instanceof ICrystal) {
-                ((ICrystal) tile).setAbilityOne(ElementRegistry.fire.recessiveNegative());
-                ((ICrystal) tile).setAbilityTwo(ElementRegistry.air.recessivePositive());
-                ((ICrystal) tile).setPowerAbility(new DebugAbility());
-            }
-        }
-
-        return bool;
+        return useItem(itemStack, player, world, x, y, z, par7, par8, par9, par10);
     }
 
     public boolean useItem(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6,
@@ -99,5 +87,30 @@ public class ItemDebugTool extends Item {
         }else {
             return false;
         }
+    }
+
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX,
+            float hitY, float hitZ, int metadata) {
+        if(!world.setBlock(x, y, z, this.blockID, metadata, 3)) {
+            return false;
+        }
+
+        if(world.getBlockId(x, y, z) == this.blockID) {
+            Block.blocksList[this.blockID].onBlockPlacedBy(world, x, y, z, player, stack);
+            Block.blocksList[this.blockID].onPostBlockPlaced(world, x, y, z, metadata);
+        }
+
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if(tile != null) {
+            System.out.println("Please");
+            if(tile instanceof TileCrystal) {
+                System.out.println("work!");
+                ((TileCrystal) tile).setAbilityOne(ElementRegistry.fire.recessiveNegative());
+                ((TileCrystal) tile).setAbilityTwo(ElementRegistry.air.recessivePositive());
+                ((TileCrystal) tile).setPowerAbility(new DebugAbility());
+            }
+        }
+        
+        return true;
     }
 }

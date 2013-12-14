@@ -13,8 +13,6 @@ public class ModBlocks {
         darkStone = new BlockDarkStone(BlockIds.darkStoneID, "stone").setUnlocalizedName("stone");
         darkCobble = new BlockDarkStone(BlockIds.darkCobbleID, "cobble").setUnlocalizedName("cobble");
         crystal = new BlockCrystal(BlockIds.crystalID).setUnlocalizedName("crystal");
-        
-        
 
         registerBlock();
     }

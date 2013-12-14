@@ -9,7 +9,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-import net.lomeli.cb.block.ItemCrystal;
 import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.core.CommonProxy;
 import net.lomeli.cb.core.Config;
@@ -33,7 +32,6 @@ public class CrystalBearers {
         ModBlocks.loadBlocks();
 
         Item debug = new ItemDebugTool(500);
-        Item crystal = new ItemCrystal(5000);
     }
 
     @Mod.EventHandler

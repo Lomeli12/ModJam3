@@ -10,6 +10,13 @@ import net.lomeli.cb.abilities.dark.AbilitySpeardDark;
 
 public class ElementDark implements IElement {
 
+    private int id;
+    
+    public ElementDark setID(int id){
+        this.id = id;
+        return this;
+    }
+    
     @Override
     public String getLocalizedName() {
         return StatCollector.translateToLocal("element.crystalbearers:darkElement");
@@ -47,4 +54,13 @@ public class ElementDark implements IElement {
         return new AbilitySpeardDark();
     }
 
+    @Override
+    public int getElementID() {
+        return id;
+    }
+    
+    @Override
+    public CrystalAbility[] abilities() {
+        return new CrystalAbility[] { dominantPositive(), recessivePositive(), dominantNegative(), recessiveNegative() };
+    }
 }
