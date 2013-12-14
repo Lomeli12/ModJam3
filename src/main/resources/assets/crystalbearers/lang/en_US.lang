@@ -5,12 +5,24 @@ element.crystalbearers:fireElement=Fire
 element.crystalbearers:darkElement=Dark
 
 item.crystalbearers:itemDebug.name=Item Debug
+item.crystalbearers:shard.0=Lava Shard
+item.crystalbearers:shard.1=Wave Shard
+item.crystalbearers:shard.2=Terra Shard
+item.crystalbearers:shard.3=Aer Shard
+item.crystalbearers:shard.4=Shadow Shard
 
 tile.crystalbearers:stone.name=Dark Stone
 tile.crystalbearers:cobble.name=Dark Cobblestone
 tile.crystalbearers:crystal.name=Crystal
-tile.crystalbearers:shard.0.name=Lava Shard Block
-tile.crystalbearers:shard.1.name=Wave Shard Block
-tile.crystalbearers:shard.2.name=Terra Shard Block
-tile.crystalbearers:shard.3.name=Aer Shard Block
-tile.crystalbearers:shard.4.name=Shadow Shard Block
+tile.crystalbearers:shard.0=Lava Shard Block
+tile.crystalbearers:shard.1=Wave Shard Block
+tile.crystalbearers:shard.2=Terra Shard Block
+tile.crystalbearers:shard.3=Aer Shard Block
+tile.crystalbearers:shard.4=Shadow Shard Block
+tile.crystalbearers:oreShard.0=Lava Shard Ore
+tile.crystalbearers:oreShard.1=Wave Shard Ore
+tile.crystalbearers:oreShard.2=Terra Shard Ore
+tile.crystalbearers:oreShard.3=Aer Shard Ore
+tile.crystalbearers:oreShard.4=Shadow Shard Ore
+
+itemGroup.crystalbearers=Crystal Bearers

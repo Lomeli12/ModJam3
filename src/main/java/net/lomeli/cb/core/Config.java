@@ -5,6 +5,7 @@ import java.io.File;
 import net.minecraftforge.common.Configuration;
 
 import net.lomeli.cb.lib.BlockIds;
+import net.lomeli.cb.lib.ItemIds;
 
 public class Config {
     private static Configuration config;
@@ -15,6 +16,7 @@ public class Config {
         config.load();
 
         loadBlockID();
+        loadItemID();
 
         config.save();
     }
@@ -29,5 +31,12 @@ public class Config {
         BlockIds.smelteryID = config.get(block, "smeltery", 454).getInt(454);
         BlockIds.crystalizerID = config.get(block, "crystalizer", 455).getInt(455);
         BlockIds.shardBlockID = config.get(block, "shardBlock", 456).getInt(456);
+        BlockIds.oreShardID = config.get(block, "oreShard", 457).getInt(457);
+    }
+    
+    private static void loadItemID() {
+        String item = "Items";
+        
+        ItemIds.shardID = config.get(item, "shard", 6000).getInt(6000);
     }
 }

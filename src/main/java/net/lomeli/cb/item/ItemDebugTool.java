@@ -1,13 +1,13 @@
 package net.lomeli.cb.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.abilities.DebugAbility;
 import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.element.ElementRegistry;
@@ -20,7 +20,7 @@ public class ItemDebugTool extends Item {
 
     public ItemDebugTool(int par1) {
         super(par1);
-        this.setCreativeTab(CreativeTabs.tabTools);
+        this.setCreativeTab(CrystalBearers.modTab);
         this.blockID = ModBlocks.crystal.blockID;
         this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":itemDebug");
     }

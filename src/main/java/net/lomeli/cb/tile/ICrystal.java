@@ -24,4 +24,8 @@ public interface ICrystal {
     public abstract void setAbilityTwo(CrystalAbility ability);
     
     public abstract void setPowerAbility(CrystalAbility ability);
+    
+    public abstract boolean isNatural();
+    
+    public abstract void setIsNatural(boolean bool);
 }

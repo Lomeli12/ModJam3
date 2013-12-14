@@ -2,7 +2,6 @@ package net.lomeli.cb.block;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,13 +17,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 
-public class BlockShardBlock extends Block{
+public class BlockOreShard extends BlockCB{
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;
-    
-    public BlockShardBlock(int par1) {
-        super(par1, Material.iron);
-        this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":shardBlock");
+
+    public BlockOreShard(int par1) {
+        super(par1, Material.rock, "oreShard_");
+        this.setUnlocalizedName("oreShard");
         this.setCreativeTab(CrystalBearers.modTab);
     }
     
@@ -32,7 +31,7 @@ public class BlockShardBlock extends Block{
     public void registerIcons(IconRegister par1IconRegister) {
         iconArray = new Icon[5];
         for(int i = 0; i < iconArray.length; i++){
-            iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":shardBlock_" + i);
+            iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.blockTexture + i);
         }
     }
     
@@ -59,9 +58,9 @@ public class BlockShardBlock extends Block{
         return this.damageDropped(world.getBlockMetadata(x, y, z));
     }
     
-    public static class ItemShardBlock extends ItemBlock{
+    public static class ItemOreBlock extends ItemBlock{
 
-        public ItemShardBlock(int par1) {
+        public ItemOreBlock(int par1) {
             super(par1);
             this.setMaxDamage(0);
             this.setHasSubtypes(true);
@@ -69,7 +68,7 @@ public class BlockShardBlock extends Block{
         
         @Override
         public Icon getIconFromDamage(int par1){
-            return ModBlocks.shardBlock.getIcon(0, par1);
+            return ModBlocks.oreShard.getIcon(0, par1);
         }
         
         @Override
@@ -80,7 +79,7 @@ public class BlockShardBlock extends Block{
         @Override
         public String getItemDisplayName(ItemStack stack){
             String unlocalizedName = stack.getUnlocalizedName();
-            return StatCollector.translateToLocal(unlocalizedName.substring(0, unlocalizedName.length() - 5) + "." + stack.getItemDamage());
+            return StatCollector.translateToLocal(unlocalizedName + "." + stack.getItemDamage());
         }
     }
 }

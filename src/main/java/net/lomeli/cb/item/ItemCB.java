@@ -6,13 +6,15 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 
 public class ItemCB extends Item{
-    private String itemTexture;
+    protected String itemTexture;
     public ItemCB(int par1, String texture) {
         super(par1);
         this.itemTexture = texture;
+        this.setCreativeTab(CrystalBearers.modTab);
     }
     
     @SideOnly(Side.CLIENT)

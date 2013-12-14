@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 
 public class BlockCB extends Block {
@@ -16,6 +17,7 @@ public class BlockCB extends Block {
     public BlockCB(int par1, Material par2Material, String texture) {
         super(par1, par2Material);
         this.blockTexture = texture;
+        this.setCreativeTab(CrystalBearers.modTab);
     }
 
     @SideOnly(Side.CLIENT)

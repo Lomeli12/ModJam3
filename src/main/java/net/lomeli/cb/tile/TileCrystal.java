@@ -11,7 +11,7 @@ import net.lomeli.cb.abilities.CrystalAbility;
 public class TileCrystal extends TileEntity implements ICrystal {
 
     private int energy;
-    private boolean active;
+    private boolean active, natural;
     private CrystalAbility[] abilities;
 
     public TileCrystal() {
@@ -137,5 +137,15 @@ public class TileCrystal extends TileEntity implements ICrystal {
         super.onDataPacket(net, pkt);
         NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
         readNBT(tag);
+    }
+
+    @Override
+    public boolean isNatural() {
+        return natural;
+    }
+
+    @Override
+    public void setIsNatural(boolean bool) {
+        natural = bool;
     }
 }
