@@ -8,7 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.lomeli.cb.lib.ItemIds;
 
 public class ModItems {
-    public static Item shard;
+    public static Item shard, crystalItem;
     public static ItemStack[] shards;
 
     public static void loadItems() {
@@ -19,7 +19,9 @@ public class ModItems {
         for(int i = 0; i < shards.length; i++) {
             shards[i] = new ItemStack(shard, 1, i);
         }
+        crystalItem = new ItemCrystal(ItemIds.crystalItemID);
 
         GameRegistry.registerItem(shard, "crystalShard");
+        GameRegistry.registerItem(crystalItem, "crystalItem");
     }
 }

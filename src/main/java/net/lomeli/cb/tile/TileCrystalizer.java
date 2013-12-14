@@ -153,14 +153,22 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
     }
 
     public void writeTag(NBTTagCompound tag) {
-        tag.setInteger("Amount1", tank1.getFluidAmount());
-        tag.setInteger("FluidID1", tank1.getFluid().fluidID);
-        tag.setInteger("Amount2", tank2.getFluidAmount());
-        tag.setInteger("FluidID2", tank2.getFluid().fluidID);
-        tag.setInteger("Amount3", tank3.getFluidAmount());
-        tag.setInteger("FluidID3", tank3.getFluid().fluidID);
-        tag.setInteger("HeldItemID", heldItem.itemID);
-        tag.setInteger("HeldItemMeta", heldItem.getItemDamage());
+        if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null){
+            tag.setInteger("Amount1", tank1.getFluidAmount());
+            tag.setInteger("FluidID1", tank1.getFluid().fluidID);
+        }
+        if(tank2.getFluid() != null && tank2.getFluid().getFluid() != null){
+            tag.setInteger("Amount2", tank2.getFluidAmount());
+            tag.setInteger("FluidID2", tank2.getFluid().fluidID);
+        }
+        if(tank3.getFluid() != null && tank3.getFluid().getFluid() != null){
+            tag.setInteger("Amount3", tank3.getFluidAmount());
+            tag.setInteger("FluidID3", tank3.getFluid().fluidID);
+        }
+        if(heldItem != null){
+            tag.setInteger("HeldItemID", heldItem.itemID);
+            tag.setInteger("HeldItemMeta", heldItem.getItemDamage());
+        }
     }
 
     @Override

@@ -10,6 +10,7 @@ item.crystalbearers:shard.1=Wave Shard
 item.crystalbearers:shard.2=Terra Shard
 item.crystalbearers:shard.3=Aer Shard
 item.crystalbearers:shard.4=Shadow Shard
+item.crystalbearers:crystal.name=Crystal
 
 tile.crystalbearers:stone.name=Dark Stone
 tile.crystalbearers:cobble.name=Dark Cobblestone
@@ -24,5 +25,7 @@ tile.crystalbearers:oreShard.1=Wave Shard Ore
 tile.crystalbearers:oreShard.2=Terra Shard Ore
 tile.crystalbearers:oreShard.3=Aer Shard Ore
 tile.crystalbearers:oreShard.4=Shadow Shard Ore
+tile.crystalbearers:crystalizer.name=Crystalizer
+tile.crystalbearers:smelter.name=Crystal Smelter
 
 itemGroup.crystalbearers=Crystal Bearers

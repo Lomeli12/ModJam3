@@ -1,5 +1,5 @@
 package net.lomeli.cb.lib;
 
 public class ItemIds {
-    public static int shardID;
+    public static int shardID, crystalItemID;
 }

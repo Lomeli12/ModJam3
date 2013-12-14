@@ -38,5 +38,6 @@ public class Config {
         String item = "Items";
 
         ItemIds.shardID = config.get(item, "shard", 6000).getInt(6000);
+        ItemIds.crystalItemID = config.get(item, "crystalItem", 6001).getInt(6001);
     }
 }

@@ -48,26 +48,34 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
             if(inventory[0] != null && inventory[0].getItem() instanceof IShard && heatLevel >= 200) {
                 if(inventory[0].stackSize == 64) {
                     if(++cookTime >= 500) {
-                        setInventorySlotContents(0, null);
+                        
                         cookTime = 0;
                         Fluid itemFluid = FluidElements.getFluidBaseOnStack(inventory[0]);
-                        FluidStack crystalFluid = new FluidStack(itemFluid, 1000);
-                        fill(null, crystalFluid, true);
+                        if(itemFluid != null){
+                            FluidStack crystalFluid = new FluidStack(itemFluid, 1000);
+                            if(crystalFluid != null){
+                                fill(null, crystalFluid, true);
+                                setInventorySlotContents(0, null);
+                            }
+                        }
                     }
                 }
             }
 
-            for(TileEntity tile : DirectionUtil.getSurroundingTiles(worldObj, xCoord, yCoord, zCoord)) {
-                if(tile != null) {
-                    if(tile instanceof TileCrystalizer) {
-                        if(((TileCrystalizer) tile).canFill(
-                                DirectionUtil.getDirectionFromTile(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile),
-                                tank.getFluid().getFluid()))
-                            tank.drain(
-                                    ((TileCrystalizer) tile).fill(
-                                            DirectionUtil.getDirectionFromTile(
-                                                    worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile), tank.getFluid(),
-                                            true), true);
+            if(tank.getFluid() != null && tank.getFluid().getFluid() != null) {
+                for(TileEntity tile : DirectionUtil.getSurroundingTiles(worldObj, xCoord, yCoord, zCoord)) {
+                    if(tile != null) {
+                        if(tile instanceof TileCrystalizer) {
+                            if(((TileCrystalizer) tile)
+                                    .canFill(DirectionUtil.getDirectionFromTile(
+                                            worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile), tank.getFluid()
+                                            .getFluid()))
+                                tank.drain(
+                                        ((TileCrystalizer) tile).fill(
+                                                DirectionUtil.getDirectionFromTile(
+                                                        worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile),
+                                                tank.getFluid(), true), true);
+                        }
                     }
                 }
             }
@@ -208,9 +216,11 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         if(itemstack != null && itemstack.getItem() instanceof IShard) {
-            if(inventory[0] != null
-                    || (itemstack.itemID == inventory[i].itemID && itemstack.getItemDamage() == inventory[i].getItemDamage()))
+            if(inventory[i] != null
+                    && (itemstack.itemID == inventory[i].itemID && itemstack.getItemDamage() == inventory[i].getItemDamage()))
                 return inventory[i].stackSize < 64;
+            else
+                return true;
         }
         return false;
     }
@@ -235,8 +245,10 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
         tag.setTag("Items", nbttaglist);
 
-        tag.setInteger("Amount", tank.getFluidAmount());
-        tag.setInteger("FluidID", tank.getFluid().fluidID);
+        if(tank.getFluid() != null && tank.getFluid().getFluid() != null) {
+            tag.setInteger("Amount", tank.getFluidAmount());
+            tag.setInteger("FluidID", tank.getFluid().fluidID);
+        }
     }
 
     @Override

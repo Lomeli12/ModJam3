@@ -53,7 +53,7 @@ public class FluidElements {
     }
 
     public static Fluid getFluidBaseOnStack(ItemStack stack) {
-        if(shardList.containsKey(new ItemStack(stack.itemID, 1, stack.getItemDamage())))
+        if(stack != null && shardList.containsKey(new ItemStack(stack.itemID, 1, stack.getItemDamage())))
             return shardList.get(new ItemStack(stack.itemID, 1, stack.getItemDamage()));
         return null;
     }

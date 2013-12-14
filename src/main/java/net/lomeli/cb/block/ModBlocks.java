@@ -21,6 +21,8 @@ public class ModBlocks {
         darkCobble = new BlockDarkStone(BlockIds.darkCobbleID, "cobble").setUnlocalizedName("cobble");
         crystal = new BlockCrystal(BlockIds.crystalID).setUnlocalizedName("crystal");
 
+        smeltry = new BlockSmelter(BlockIds.smelteryID);
+        crystalizer = new BlockCrystalizer(BlockIds.crystalizerID);
         shardBlock = new BlockShardBlock(BlockIds.shardBlockID);
         oreShard = new BlockOreShard(BlockIds.oreShardID);
 
@@ -32,6 +34,8 @@ public class ModBlocks {
         GameRegistry.registerBlock(darkCobble, "darkCobble");
         GameRegistry.registerBlock(crystal, "crystal");
 
+        GameRegistry.registerBlock(smeltry, "smelter");
+        GameRegistry.registerBlock(crystalizer, "crystalizer");
         GameRegistry.registerBlock(shardBlock, ItemShardBlock.class, "shardBlock");
         GameRegistry.registerBlock(oreShard, ItemOreBlock.class, "oreShard");
         for(int i = 0; i < 5; i++) {

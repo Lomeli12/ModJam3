@@ -4,34 +4,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import net.lomeli.cb.tile.TileCrystalSmelter;
+import net.lomeli.cb.tile.TileCrystalizer;
 
 public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
 
     public BlockCrystalizer(int par1) {
         super(par1, Material.iron, "crystalizer_");
+        this.setUnlocalizedName("crystalizer");
     }
     
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int j, float f, float k, float b){
-        if(!world.isRemote && !player.isSneaking()){
-            TileCrystalSmelter tile = (TileCrystalSmelter)world.getBlockTileEntity(x, y, z);
-            if(tile != null){
-                ItemStack stack =  player.getCurrentEquippedItem();
-                if(stack != null && tile.isItemValidForSlot(0, stack))
-                    tile.addItemToSlot(player.getCurrentEquippedItem());
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean hasTileEntity() {
         return true;
@@ -39,7 +26,7 @@ public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
     
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileCrystalSmelter();
+        return new TileCrystalizer();
     }
 
     @Override

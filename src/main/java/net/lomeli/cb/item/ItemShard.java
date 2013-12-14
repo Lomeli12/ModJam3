@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.lomeli.cb.lib.Strings;
 
-public class ItemShard extends ItemCB {
+public class ItemShard extends ItemCB implements IShard{
 
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;

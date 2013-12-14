@@ -58,7 +58,7 @@ public class ElementRegistry {
         return 0;
     }
 
-    public static IElement getAbiltiyOneElement(ItemStack stack) {
+    public static IElement getAbilityOneElement(ItemStack stack) {
         if(stack.getTagCompound() != null) {
             int id = stack.getTagCompound().getInteger("element1");
             return elements.get(id);
@@ -67,13 +67,13 @@ public class ElementRegistry {
     }
 
     public static CrystalAbility getAbilityOne(ItemStack stack) {
-        if(stack.getTagCompound() != null && getAbiltiyOneElement(stack) != null) {
-            return getAbiltiyOneElement(stack).abilities()[stack.getTagCompound().getInteger("element1Ability")];
+        if(stack.getTagCompound() != null && getAbilityOneElement(stack) != null) {
+            return getAbilityOneElement(stack).abilities()[stack.getTagCompound().getInteger("element1Ability")];
         }
         return null;
     }
 
-    public static IElement getAbiltiyTwoElement(ItemStack stack) {
+    public static IElement getAbilityTwoElement(ItemStack stack) {
         if(stack.getTagCompound() != null) {
             int id = stack.getTagCompound().getInteger("element2");
             return elements.get(id);
@@ -82,8 +82,8 @@ public class ElementRegistry {
     }
 
     public static CrystalAbility getAbilityTwo(ItemStack stack) {
-        if(stack.getTagCompound() != null && getAbiltiyTwoElement(stack) != null) {
-            return getAbiltiyTwoElement(stack).abilities()[stack.getTagCompound().getInteger("element2Ability")];
+        if(stack.getTagCompound() != null && getAbilityTwoElement(stack) != null) {
+            return getAbilityTwoElement(stack).abilities()[stack.getTagCompound().getInteger("element2Ability")];
         }
         return null;
     }
