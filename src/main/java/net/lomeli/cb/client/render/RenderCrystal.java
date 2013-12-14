@@ -24,30 +24,37 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double d0, double d1, double d2, float f) {
-        renderCrystal((TileCrystal)tileentity, d0, d1, d2, f);
+        renderCrystal((TileCrystal) tileentity, d0, d1, d2, f);
     }
 
     public void renderCrystal(TileCrystal tile, double d0, double d1, double d2, float f) {
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Strings.MOD_ID.toLowerCase(),
                 "textures/model/Crystal.png"));
+
         GL11.glPushMatrix();
 
         GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1F, (float) d2 + 0.5F);
 
         GL11.glScaled(1.5d, -1.5d, 1.5d);
-        
+
         GL11.glColor3d(255, 0, 0);
-        
+
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(255F, 0F, 0F, 0.7F);
-        
-        
+        if(tile.isNatural())
+            GL11.glColor4f(73F, 12F, 84F, 0.7F);
+        else
+            GL11.glColor4f(tile.red, tile.green, tile.blue, 0.65F);
+
         model.render(0.0625F);
-        
+
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glColor4f(255.0F, 0F, 0F, 1.0F);
-        
+        if(tile.isNatural())
+            GL11.glColor4f(73F, 12F, 84F, 1F);
+        else
+            GL11.glColor4f(tile.red, tile.green, tile.blue, 1F);
+        //GL11.glColor4f(tile.red, tile.green, tile.blue, 1.0F);
+
         GL11.glPopMatrix();
     }
 

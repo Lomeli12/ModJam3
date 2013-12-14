@@ -18,6 +18,8 @@ public class BlockCB extends Block {
         super(par1, par2Material);
         this.blockTexture = texture;
         this.setCreativeTab(CrystalBearers.modTab);
+        this.setHardness(2.0F);
+        this.setResistance(10.0F);
     }
 
     @SideOnly(Side.CLIENT)

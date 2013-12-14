@@ -26,6 +26,8 @@ public class BlockShardBlock extends Block {
         super(par1, Material.iron);
         this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":shardBlock");
         this.setCreativeTab(CrystalBearers.modTab);
+        this.setHardness(2.0F);
+        this.setResistance(10.0F);
     }
 
     @Override

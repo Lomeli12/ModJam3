@@ -3,6 +3,8 @@ package net.lomeli.cb.block;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.lomeli.cb.block.BlockOreShard.ItemOreBlock;
@@ -42,5 +44,8 @@ public class ModBlocks {
             shardBlocks[i] = new ItemStack(shardBlock, 1, i);
             oreShards[i] = new ItemStack(oreShard, 1, i);
         }
+        
+        MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
+        MinecraftForge.setBlockHarvestLevel(crystal, "pickaxe", 2);
     }
 }

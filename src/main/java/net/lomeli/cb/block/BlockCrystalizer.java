@@ -25,6 +25,8 @@ public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
     public BlockCrystalizer(int par1) {
         super(par1, Material.iron, "crystalizer_");
         this.setUnlocalizedName("crystalizer");
+        this.setHardness(2.0F);
+        this.setResistance(10.0F);
     }
     
     @Override

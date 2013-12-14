@@ -14,6 +14,8 @@ public class BlockCrystal extends BlockCB implements ITileEntityProvider {
 
     public BlockCrystal(int par1) {
         super(par1, Material.glass, "blank");
+        this.setHardness(5.0F);
+        this.setResistance(50.0F);
     }
 
     @Override

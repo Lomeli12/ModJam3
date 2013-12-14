@@ -8,8 +8,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.lomeli.cb.block.ModBlocks;
+import net.lomeli.cb.block.WorldGen;
 import net.lomeli.cb.core.CommonProxy;
 import net.lomeli.cb.core.Config;
 import net.lomeli.cb.core.CreativeTabCrystals;
@@ -42,6 +44,8 @@ public class CrystalBearers {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.registerTile();
+        
+        GameRegistry.registerWorldGenerator(new WorldGen());
     }
 
     @Mod.EventHandler

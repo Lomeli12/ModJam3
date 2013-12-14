@@ -13,12 +13,13 @@ import net.lomeli.cb.abilities.DebugAbility;
 import net.lomeli.cb.element.ElementRegistry;
 
 public class TileCrystal extends TileEntity implements ICrystal {
-    private Random rand;
+    public Random rand;
     private int energy;
     private boolean active, natural;
     private CrystalAbility[] abilities;
     public int firstEle, secondEle, thridEle, ability1ID, ability2ID;
     public boolean abilitiesSet, passiveAbility;
+    public float red, green, blue;
 
     public TileCrystal() {
         rand = new Random();
@@ -29,14 +30,18 @@ public class TileCrystal extends TileEntity implements ICrystal {
             ability1ID = rand.nextInt(4);
             ability2ID = rand.nextInt(4);
             abilitiesSet = true;
-            setIsNatural(false);
+            setIsNatural(true);
         }
+        red = rand.nextInt(256);
+        green = rand.nextInt(256);
+        blue = rand.nextInt(256);
     }
 
     @Override
     public void updateEntity() {
         super.updateEntity();
         if(!worldObj.isRemote) {
+            System.out.println(xCoord + ", " + yCoord + ", " + zCoord);
             if(abilityOne() != null && abilityTwo() != null && powerAbility() != null) {
                 if(getPower() < getMaxPower())
                     powerAbility().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
@@ -141,6 +146,9 @@ public class TileCrystal extends TileEntity implements ICrystal {
             tag.setBoolean("ability3", passiveAbility);
             tag.setInteger("element3", thridEle);
         }
+        tag.setFloat("red", red);
+        tag.setFloat("blue", blue);
+        tag.setFloat("green", green);
     }
 
     @Override
@@ -162,6 +170,9 @@ public class TileCrystal extends TileEntity implements ICrystal {
             this.thridEle = tag.getInteger("element3");
             this.passiveAbility = tag.getBoolean("ability3");
         }
+        this.red = tag.getFloat("red");
+        this.green = tag.getFloat("green");
+        this.blue = tag.getFloat("blue");
     }
 
     @Override
@@ -187,5 +198,17 @@ public class TileCrystal extends TileEntity implements ICrystal {
     @Override
     public void setIsNatural(boolean bool) {
         natural = bool;
+    }
+    
+    public float red(){
+        return red;
+    }
+    
+    public float green(){
+        return green;
+    }
+    
+    public float blue(){
+        return blue;
     }
 }
