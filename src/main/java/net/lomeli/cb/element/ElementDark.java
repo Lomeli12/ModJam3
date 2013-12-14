@@ -3,9 +3,12 @@ package net.lomeli.cb.element;
 import net.minecraft.util.StatCollector;
 
 import net.lomeli.cb.abilities.CrystalAbility;
-import net.lomeli.cb.abilities.dark.*;
+import net.lomeli.cb.abilities.dark.AbilityEnrichedEarth;
+import net.lomeli.cb.abilities.dark.AbilityMagnetism;
+import net.lomeli.cb.abilities.dark.AbilityOreater;
+import net.lomeli.cb.abilities.dark.AbilitySpeardDark;
 
-public class ElementDark implements IElement{
+public class ElementDark implements IElement {
 
     @Override
     public String getLocalizedName() {

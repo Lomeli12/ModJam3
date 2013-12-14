@@ -27,7 +27,7 @@ public class BlockDarkStone extends BlockCB {
                 EntityLivingBase entity = (EntityLivingBase) ((SpawnListEntry) list.get(rand.nextInt(list.size()))).entityClass
                         .getConstructor(new Class[] { World.class }).newInstance(new Object[] { world });
                 if(entity != null) {
-                    if(world.isAirBlock(x, y + 1, z) && world.isAirBlock(x, y + 2, z) && rand.nextInt(1000) < 405){
+                    if(world.isAirBlock(x, y + 1, z) && world.isAirBlock(x, y + 2, z) && rand.nextInt(1000) < 405) {
                         entity.setLocationAndAngles(x - 0.5, y + 1, z - 0.5, rand.nextFloat() * 360.0F, 0.0F);
                         world.spawnEntityInWorld(entity);
                     }

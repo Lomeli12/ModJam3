@@ -8,7 +8,7 @@ import net.lomeli.cb.abilities.air.AbilityFalless;
 import net.lomeli.cb.abilities.air.AbilityRagingWinds;
 import net.lomeli.cb.abilities.air.AbilityToxicAir;
 
-public class ElementAir implements IElement{
+public class ElementAir implements IElement {
 
     @Override
     public String getLocalizedName() {

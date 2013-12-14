@@ -3,14 +3,18 @@ package net.lomeli.cb.element;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElementBase {
+public class ElementRegistry {
 
     private static List<IElement> elements = new ArrayList<IElement>();
 
-    private static IElement fire, water, earth, air, dark;
+    public static IElement fire, water, earth, air, dark;
 
     public static void registerElements() {
+        fire = new ElementFire();
+        water = new ElementWater();
         earth = new ElementEarth();
+        air = new ElementAir();
+        dark = new ElementDark();
 
         elements.add(fire);
         elements.add(water);

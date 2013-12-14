@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
 
-public class AbilitySpontanousCombustion extends CrystalAbility{
+public class AbilitySpontanousCombustion extends CrystalAbility {
     @Override
     public EnumAbilityType abilityType() {
         return EnumAbilityType.NEGATIVE;

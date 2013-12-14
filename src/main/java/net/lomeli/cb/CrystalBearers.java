@@ -9,9 +9,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
+import net.lomeli.cb.block.ItemCrystal;
 import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.core.CommonProxy;
 import net.lomeli.cb.core.Config;
+import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.item.ItemDebugTool;
 import net.lomeli.cb.lib.Strings;
 
@@ -21,15 +23,17 @@ public class CrystalBearers {
 
     @SidedProxy(clientSide = "net.lomeli.cb.core.ClientProxy", serverSide = "net.lomeli.cb.core.CommonProxy")
     public static CommonProxy proxy;
-    
-    @SuppressWarnings("unused")
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Config.loadConfig(event.getSuggestedConfigurationFile());
-        
+
+        ElementRegistry.registerElements();
+
         ModBlocks.loadBlocks();
-        
+
         Item debug = new ItemDebugTool(500);
+        Item crystal = new ItemCrystal(5000);
     }
 
     @Mod.EventHandler

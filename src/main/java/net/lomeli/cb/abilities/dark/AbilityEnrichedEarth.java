@@ -9,10 +9,10 @@ import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
 
-public class AbilityEnrichedEarth extends CrystalAbility{
+public class AbilityEnrichedEarth extends CrystalAbility {
     private List<Integer> blockList;
-    
-    public AbilityEnrichedEarth(){
+
+    public AbilityEnrichedEarth() {
         this.blockList = new ArrayList<Integer>();
         this.blockList.add(Block.oreCoal.blockID);
         this.blockList.add(Block.oreDiamond.blockID);

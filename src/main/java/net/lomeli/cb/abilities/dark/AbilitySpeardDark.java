@@ -13,11 +13,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.block.ModBlocks;
 
-public class AbilitySpeardDark extends CrystalAbility{
-    
+public class AbilitySpeardDark extends CrystalAbility {
+
     private List<Integer> blockList;
-    
-    public AbilitySpeardDark(){
+
+    public AbilitySpeardDark() {
         this.blockList = new ArrayList<Integer>();
         for(ItemStack cobblestone : OreDictionary.getOres("cobblestone")) {
             if(cobblestone != null)
@@ -28,7 +28,7 @@ public class AbilitySpeardDark extends CrystalAbility{
                 this.blockList.add(stone.itemID);
         }
     }
-    
+
     @Override
     public EnumAbilityType abilityType() {
         return EnumAbilityType.NEGATIVE;

@@ -3,9 +3,12 @@ package net.lomeli.cb.element;
 import net.minecraft.util.StatCollector;
 
 import net.lomeli.cb.abilities.CrystalAbility;
-import net.lomeli.cb.abilities.water.*;
+import net.lomeli.cb.abilities.water.AbilityDrenchedEarth;
+import net.lomeli.cb.abilities.water.AbilityMoistSoil;
+import net.lomeli.cb.abilities.water.AbilityMorphaReach;
+import net.lomeli.cb.abilities.water.AbilityReplenishWater;
 
-public class ElementWater implements IElement{
+public class ElementWater implements IElement {
 
     @Override
     public String getLocalizedName() {

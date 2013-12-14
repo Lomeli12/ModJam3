@@ -1,8 +1,8 @@
 package net.lomeli.cb.core;
 
-public class ClientProxy extends CommonProxy{
+public class ClientProxy extends CommonProxy {
     @Override
-    public void registerTile(){
+    public void registerTile() {
         super.registerTile();
     }
 }
