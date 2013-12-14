@@ -21,6 +21,8 @@ import net.lomeli.cb.element.FluidElements;
 public class TileCrystalizer extends TileEntity implements IFluidHandler {
     private FluidTank tank1, tank2, tank3;
     private ItemStack heldItem;
+    private int tick;
+    private boolean crystal;
 
     public TileCrystalizer() {
         tank1 = tank2 = tank3 = new FluidTank(1000);
@@ -30,24 +32,44 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
     public void updateEntity() {
         super.updateEntity();
         if(!worldObj.isRemote) {
-            int firstEle = 0, secondEle = 0, thridEle = 0;
-            if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null && tank2.getFluid() != null
-                    && tank2.getFluid().getFluid() != null && tank3.getFluid() != null && tank3.getFluid().getFluid() != null) {
-                if(tank1.getFluidAmount() >= 1000 && tank2.getFluidAmount() >= 1000 && tank3.getFluidAmount() >= 1000){
-                    if(tank1.getFluidAmount() >= 1000){
-                        firstEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
-                        tank1.drain(1000, true);
+            if(heldItem == null) {
+                TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+                if(tile != null) {
+                    if(tile instanceof IInventory) {
+                        for(int slot = 0; slot < ((IInventory) tile).getSizeInventory(); slot++) {
+                            if(((IInventory) tile).getStackInSlot(slot) == null) {
+                                ((IInventory) tile).setInventorySlotContents(slot, heldItem);
+                                heldItem = null;
+                                break;
+                            }
+                        }
                     }
-                    if(tank2.getFluidAmount() >= 1000){
-                        secondEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
-                        tank2.drain(1000, true);
-                    }
-                    if(tank3.getFluidAmount() >= 1000){
-                        thridEle = FluidElements.getFluidElement(tank3.getFluid().getFluid()).getElementID();
-                        tank3.drain(1000, true);
-                    }
-                    
+                }
+            }else {
+                int firstEle = 0, secondEle = 0, thridEle = 0;
+                if(crystal && ++tick >= 500) {
+                    tick = 0;
+                    crystal = false;
                     throwCrystalIntoChest(secondEle, thridEle, firstEle);
+                }
+
+                if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null && tank2.getFluid() != null
+                        && tank2.getFluid().getFluid() != null && tank3.getFluid() != null && tank3.getFluid().getFluid() != null) {
+                    if(tank1.getFluidAmount() >= 1000 && tank2.getFluidAmount() >= 1000 && tank3.getFluidAmount() >= 1000) {
+                        if(tank1.getFluidAmount() >= 1000) {
+                            firstEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
+                            tank1.drain(1000, true);
+                        }
+                        if(tank2.getFluidAmount() >= 1000) {
+                            secondEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
+                            tank2.drain(1000, true);
+                        }
+                        if(tank3.getFluidAmount() >= 1000) {
+                            thridEle = FluidElements.getFluidElement(tank3.getFluid().getFluid()).getElementID();
+                            tank3.drain(1000, true);
+                        }
+                        crystal = true;
+                    }
                 }
             }
         }
@@ -168,18 +190,18 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
         NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
         readNBT(tag);
     }
-    
-    public void throwCrystalIntoChest(int i, int j, int k){
+
+    public void throwCrystalIntoChest(int i, int j, int k) {
         boolean placedItem = false;
         ItemStack finishedCrystal = new ItemStack(70, 1, 1);
         ElementRegistry.writeBasic(finishedCrystal, i, j, k);
         TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
-        if(tile != null){
-            if(tile instanceof IInventory){
-                for(int slot = 0; slot < ((IInventory)tile).getSizeInventory(); slot++){
-                    if(((IInventory)tile).getStackInSlot(slot) == null){
+        if(tile != null) {
+            if(tile instanceof IInventory) {
+                for(int slot = 0; slot < ((IInventory) tile).getSizeInventory(); slot++) {
+                    if(((IInventory) tile).getStackInSlot(slot) == null) {
                         placedItem = true;
-                        ((IInventory)tile).setInventorySlotContents(slot, finishedCrystal);
+                        ((IInventory) tile).setInventorySlotContents(slot, finishedCrystal);
                         break;
                     }
                 }
