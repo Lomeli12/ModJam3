@@ -16,8 +16,8 @@ public interface IElement {
     public abstract CrystalAbility dominantNegative();
 
     public abstract CrystalAbility recessiveNegative();
-    
+
     public abstract int getElementID();
-    
+
     public abstract CrystalAbility[] abilities();
 }

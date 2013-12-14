@@ -1,5 +1,6 @@
 package net.lomeli.cb.tile;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -9,7 +10,6 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
 
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -18,6 +18,8 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import net.lomeli.cb.core.DirectionUtil;
+import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.item.IShard;
 import net.lomeli.cb.lib.Strings;
 
@@ -30,17 +32,59 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
         inventory = new ItemStack[1];
         tank = new FluidTank(1000);
     }
-    
-    public void heatUp(){
-        heatLevel++;
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if(!worldObj.isRemote) {
+            int blockID = worldObj.getBlockId(xCoord, yCoord - 1, zCoord);
+            if(blockID == Block.lavaMoving.blockID || blockID == Block.lavaStill.blockID)
+                heatUp();
+            else {
+                if(heatLevel > 0)
+                    heatLevel--;
+            }
+
+            if(inventory[0] != null && inventory[0].getItem() instanceof IShard && heatLevel >= 200) {
+                if(inventory[0].stackSize == 64) {
+                    if(++cookTime >= 500) {
+                        setInventorySlotContents(0, null);
+                        cookTime = 0;
+                        Fluid itemFluid = FluidElements.getFluidBaseOnStack(inventory[0]);
+                        FluidStack crystalFluid = new FluidStack(itemFluid, 1000);
+                        fill(null, crystalFluid, true);
+                    }
+                }
+            }
+
+            for(TileEntity tile : DirectionUtil.getSurroundingTiles(worldObj, xCoord, yCoord, zCoord)) {
+                if(tile != null) {
+                    if(tile instanceof TileCrystalizer) {
+                        if(((TileCrystalizer) tile).canFill(
+                                DirectionUtil.getDirectionFromTile(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile),
+                                tank.getFluid().getFluid()))
+                            tank.drain(
+                                    ((TileCrystalizer) tile).fill(
+                                            DirectionUtil.getDirectionFromTile(
+                                                    worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile), tank.getFluid(),
+                                            true), true);
+                    }
+                }
+            }
+        }
+    }
+
+    public void heatUp() {
+        if(heatLevel < 8000)
+            heatLevel++;
     }
 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
         int amount = 0;
-        if(doFill){
+        if(doFill) {
             if(resource != null) {
-                if(tank.getFluid() != null && tank.getFluid().getFluid() != null){
+                if(tank.getFluid() != null && tank.getFluid().getFluid() != null) {
                     if(resource.getFluid().equals(tank.getFluid().getFluid()))
                         amount = tank.fill(resource, doFill);
                 }else
@@ -52,14 +96,15 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-        if(doDrain){
-            if(resource != null && tank.getFluid() != null){
-                if(resource.getFluid().equals(tank.getFluid().getFluid())){
-                    return (tank.getFluidAmount() >= resource.amount) ? tank.drain(resource.amount, doDrain) : tank.drain(tank.getFluidAmount(), doDrain);
+        if(doDrain) {
+            if(resource != null && tank.getFluid() != null) {
+                if(resource.getFluid().equals(tank.getFluid().getFluid())) {
+                    return (tank.getFluidAmount() >= resource.amount) ? tank.drain(resource.amount, doDrain) : tank.drain(
+                            tank.getFluidAmount(), doDrain);
                 }
             }
         }
-        return null;
+        return resource;
     }
 
     @Override
@@ -69,12 +114,13 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        return ((tank.getFluid() != null || tank.getFluid().getFluid() != null) ? ((tank.getFluidAmount() < tank.getCapacity()) && fluid.equals(tank.getFluid().getFluid())) : true);
+        return ((tank.getFluid() != null || tank.getFluid().getFluid() != null) ? ((tank.getFluidAmount() < tank.getCapacity()) && fluid
+                .equals(tank.getFluid().getFluid())) : true);
     }
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-        return false;
+        return true;
     }
 
     @Override
@@ -94,41 +140,34 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
     @Override
     public ItemStack decrStackSize(int par1, int par2) {
-        if (this.inventory[par1] != null)
-        {
+        if(this.inventory[par1] != null) {
             ItemStack itemstack;
 
-            if (this.inventory[par1].stackSize <= par2)
-            {
+            if(this.inventory[par1].stackSize <= par2) {
                 itemstack = this.inventory[par1];
                 this.inventory[par1] = null;
                 this.onInventoryChanged();
                 return itemstack;
-            }
-            else
-            {
+            }else {
                 itemstack = this.inventory[par1].splitStack(par2);
 
-                if (this.inventory[par1].stackSize == 0)
+                if(this.inventory[par1].stackSize == 0)
                     this.inventory[par1] = null;
 
                 this.onInventoryChanged();
                 return itemstack;
             }
-        }
-        else
+        }else
             return null;
     }
 
     @Override
     public ItemStack getStackInSlotOnClosing(int i) {
-        if (this.inventory[i] != null)
-        {
+        if(this.inventory[i] != null) {
             ItemStack itemstack = this.inventory[i];
             this.inventory[i] = null;
             return itemstack;
-        }
-        else
+        }else
             return null;
     }
 
@@ -140,12 +179,12 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
     @Override
     public String getInvName() {
-        return StatCollector.translateToLocal("gui." + Strings.MOD_ID.toLowerCase() + ":crystalSmelter");
+        return "gui." + Strings.MOD_ID.toLowerCase() + ":crystalSmelter";
     }
 
     @Override
     public boolean isInvNameLocalized() {
-        return true;
+        return false;
     }
 
     @Override
@@ -168,7 +207,12 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return itemstack.getItem() instanceof IShard;
+        if(itemstack != null && itemstack.getItem() instanceof IShard) {
+            if(inventory[0] != null
+                    || (itemstack.itemID == inventory[i].itemID && itemstack.getItemDamage() == inventory[i].getItemDamage()))
+                return inventory[i].stackSize < 64;
+        }
+        return false;
     }
 
     @Override
@@ -190,6 +234,9 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
         }
 
         tag.setTag("Items", nbttaglist);
+
+        tag.setInteger("Amount", tank.getFluidAmount());
+        tag.setInteger("FluidID", tank.getFluid().fluidID);
     }
 
     @Override
@@ -208,6 +255,7 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
                 this.inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
+        tank.setFluid(new FluidStack(tag.getInteger("FluidId"), tag.getInteger("Amount")));
     }
 
     @Override
@@ -223,6 +271,18 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
         super.onDataPacket(net, pkt);
         NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
         readNBT(tag);
+    }
+
+    public void addItemToSlot(ItemStack stack) {
+        if(this.isItemValidForSlot(0, stack)) {
+            if(inventory[0] != null) {
+                stack.stackSize--;
+                inventory[0].stackSize--;
+            }else {
+                stack.stackSize--;
+                inventory[0] = new ItemStack(stack.itemID, 1, stack.getItemDamage());
+            }
+        }
     }
 
 }

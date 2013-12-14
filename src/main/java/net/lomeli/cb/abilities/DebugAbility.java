@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import net.lomeli.cb.tile.ICrystal;
 
-public class DebugAbility extends CrystalAbility{
+public class DebugAbility extends CrystalAbility {
 
     public EnumAbilityType abilityType() {
         return EnumAbilityType.NEUTRAL;
@@ -15,10 +15,10 @@ public class DebugAbility extends CrystalAbility{
 
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
         TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
-        if(tile != null){
-            if(tile instanceof ICrystal){
+        if(tile != null) {
+            if(tile instanceof ICrystal) {
                 // ((ICrystal)tile)
-                ((ICrystal)tile).addPower(10);
+                ((ICrystal) tile).addPower(10);
             }
         }
     }

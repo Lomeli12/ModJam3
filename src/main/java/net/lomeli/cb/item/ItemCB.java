@@ -9,14 +9,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 
-public class ItemCB extends Item{
+public class ItemCB extends Item {
     protected String itemTexture;
+
     public ItemCB(int par1, String texture) {
         super(par1);
         this.itemTexture = texture;
         this.setCreativeTab(CrystalBearers.modTab);
     }
-    
+
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IconRegister par1IconRegister) {

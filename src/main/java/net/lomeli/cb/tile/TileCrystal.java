@@ -21,26 +21,26 @@ public class TileCrystal extends TileEntity implements ICrystal {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(!worldObj.isRemote){
-            if(abilityOne() != null && abilityTwo() != null && powerAbility() != null){
+        if(!worldObj.isRemote) {
+            if(abilityOne() != null && abilityTwo() != null && powerAbility() != null) {
                 if(getPower() < getMaxPower())
                     powerAbility().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
-                
+
                 this.usePower(abilityOne().cost());
-                if(this.canActivate()){
+                if(this.canActivate()) {
                     abilityOne().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                     this.active = false;
                 }
-                
+
                 this.usePower(abilityTwo().cost());
-                if(this.canActivate()){
+                if(this.canActivate()) {
                     abilityTwo().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                     this.active = false;
                 }
             }
         }
     }
-    
+
     @Override
     public CrystalAbility abilityOne() {
         return abilities[0];
@@ -101,25 +101,25 @@ public class TileCrystal extends TileEntity implements ICrystal {
     public void setPowerAbility(CrystalAbility ability) {
         abilities[2] = ability;
     }
-    
+
     @Override
-    public void writeToNBT(NBTTagCompound tag){
+    public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         writeTag(tag);
     }
-    
-    public void writeTag(NBTTagCompound tag){
+
+    public void writeTag(NBTTagCompound tag) {
         tag.setInteger("power", this.energy);
         tag.setBoolean("active", this.active);
     }
-    
+
     @Override
-    public void readFromNBT(NBTTagCompound tag){
+    public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         readNBT(tag);
     }
-    
-    public void readNBT(NBTTagCompound tag){
+
+    public void readNBT(NBTTagCompound tag) {
         this.energy = tag.getInteger("power");
         this.active = tag.getBoolean("active");
     }
@@ -133,7 +133,7 @@ public class TileCrystal extends TileEntity implements ICrystal {
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt){
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
         super.onDataPacket(net, pkt);
         NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
         readNBT(tag);

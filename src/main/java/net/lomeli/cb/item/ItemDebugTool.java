@@ -109,7 +109,7 @@ public class ItemDebugTool extends Item {
                 ((TileCrystal) tile).setPowerAbility(new DebugAbility());
             }
         }
-        
+
         return true;
     }
 }

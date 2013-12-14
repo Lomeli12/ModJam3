@@ -12,12 +12,12 @@ import net.lomeli.cb.abilities.air.AbilityPowerAir;
 
 public class ElementAir implements IElement {
     private int id;
-    
-    public ElementAir setID(int id){
+
+    public ElementAir setID(int id) {
         this.id = id;
         return this;
     }
-    
+
     @Override
     public String getLocalizedName() {
         return StatCollector.translateToLocal("element.crystalbearers:airElement");

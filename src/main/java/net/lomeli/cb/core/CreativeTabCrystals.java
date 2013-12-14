@@ -11,9 +11,9 @@ public class CreativeTabCrystals extends CreativeTabs {
     public CreativeTabCrystals(int j) {
         super(j, Strings.MOD_ID.toLowerCase());
     }
-    
+
     @Override
-    public ItemStack getIconItemStack(){
+    public ItemStack getIconItemStack() {
         return new ItemStack(ModItems.shard);
     }
 

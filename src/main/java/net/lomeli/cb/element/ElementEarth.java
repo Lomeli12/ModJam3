@@ -12,12 +12,12 @@ import net.lomeli.cb.abilities.earth.AbilityShardPowerEarth;
 
 public class ElementEarth implements IElement {
     private int id;
-    
-    public ElementEarth setID(int id){
+
+    public ElementEarth setID(int id) {
         this.id = id;
         return this;
     }
-    
+
     @Override
     public CrystalAbility dominantPositive() {
         return new AbilityNatureTouch();

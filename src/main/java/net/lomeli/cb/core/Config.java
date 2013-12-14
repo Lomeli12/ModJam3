@@ -33,10 +33,10 @@ public class Config {
         BlockIds.shardBlockID = config.get(block, "shardBlock", 456).getInt(456);
         BlockIds.oreShardID = config.get(block, "oreShard", 457).getInt(457);
     }
-    
+
     private static void loadItemID() {
         String item = "Items";
-        
+
         ItemIds.shardID = config.get(item, "shard", 6000).getInt(6000);
     }
 }

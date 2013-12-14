@@ -12,8 +12,8 @@ import net.lomeli.cb.abilities.water.AbilityShardPowerWater;
 
 public class ElementWater implements IElement {
     private int id;
-    
-    public ElementWater setID(int id){
+
+    public ElementWater setID(int id) {
         this.id = id;
         return this;
     }

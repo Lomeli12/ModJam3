@@ -12,12 +12,12 @@ import net.lomeli.cb.abilities.fire.AbilityShardPowerFire;
 
 public class ElementFire implements IElement {
     private int id;
-    
-    public ElementFire setID(int id){
+
+    public ElementFire setID(int id) {
         this.id = id;
         return this;
     }
-    
+
     @Override
     public String getLocalizedName() {
         return StatCollector.translateToLocal("element.crystalbearers:fireElement");

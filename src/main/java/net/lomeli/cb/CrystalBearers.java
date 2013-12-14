@@ -24,7 +24,7 @@ public class CrystalBearers {
 
     @SidedProxy(clientSide = "net.lomeli.cb.core.ClientProxy", serverSide = "net.lomeli.cb.core.CommonProxy")
     public static CommonProxy proxy;
-    
+
     public static CreativeTabs modTab = new CreativeTabCrystals(CreativeTabs.getNextID());
 
     @Mod.EventHandler
@@ -32,10 +32,10 @@ public class CrystalBearers {
         Config.loadConfig(event.getSuggestedConfigurationFile());
 
         ElementRegistry.registerElements();
-        
+
         ModBlocks.loadBlocks();
         ModItems.loadItems();
-        
+
         FluidElements.loadFluids();
     }
 
