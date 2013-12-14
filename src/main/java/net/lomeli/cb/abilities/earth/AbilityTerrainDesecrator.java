@@ -44,7 +44,6 @@ public class AbilityTerrainDesecrator extends CrystalAbility {
 
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
-        System.out.println("HELLO! 1");
         int radius = 5;
 
         for(int x1 = x - radius; x1 <= x + radius; x1++)

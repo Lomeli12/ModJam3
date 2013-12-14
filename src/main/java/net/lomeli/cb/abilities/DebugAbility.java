@@ -17,7 +17,7 @@ public class DebugAbility extends CrystalAbility {
         TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
         if(tile != null) {
             if(tile instanceof ICrystal) {
-                ((ICrystal) tile).addPower(10);
+                ((ICrystal) tile).addPower(10000);
             }
         }
     }

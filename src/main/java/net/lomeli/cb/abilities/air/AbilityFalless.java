@@ -28,4 +28,9 @@ public class AbilityFalless extends CrystalAbility {
             }
         }
     }
+    
+    @Override
+    public int cost() {
+        return 150;
+    }
 }

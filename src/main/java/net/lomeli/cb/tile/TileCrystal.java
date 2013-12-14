@@ -30,7 +30,6 @@ public class TileCrystal extends TileEntity implements ICrystal {
             ability2ID = rand.nextInt(4);
             abilitiesSet = true;
             setIsNatural(false);
-            this.setPowerAbility(new DebugAbility());
         }
     }
 
@@ -56,10 +55,7 @@ public class TileCrystal extends TileEntity implements ICrystal {
             }else {
                 this.setAbilityOne(ElementRegistry.elements.get(firstEle).abilities()[ability1ID]);
                 this.setAbilityTwo(ElementRegistry.elements.get(secondEle).abilities()[ability2ID]);
-                if(passiveAbility)
-                    this.setPowerAbility(ElementRegistry.elements.get(thridEle).recessiveNeutral());
-                else
-                    this.setPowerAbility(ElementRegistry.elements.get(thridEle).dominantNeutral());
+                this.setPowerAbility(new DebugAbility());
             }
         }
     }

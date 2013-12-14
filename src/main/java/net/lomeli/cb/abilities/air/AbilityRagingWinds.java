@@ -29,5 +29,10 @@ public class AbilityRagingWinds extends CrystalAbility {
             }
         }
     }
+    
+    @Override
+    public int cost() {
+        return 400;
+    }
 
 }

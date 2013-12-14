@@ -28,4 +28,9 @@ public class AbilityAirBubble extends CrystalAbility {
             }
         }
     }
+    
+    @Override
+    public int cost() {
+        return 200;
+    }
 }
