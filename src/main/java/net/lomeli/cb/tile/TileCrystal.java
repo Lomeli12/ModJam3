@@ -31,10 +31,10 @@ public class TileCrystal extends TileEntity implements ICrystal {
             ability2ID = rand.nextInt(4);
             abilitiesSet = true;
             setIsNatural(true);
+            red = rand.nextInt(200);
+            green = rand.nextInt(200);
+            blue = rand.nextInt(200);
         }
-        red = rand.nextInt(256);
-        green = rand.nextInt(256);
-        blue = rand.nextInt(256);
     }
 
     @Override
@@ -198,16 +198,16 @@ public class TileCrystal extends TileEntity implements ICrystal {
     public void setIsNatural(boolean bool) {
         natural = bool;
     }
-    
-    public float red(){
+
+    public float red() {
         return red;
     }
-    
-    public float green(){
+
+    public float green() {
         return green;
     }
-    
-    public float blue(){
+
+    public float blue() {
         return blue;
     }
 }

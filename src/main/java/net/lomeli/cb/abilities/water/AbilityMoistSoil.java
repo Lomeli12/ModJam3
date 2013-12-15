@@ -32,12 +32,12 @@ public class AbilityMoistSoil extends CrystalAbility {
                     }
                 }
     }
-    
+
     @Override
     public int cost() {
         return 40;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

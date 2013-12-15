@@ -26,7 +26,7 @@ public class EntityLivingHandler {
             }
         }else if(event.entityLiving instanceof EntityThunderCow) {
             if(!event.entityLiving.worldObj.isRemote) {
-                
+
                 EntityItem item = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX + 3,
                         event.entityLiving.posY, event.entityLiving.posZ + 3, ModItems.shards[3]);
                 event.entityLiving.worldObj.spawnEntityInWorld(item);
@@ -38,11 +38,11 @@ public class EntityLivingHandler {
     }
 
     @ForgeSubscribe
-    public void onSpawnEvent(LivingSpawnEvent event){
+    public void onSpawnEvent(LivingSpawnEvent event) {
         Random rand = new Random();
-        if(event.entityLiving instanceof EntityFireWolf){
+        if(event.entityLiving instanceof EntityFireWolf) {
             if(rand.nextInt(100) < 5)
-                ((EntityLiving)event.entityLiving).setCustomNameTag("Firewolf20");
+                ((EntityLiving) event.entityLiving).setCustomNameTag("Firewolf20");
         }
     }
 }

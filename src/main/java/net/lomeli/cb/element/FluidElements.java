@@ -55,7 +55,7 @@ public class FluidElements {
 
     public static Fluid getFluidBaseOnStack(ItemStack stack) {
         if(stack != null && stack.getItem() instanceof IShard)
-            return ((IShard)stack.getItem()).getFluid(stack);
+            return ((IShard) stack.getItem()).getFluid(stack);
         return null;
     }
 }

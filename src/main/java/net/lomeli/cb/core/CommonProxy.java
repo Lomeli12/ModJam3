@@ -12,6 +12,7 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileCrystalizer.class, "net.lomeli.cb.tileCrystalizer");
         GameRegistry.registerTileEntity(TileCrystalSmelter.class, "net.lomeli.cb.tileCrystalSmelter");
     }
-    
-    public void registerRenders(){}
+
+    public void registerRenders() {
+    }
 }

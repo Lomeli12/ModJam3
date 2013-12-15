@@ -61,12 +61,12 @@ public class AbilityTerrainDesecrator extends CrystalAbility {
                     }
                 }
     }
-    
+
     @Override
     public int cost() {
         return 250;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

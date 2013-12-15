@@ -71,9 +71,11 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
                                     .canFill(DirectionUtil.getDirectionFromTile(
                                             worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile), tank.getFluid()
                                             .getFluid())) {
-                                tank.drain(((TileCrystalizer) tile).fill(
-                                        DirectionUtil.getDirectionFromTile(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord),
-                                                tile), tank.getFluid(), true), true);
+                                tank.drain(
+                                        ((TileCrystalizer) tile).fill(
+                                                DirectionUtil.getDirectionFromTile(
+                                                        worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile),
+                                                tank.getFluid(), true), true);
                                 break;
                             }
                         }

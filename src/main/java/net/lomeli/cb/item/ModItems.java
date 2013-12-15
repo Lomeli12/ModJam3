@@ -15,13 +15,12 @@ public class ModItems {
 
     public static void loadItems() {
         shards = new ItemStack[5];
-        new ItemDebugTool(500);
-
         shard = new ItemShard(ItemIds.shardID);
-        
+
         for(int i = 0; i < shards.length; i++) {
             shards[i] = new ItemStack(shard, 1, i);
         }
+
         crystalItem = new ItemCrystal(ItemIds.crystalItemID);
         easterEgg = new ItemChickenRecord(ItemIds.recordID);
         scanner = new ItemScanner(ItemIds.scannerID);
@@ -30,7 +29,8 @@ public class ModItems {
         GameRegistry.registerItem(crystalItem, "crystalItem");
         GameRegistry.registerItem(easterEgg, "record");
         GameRegistry.registerItem(scanner, "scanner");
-        
+
+        OreDictionary.registerOre("crystalShard", new ItemStack(shard, 1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("fireShard", shards[0]);
         OreDictionary.registerOre("waterShard", shards[1]);
         OreDictionary.registerOre("earthShard", shards[2]);

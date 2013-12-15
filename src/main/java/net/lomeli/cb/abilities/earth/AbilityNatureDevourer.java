@@ -54,8 +54,7 @@ public class AbilityNatureDevourer extends CrystalAbility {
                         if(rand.nextInt(10000) < 4500) {
                             if(id == Block.grass.blockID)
                                 worldObj.setBlock(x1, y1, z1, Block.dirt.blockID);
-                            else if(OreDictionary.getOres("logWood").contains(
-                                    new ItemStack(id, 1, 0)))
+                            else if(OreDictionary.getOres("logWood").contains(new ItemStack(id, 1, 0)))
                                 worldObj.setBlock(x1, y1, z1, Block.cobblestone.blockID);
                             else
                                 worldObj.setBlockToAir(x1, y1, z1);
@@ -63,12 +62,12 @@ public class AbilityNatureDevourer extends CrystalAbility {
                     }
                 }
     }
-    
+
     @Override
     public int cost() {
         return 350;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

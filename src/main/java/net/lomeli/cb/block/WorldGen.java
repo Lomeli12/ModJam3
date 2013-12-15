@@ -94,9 +94,9 @@ public class WorldGen implements IWorldGenerator {
         lz = z;
         int id;
         id = world.getBlockId(lx, ly, lz);
-        if(id != Block.stone.blockID && id != Block.dirt.blockID) 
+        if(id != Block.stone.blockID && id != Block.dirt.blockID)
             return;
-        
+
         for(int i = 0; i < ntg; i++) {
 
             id = world.getBlockId(lx, ly, lz);

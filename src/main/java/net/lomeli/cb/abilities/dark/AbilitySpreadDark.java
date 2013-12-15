@@ -53,12 +53,12 @@ public class AbilitySpreadDark extends CrystalAbility {
                     }
                 }
     }
-    
+
     @Override
     public int cost() {
         return 300;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

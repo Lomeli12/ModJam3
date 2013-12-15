@@ -119,3 +119,10 @@ ability.crystalbearers:ShardPowerWaterName=Shard Power: Wave
 ability.crystalbearers:ShardPowerWater=Generates 20 units of power per 7 ticks from an Wave Shard block underneath.
 ability.crystalbearers:ReplenishWaterName=Replenish Water
 ability.crystalbearers:ReplenishWater=Fills nearby tanks with water.
+
+
+# Books
+book.crystalbearers:SmeltBookName=Crystal Smeltery Book
+book.crystalbearers:SmeltBook=Requires a lava source below it and 64 crystal shards of the same time. Will melt the shards and auto-output to nearby Crystalizers.
+book.crystalbearers:CrystalizerName=Guide to making Crystals
+book.crystalbearers:Crystalizer=Requires 3 types of crystal fluid. Inputs from the sides (except the front) and outputs to an inventory above (not ISided).

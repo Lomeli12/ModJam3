@@ -49,12 +49,12 @@ public class AbilityNatureTouch extends CrystalAbility {
                     }
                 }
     }
-    
+
     @Override
     public int cost() {
         return 500;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

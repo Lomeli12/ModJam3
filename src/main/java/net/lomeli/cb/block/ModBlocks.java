@@ -42,12 +42,12 @@ public class ModBlocks {
         GameRegistry.registerBlock(shardBlock, ItemShardBlock.class, "shardBlock");
         GameRegistry.registerBlock(oreShard, ItemOreBlock.class, "oreShard");
         for(int i = 0; i < 5; i++) {
-            shardBlocks[i] = new ItemStack(shardBlock, 1, i);
-            oreShards[i] = new ItemStack(oreShard, 1, i);
+            shardBlocks[i] = new ItemStack(oreShard, 1, i);
+            oreShards[i] = new ItemStack(shardBlock, 1, i);
         }
-        
+
         MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
-        
+
         OreDictionary.registerOre("oreFireShard", shardBlocks[0]);
         OreDictionary.registerOre("oreWaterShard", shardBlocks[1]);
         OreDictionary.registerOre("oreEarthShard", shardBlocks[2]);

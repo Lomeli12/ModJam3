@@ -52,7 +52,7 @@ public class AbilityDrenchedEarth extends CrystalAbility {
                     }
                 }
     }
-    
+
     @Override
     public int cost() {
         return 400;

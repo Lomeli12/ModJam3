@@ -26,13 +26,13 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(ModBlocks.crystal.blockID, new RenderCrystal());
         MinecraftForgeClient.registerItemRenderer(ModItems.crystalItem.itemID, new RenderCrystal());
     }
-    
+
     @Override
-    public void registerRenders(){
+    public void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFireWolf.class, new RenderFireWolf());
         RenderingRegistry.registerEntityRenderingHandler(EntityDarkChicken.class, new RenderDarkChicken());
         RenderingRegistry.registerEntityRenderingHandler(EntityThunderCow.class, new RenderThunderCow());
-        
+
         MinecraftForge.EVENT_BUS.register(SoundHandler.getSoundHandler());
     }
 }

@@ -19,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityThunderCow extends EntityMob{
+public class EntityThunderCow extends EntityMob {
 
     public EntityThunderCow(World par1World) {
         super(par1World);
@@ -39,7 +39,7 @@ public class EntityThunderCow extends EntityMob{
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(6.0D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
     }
 
@@ -86,7 +86,7 @@ public class EntityThunderCow extends EntityMob{
     protected float getSoundVolume() {
         return 0.4F;
     }
-    
+
     public void onUpdate() {
         super.onUpdate();
     }
@@ -119,7 +119,7 @@ public class EntityThunderCow extends EntityMob{
     public boolean attackEntityAsMob(Entity par1Entity) {
         return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) 2);
     }
-    
+
     public int getMaxSpawnedInChunk() {
         return 8;
     }

@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRenderer{
+public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRenderer {
     private ModelCrystal model;
 
     public RenderCrystal() {
@@ -36,18 +36,17 @@ public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRen
 
         GL11.glPushMatrix();
 
-        GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1F, (float) d2 + 0.5F);
+        GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1.6F, (float) d2 + 0.5F);
 
         GL11.glScaled(1.5d, -1.5d, 1.5d);
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(56F, 0F, 130F, 0.7F);
+        GL11.glColor4f(tile.red / 255F, tile.green / 255F, tile.blue / 255F, 0.7F);
 
         model.render(0.0625F);
 
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glColor4f(56F, 0F, 130F, 1F);
 
         GL11.glPopMatrix();
     }
@@ -64,7 +63,27 @@ public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRen
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        renderCrystal(new TileCrystal(), 0.1D, 0.1D, 0.1D, 0.1F);
+        renderCrystalItem(new TileCrystal(), 0.1D, 0.1D, 0.1D, 0.1F);
     }
 
+    public void renderCrystalItem(TileCrystal tile, double d0, double d1, double d2, float f) {
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Strings.MOD_ID.toLowerCase(),
+                "textures/model/Crystal.png"));
+
+        GL11.glPushMatrix();
+
+        GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1.6F, (float) d2 + 0.5F);
+
+        GL11.glScaled(1.5d, -1.5d, 1.5d);
+
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glColor4f(18 / 255F, 200 / 255F, 240 / 255F, 0.7F);
+
+        model.render(0.0625F);
+
+        GL11.glDisable(GL11.GL_BLEND);
+
+        GL11.glPopMatrix();
+    }
 }

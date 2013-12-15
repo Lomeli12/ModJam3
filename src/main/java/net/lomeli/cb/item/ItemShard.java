@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.lib.Strings;
 
-public class ItemShard extends ItemCB implements IShard{
+public class ItemShard extends ItemCB implements IShard {
 
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;
@@ -64,13 +64,19 @@ public class ItemShard extends ItemCB implements IShard{
 
     @Override
     public Fluid getFluid(ItemStack stack) {
-        switch(stack.getItemDamage()){
-            case 0: return FluidElements.fireFluid;
-            case 1: return FluidElements.waterFluid;
-            case 2: return FluidElements.earthFluid;
-            case 3: return FluidElements.airFluid;
-            case 4: return FluidElements.darkFluid;
-            default: return null;
+        switch(stack.getItemDamage()) {
+        case 0:
+            return FluidElements.fireFluid;
+        case 1:
+            return FluidElements.waterFluid;
+        case 2:
+            return FluidElements.earthFluid;
+        case 3:
+            return FluidElements.airFluid;
+        case 4:
+            return FluidElements.darkFluid;
+        default:
+            return null;
         }
     }
 }

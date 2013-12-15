@@ -101,20 +101,20 @@ public class EntityDarkChicken extends EntityMob {
 
         this.field_70888_h = this.field_70886_e;
         this.field_70884_g = this.destPos;
-        this.destPos = (float)((double)this.destPos + (double)(this.onGround ? -1 : 4) * 0.3D);
+        this.destPos = (float) ((double) this.destPos + (double) (this.onGround ? -1 : 4) * 0.3D);
 
-        if (this.destPos < 0.0F)
+        if(this.destPos < 0.0F)
             this.destPos = 0.0F;
 
-        if (this.destPos > 1.0F)
+        if(this.destPos > 1.0F)
             this.destPos = 1.0F;
 
-        if (!this.onGround && this.field_70889_i < 1.0F)
+        if(!this.onGround && this.field_70889_i < 1.0F)
             this.field_70889_i = 1.0F;
-        
-        this.field_70889_i = (float)((double)this.field_70889_i * 0.9D);
 
-        if (!this.onGround && this.motionY < 0.0D)
+        this.field_70889_i = (float) ((double) this.field_70889_i * 0.9D);
+
+        if(!this.onGround && this.motionY < 0.0D)
             this.motionY *= 0.6D;
 
         this.field_70886_e += this.field_70889_i * 2.0F;

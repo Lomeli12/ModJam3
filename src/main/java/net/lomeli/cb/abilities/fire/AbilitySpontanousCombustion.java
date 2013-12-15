@@ -29,12 +29,12 @@ public class AbilitySpontanousCombustion extends CrystalAbility {
             }
         }
     }
-    
+
     @Override
     public int cost() {
         return 200;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

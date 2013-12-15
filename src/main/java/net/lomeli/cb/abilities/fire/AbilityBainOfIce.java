@@ -30,12 +30,12 @@ public class AbilityBainOfIce extends CrystalAbility {
                     worldObj.markBlockForUpdate(x1, y1, z1);
                 }
     }
-    
+
     @Override
     public int cost() {
         return 50;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

@@ -32,8 +32,8 @@ public class BlockBreakHandler {
                         event.world.spawnEntityInWorld(item);
                     }
                 }
-                if(!event.getPlayer().getEntityData().getBoolean("hasText")){
-                    
+                if(!event.getPlayer().getEntityData().getBoolean("hasText")) {
+
                 }
             }
         }

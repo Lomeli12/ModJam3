@@ -44,11 +44,11 @@ public class Config {
         ItemIds.recordID = config.get(item, "notaneasteregg", 6002).getInt(6002);
         ItemIds.scannerID = config.get(item, "scanner", 6003).getInt(6003);
     }
-    
-    private static void loadEntityIDs(){
+
+    private static void loadEntityIDs() {
         String entity = "Entity";
-        
-        ModEntities.fireWolfID  = config.get(entity, "fireWolf", 110).getInt(110);
+
+        ModEntities.fireWolfID = config.get(entity, "fireWolf", 110).getInt(110);
         ModEntities.darkChickenID = config.get(entity, "darkChicken", 111).getInt(111);
         ModEntities.thunderCowId = config.get(entity, "thunderCow", 112).getInt(112);
     }

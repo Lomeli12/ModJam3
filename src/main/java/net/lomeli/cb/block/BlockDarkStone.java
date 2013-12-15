@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
 
 import net.lomeli.cb.CrystalBearers;
+import net.lomeli.cb.lib.BlockIds;
 
 public class BlockDarkStone extends BlockCB {
 
@@ -20,6 +21,11 @@ public class BlockDarkStone extends BlockCB {
         this.setHardness(2.0F);
         this.setResistance(10.0F);
         this.setStepSound(soundStoneFootstep);
+    }
+
+    @Override
+    public int idDropped(int par1, Random par2Random, int par3) {
+        return BlockIds.darkCobbleID;
     }
 
     @SuppressWarnings("unchecked")

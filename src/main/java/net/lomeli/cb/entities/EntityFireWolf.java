@@ -144,7 +144,7 @@ public class EntityFireWolf extends EntityMob {
     public void onUpdate() {
         super.onUpdate();
     }
-    
+
     public int getVerticalFaceSpeed() {
         return super.getVerticalFaceSpeed();
     }
@@ -183,10 +183,10 @@ public class EntityFireWolf extends EntityMob {
     protected boolean canDespawn() {
         return true;
     }
-    
+
     @Override
-    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData){
-        if(rand.nextInt(100000) < 10){
+    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData) {
+        if(rand.nextInt(100000) < 10) {
         }
         return super.onSpawnWithEgg(par1EntityLivingData);
     }

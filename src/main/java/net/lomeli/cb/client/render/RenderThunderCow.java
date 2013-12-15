@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import net.lomeli.cb.lib.Strings;
 
-public class RenderThunderCow extends RenderLiving{
+public class RenderThunderCow extends RenderLiving {
 
     public RenderThunderCow() {
         super(new ModelCow(), 0.5F);

@@ -26,12 +26,12 @@ public class AbilityCombustable extends CrystalAbility {
                         worldObj.createExplosion(null, x1, y1, z1, 5F, true);
                 }
     }
-    
+
     @Override
     public int cost() {
         return 200;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

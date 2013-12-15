@@ -29,7 +29,7 @@ public class AbilityShardPowerDark extends CrystalAbility {
             }
         }
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

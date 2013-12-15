@@ -16,12 +16,12 @@ public class CrystalAbility {
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
 
     }
-    
-    public String getAbilityName(){
+
+    public String getAbilityName() {
         return null;
     }
-    
-    public String getAbilityDesc(){
+
+    public String getAbilityDesc() {
         return null;
     }
 

@@ -17,7 +17,9 @@ import net.lomeli.cb.block.WorldGen;
 import net.lomeli.cb.core.CommonProxy;
 import net.lomeli.cb.core.Config;
 import net.lomeli.cb.core.CreativeTabCrystals;
+import net.lomeli.cb.core.ModRecipes;
 import net.lomeli.cb.core.handler.BlockBreakHandler;
+import net.lomeli.cb.core.handler.CraftingHandler;
 import net.lomeli.cb.core.handler.EntityLivingHandler;
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.element.FluidElements;
@@ -31,8 +33,6 @@ public class CrystalBearers {
 
     @SidedProxy(clientSide = "net.lomeli.cb.core.ClientProxy", serverSide = "net.lomeli.cb.core.CommonProxy")
     public static CommonProxy proxy;
-    
-    
 
     public static CreativeTabs modTab = new CreativeTabCrystals(CreativeTabs.getNextID());
 
@@ -41,7 +41,7 @@ public class CrystalBearers {
         Config.loadConfig(event.getSuggestedConfigurationFile());
 
         ElementRegistry.registerElements();
-        
+
         ModItems.loadItems();
         ModBlocks.loadBlocks();
 
@@ -52,17 +52,18 @@ public class CrystalBearers {
     public void init(FMLInitializationEvent event) {
         proxy.registerTile();
         proxy.registerRenders();
-        
+
         ModEntities.loadEntities();
-        
+
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
         MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
-        
+
         GameRegistry.registerWorldGenerator(new WorldGen());
+        GameRegistry.registerCraftingHandler(new CraftingHandler());
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-
+        ModRecipes.loadRecipes();
     }
 }

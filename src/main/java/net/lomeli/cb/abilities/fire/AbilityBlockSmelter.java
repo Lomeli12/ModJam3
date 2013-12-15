@@ -30,12 +30,12 @@ public class AbilityBlockSmelter extends CrystalAbility {
                     }
                 }
     }
-    
+
     @Override
     public int cost() {
         return 100;
     }
-    
+
     @Override
     public String getAbilityName() {
         return "ability." + Strings.MOD_ID.toLowerCase() + ":"

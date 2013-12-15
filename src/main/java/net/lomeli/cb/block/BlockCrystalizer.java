@@ -21,14 +21,14 @@ import net.lomeli.cb.tile.TileCrystalizer;
 public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;
-    
+
     public BlockCrystalizer(int par1) {
         super(par1, Material.iron, "crystalizer_");
         this.setUnlocalizedName("crystalizer");
         this.setHardness(2.0F);
         this.setResistance(10.0F);
     }
-    
+
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         iconArray = new Icon[4];
@@ -36,17 +36,17 @@ public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
             iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.blockTexture + i);
         }
     }
-    
+
     @Override
     public Icon getIcon(int side, int meta) {
         return side == 0 ? iconArray[3] : side == 1 ? iconArray[1] : side == meta ? iconArray[0] : iconArray[2];
     }
-    
+
     @Override
     public boolean hasTileEntity() {
         return true;
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world) {
         return new TileCrystalizer();

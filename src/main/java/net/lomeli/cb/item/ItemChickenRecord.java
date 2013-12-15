@@ -20,13 +20,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 
-public class ItemChickenRecord extends ItemRecord{
+public class ItemChickenRecord extends ItemRecord {
 
     @SuppressWarnings("rawtypes")
     private static final Map records = new HashMap();
-    
+
     public final String recordName;
-    
+
     @SuppressWarnings("unchecked")
     public ItemChickenRecord(int par1) {
         super(par1, "chickenTechno");
@@ -36,11 +36,12 @@ public class ItemChickenRecord extends ItemRecord{
         recordName = "chickenTechno";
         records.put(recordName, this);
     }
-    
+
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote) {
-            if (world.getBlockId(x, y, z) == Block.jukebox.blockID && world.getBlockMetadata(x, y, z) == 0) {
+    public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX,
+            float hitY, float hitZ) {
+        if(!world.isRemote) {
+            if(world.getBlockId(x, y, z) == Block.jukebox.blockID && world.getBlockMetadata(x, y, z) == 0) {
                 ((BlockJukeBox) Block.jukebox).insertRecord(world, x, y, z, itemstack);
                 world.playAuxSFXAtEntity((EntityPlayer) null, 1005, x, y, z, this.itemID);
                 --itemstack.stackSize;
@@ -49,13 +50,13 @@ public class ItemChickenRecord extends ItemRecord{
         }
         return false;
     }
-    
+
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":musicDisc");
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public String getRecordTitle() {
@@ -80,9 +81,9 @@ public class ItemChickenRecord extends ItemRecord{
         super.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":" + str);
         return this;
     }
-    
+
     @SideOnly(Side.CLIENT)
-    public static ItemChickenRecord getRecord(String par1){
+    public static ItemChickenRecord getRecord(String par1) {
         return (ItemChickenRecord) records.get(par1);
     }
 

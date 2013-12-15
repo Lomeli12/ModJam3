@@ -10,7 +10,7 @@ import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.ICrystal;
 
-public class ItemScanner extends ItemCB{
+public class ItemScanner extends ItemCB {
 
     public ItemScanner(int par1) {
         super(par1, "scanner");
@@ -23,12 +23,13 @@ public class ItemScanner extends ItemCB{
             float par9, float par10) {
         if(!world.isRemote) {
             TileEntity tile = world.getBlockTileEntity(x, y, z);
-            if(tile != null){
-                if(tile instanceof ICrystal){
-                    CrystalAbility[] abilities = new CrystalAbility[] { ((ICrystal)tile).abilityOne(), ((ICrystal)tile).abilityTwo(), ((ICrystal)tile).powerAbility() };
-                    if(abilities.length > 0){
-                        for(CrystalAbility ability : abilities){
-                            if(ability != null){
+            if(tile != null) {
+                if(tile instanceof ICrystal) {
+                    CrystalAbility[] abilities = new CrystalAbility[] { ((ICrystal) tile).abilityOne(),
+                            ((ICrystal) tile).abilityTwo(), ((ICrystal) tile).powerAbility() };
+                    if(abilities.length > 0) {
+                        for(CrystalAbility ability : abilities) {
+                            if(ability != null) {
                                 player.addChatMessage(StatCollector.translateToLocal(ability.getAbilityName()));
                                 player.addChatMessage(StatCollector.translateToLocal(ability.getAbilityDesc()));
                             }

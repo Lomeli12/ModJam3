@@ -11,14 +11,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.lomeli.cb.lib.Strings;
 
 @SideOnly(Side.CLIENT)
-public class RenderDarkChicken extends RenderLiving{
+public class RenderDarkChicken extends RenderLiving {
 
     public RenderDarkChicken() {
         super(new ModelChicken(), 0.5F);
     }
-    
+
     @Override
-    protected ResourceLocation getEntityTexture(Entity par1Entity){
+    protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return new ResourceLocation(Strings.MOD_ID.toLowerCase(), "textures/model/darkchicken.png");
     }
 
