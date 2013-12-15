@@ -10,6 +10,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityToxicAir extends CrystalAbility {
     @Override
@@ -29,6 +30,23 @@ public class AbilityToxicAir extends CrystalAbility {
                     entity.addPotionEffect(new PotionEffect(Potion.poison.id, 5000, 2));
             }
         }
+    }
+    
+    @Override
+    public int cost() {
+        return 400;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 
 }

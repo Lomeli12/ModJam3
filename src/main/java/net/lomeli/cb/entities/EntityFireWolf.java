@@ -144,11 +144,7 @@ public class EntityFireWolf extends EntityMob {
     public void onUpdate() {
         super.onUpdate();
     }
-
-    public float getEyeHeight() {
-        return this.height * 0.8F;
-    }
-
+    
     public int getVerticalFaceSpeed() {
         return super.getVerticalFaceSpeed();
     }

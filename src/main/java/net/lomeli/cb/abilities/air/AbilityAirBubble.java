@@ -8,6 +8,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityAirBubble extends CrystalAbility {
     @Override
@@ -32,5 +33,17 @@ public class AbilityAirBubble extends CrystalAbility {
     @Override
     public int cost() {
         return 200;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

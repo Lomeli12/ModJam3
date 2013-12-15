@@ -10,9 +10,11 @@ import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.client.render.RenderCrystal;
 import net.lomeli.cb.client.render.RenderDarkChicken;
 import net.lomeli.cb.client.render.RenderFireWolf;
+import net.lomeli.cb.client.render.RenderThunderCow;
 import net.lomeli.cb.core.handler.SoundHandler;
 import net.lomeli.cb.entities.EntityDarkChicken;
 import net.lomeli.cb.entities.EntityFireWolf;
+import net.lomeli.cb.entities.EntityThunderCow;
 import net.lomeli.cb.item.ModItems;
 import net.lomeli.cb.tile.TileCrystal;
 
@@ -29,6 +31,7 @@ public class ClientProxy extends CommonProxy {
     public void registerRenders(){
         RenderingRegistry.registerEntityRenderingHandler(EntityFireWolf.class, new RenderFireWolf());
         RenderingRegistry.registerEntityRenderingHandler(EntityDarkChicken.class, new RenderDarkChicken());
+        RenderingRegistry.registerEntityRenderingHandler(EntityThunderCow.class, new RenderThunderCow());
         
         MinecraftForge.EVENT_BUS.register(SoundHandler.getSoundHandler());
     }

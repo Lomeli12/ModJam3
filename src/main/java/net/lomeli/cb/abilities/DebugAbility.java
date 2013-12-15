@@ -21,4 +21,12 @@ public class DebugAbility extends CrystalAbility {
             }
         }
     }
+    
+    public String getAbilityName(){
+        return "Power";
+    }
+    
+    public String getAbilityDesc(){
+        return "An unlimted power source (Naturally spawning crystals only)";
+    }
 }

@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityBainOfIce extends CrystalAbility {
 
@@ -28,5 +29,22 @@ public class AbilityBainOfIce extends CrystalAbility {
                         worldObj.setBlock(x1, y1, z1, Block.waterMoving.blockID);
                     worldObj.markBlockForUpdate(x1, y1, z1);
                 }
+    }
+    
+    @Override
+    public int cost() {
+        return 50;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

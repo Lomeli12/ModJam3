@@ -19,18 +19,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+public class EntityThunderCow extends EntityMob{
 
-public class EntityDarkChicken extends EntityMob {
-
-    public float field_70886_e;
-    public float destPos;
-    public float field_70884_g;
-    public float field_70888_h;
-    public float field_70889_i = 1.0F;
-
-    public EntityDarkChicken(World par1World) {
+    public EntityThunderCow(World par1World) {
         super(par1World);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIBreakDoor(this));
@@ -68,7 +59,7 @@ public class EntityDarkChicken extends EntityMob {
     }
 
     protected void playStepSound(int par1, int par2, int par3, int par4) {
-        this.playSound("mob.chicken.step", 0.15F, 1.0F);
+        this.playSound("mob.cow.step", 0.15F, 1.0F);
     }
 
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
@@ -81,51 +72,27 @@ public class EntityDarkChicken extends EntityMob {
     }
 
     protected String getLivingSound() {
-        return "mob.chicken.say";
+        return "mob.cow.say";
     }
 
     protected String getHurtSound() {
-        return "mob.chicken.hurt";
+        return "mob.cow.hurt";
     }
 
     protected String getDeathSound() {
-        return "mob.chicken.death";
+        return "mob.cow.death";
     }
 
     protected float getSoundVolume() {
         return 0.4F;
     }
-
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-
-        this.field_70888_h = this.field_70886_e;
-        this.field_70884_g = this.destPos;
-        this.destPos = (float)((double)this.destPos + (double)(this.onGround ? -1 : 4) * 0.3D);
-
-        if (this.destPos < 0.0F)
-            this.destPos = 0.0F;
-
-        if (this.destPos > 1.0F)
-            this.destPos = 1.0F;
-
-        if (!this.onGround && this.field_70889_i < 1.0F)
-            this.field_70889_i = 1.0F;
-        
-        this.field_70889_i = (float)((double)this.field_70889_i * 0.9D);
-
-        if (!this.onGround && this.motionY < 0.0D)
-            this.motionY *= 0.6D;
-
-        this.field_70886_e += this.field_70889_i * 2.0F;
-    }
-
+    
     public void onUpdate() {
         super.onUpdate();
     }
 
     public float getEyeHeight() {
-        return this.height * 0.8F;
+        return this.height * 0.5F;
     }
 
     public int getVerticalFaceSpeed() {
@@ -152,12 +119,7 @@ public class EntityDarkChicken extends EntityMob {
     public boolean attackEntityAsMob(Entity par1Entity) {
         return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) 2);
     }
-
-    @SideOnly(Side.CLIENT)
-    public float getTailRotation() {
-        return 1.5393804F;
-    }
-
+    
     public int getMaxSpawnedInChunk() {
         return 8;
     }

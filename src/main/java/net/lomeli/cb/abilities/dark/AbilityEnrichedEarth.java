@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityEnrichedEarth extends CrystalAbility {
     private List<Integer> blockList;
@@ -47,5 +48,17 @@ public class AbilityEnrichedEarth extends CrystalAbility {
     @Override
     public int cost() {
         return 400;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

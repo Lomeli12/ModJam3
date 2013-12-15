@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityCombustable extends CrystalAbility {
     @Override
@@ -24,5 +25,22 @@ public class AbilityCombustable extends CrystalAbility {
                     if(Block.lightValue[id] > 0.5F && rand.nextInt(1000) < 405)
                         worldObj.createExplosion(null, x1, y1, z1, 5F, true);
                 }
+    }
+    
+    @Override
+    public int cost() {
+        return 200;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

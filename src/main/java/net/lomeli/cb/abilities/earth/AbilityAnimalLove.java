@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityAnimalLove extends CrystalAbility {
 
@@ -28,7 +29,7 @@ public class AbilityAnimalLove extends CrystalAbility {
                     EntityLivingBase entity = (EntityLivingBase) ((SpawnListEntry) list.get(rand.nextInt(list.size()))).entityClass
                             .getConstructor(new Class[] { World.class }).newInstance(new Object[] { worldObj });
                     if(entity != null) {
-                        if(rand.nextInt(10000) < 50) {
+                        if(rand.nextInt(10000) < 20) {
                             entity.setLocationAndAngles(x, y + 1, z, rand.nextFloat() * 360.0F, 0.0F);
                             worldObj.spawnEntityInWorld(entity);
                         }
@@ -37,5 +38,22 @@ public class AbilityAnimalLove extends CrystalAbility {
                 }
             }
         }
+    }
+    
+    @Override
+    public int cost() {
+        return 400;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

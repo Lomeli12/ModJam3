@@ -14,6 +14,7 @@ item.crystalbearers:shard.3=Aer Shard
 item.crystalbearers:shard.4=Shadow Shard
 item.crystalbearers:crystal.name=Crystal
 item.crystalbearers:Record.name=Music Disc
+item.crystalbearers:scanner.name=Crystal Scanner
 
 # Block Names
 tile.crystalbearers:stone.name=Dark Stone
@@ -45,6 +46,7 @@ fluid.liquidDarkCrystal=Liquid Shadow Crystal
 # Entities
 entity.crystalbearers:firewolf.name=Fire Wolf
 entity.crystalbearers:darkChicken.name=Shadow Chicken
+entity.crystalbearers:thunderCow.name=Thunder Cow
 
 # Ability
 
@@ -75,3 +77,45 @@ ability.crystalbearers:ShardPowerDarkName=Shard Power: Dark
 ability.crystalbearers:ShardPowerDark=Generates 20 units of power per 7 ticks from an Shadow Shard block underneath.
 ability.crystalbearers:SpreadDarkName=Spread Darkness
 ability.crystalbearers:SpreadDark=Turns nearby stone/cobble into dark stone, which spawns hostiles.
+
+# Earth
+ability.crystalbearers:AnimalLoveName=Animal Love
+ability.crystalbearers:AnimalLove=Randomly spawns animals.
+ability.crystalbearers:NatureDevourerName=Nature Devourer
+ability.crystalbearers:NatureDevourer=Turns nearby logs into stone, turns grass into dirt, and destroys other plant life.
+ability.crystalbearers:NatureTouchName=Nature's Touch
+ability.crystalbearers:NatureTouch=Plants flowers and sapplings in the nearby area.
+ability.crystalbearers:PowerEarthName=Terra Power
+ability.crystalbearers:PowerEarth=Generates 40 units of power per 7 ticks from a coal block underneath.
+ability.crystalbearers:ShardPowerEarthName=Shard Power: Terra
+ability.crystalbearers:ShardPowerEarth=Generates 20 units of power per 7 ticks from an Terra Shard block underneath.
+ability.crystalbearers:TerrainDesecratorName=Terrain Desecrator
+ability.crystalbearers:TerrainDesecrator=Destroys nearby plant life and turns grass into cobblestone.
+
+# Fire
+ability.crystalbearers:BainOfIceName=Bain of Ice
+ability.crystalbearers:BainOfIce=Prevents ice and snow from forming within a 20 block radius.
+ability.crystalbearers:BlockSmelterName=Smelter
+ability.crystalbearers:BlockSmelter=Auto smelts nearby blocks.
+ability.crystalbearers:CombustableName=Combustable
+ability.crystalbearers:Combustable=Causes nearby light sources to explode
+ability.crystalbearers:PowerFireName=Fire Power
+ability.crystalbearers:PowerFire=Generates 40 units of power per 7 ticks from a lava source block underneath.
+ability.crystalbearers:ShardPowerFireName=Shard Power: Fire
+ability.crystalbearers:ShardPowerFire=Generates 20 units of power per 7 ticks from an Lava Shard block underneath.
+ability.crystalbearers:SpontanousCombustionName=Spontanous Combustion
+ability.crystalbearers:SpontanousCombustion=Lights nearby entities on fire.
+
+# Water
+ability.crystalbearers:DrenchedEarthName=Drenched Earth
+ability.crystalbearers:DrenchedEarth=Destroys light source blocks and prevents furnaces from working.
+ability.crystalbearers:MoistSoilName=Moist Soil
+ability.crystalbearers:MoistSoil=Keeps tilled soil moist and increases the growth rate of blocks in a 8 block radius
+ability.crystalbearers:MorphaReachName=Morpha's Reach
+ability.crystalbearers:MorphaReach=Causes nearby entities to drown.
+ability.crystalbearers:PowerWaterName=Wave Power
+ability.crystalbearers:PowerWater=Generates 40 units of power per 7 ticks from a ice block underneath.
+ability.crystalbearers:ShardPowerWaterName=Shard Power: Wave
+ability.crystalbearers:ShardPowerWater=Generates 20 units of power per 7 ticks from an Wave Shard block underneath.
+ability.crystalbearers:ReplenishWaterName=Replenish Water
+ability.crystalbearers:ReplenishWater=Fills nearby tanks with water.

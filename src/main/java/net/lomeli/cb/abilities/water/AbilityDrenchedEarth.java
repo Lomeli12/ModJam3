@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityDrenchedEarth extends CrystalAbility {
 
@@ -40,13 +41,32 @@ public class AbilityDrenchedEarth extends CrystalAbility {
                         }
                     }else if(id != Block.glowStone.blockID) {
                         if(Block.lightValue[id] > 0.5F) {
-                            EntityItem drop = new EntityItem(worldObj, x1, y1, z1, new ItemStack(id, 1,
-                                    worldObj.getBlockMetadata(x1, y1, z1)));
-                            if(drop != null)
-                                worldObj.spawnEntityInWorld(drop);
-                            worldObj.setBlockToAir(x1, y1, z1);
+                            if(id != Block.lavaMoving.blockID || id != Block.lavaStill.blockID) {
+                                EntityItem drop = new EntityItem(worldObj, x1, y1, z1, new ItemStack(id, 1,
+                                        worldObj.getBlockMetadata(x1, y1, z1)));
+                                if(drop != null)
+                                    worldObj.spawnEntityInWorld(drop);
+                                worldObj.setBlockToAir(x1, y1, z1);
+                            }
                         }
                     }
                 }
+    }
+    
+    @Override
+    public int cost() {
+        return 400;
+    }
+
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

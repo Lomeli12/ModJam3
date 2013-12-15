@@ -18,7 +18,7 @@ import net.lomeli.cb.core.CommonProxy;
 import net.lomeli.cb.core.Config;
 import net.lomeli.cb.core.CreativeTabCrystals;
 import net.lomeli.cb.core.handler.BlockBreakHandler;
-import net.lomeli.cb.core.handler.EntityDropHandler;
+import net.lomeli.cb.core.handler.EntityLivingHandler;
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.entities.ModEntities;
@@ -55,7 +55,7 @@ public class CrystalBearers {
         
         ModEntities.loadEntities();
         
-        MinecraftForge.EVENT_BUS.register(new EntityDropHandler());
+        MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
         MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
         
         GameRegistry.registerWorldGenerator(new WorldGen());

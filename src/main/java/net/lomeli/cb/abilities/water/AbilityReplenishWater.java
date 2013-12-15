@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityReplenishWater extends CrystalAbility {
 
@@ -29,6 +30,22 @@ public class AbilityReplenishWater extends CrystalAbility {
                             ((IFluidHandler) tile).fill(null, new FluidStack(FluidRegistry.WATER, 500), true);
                     }
                 }
+    }
+    
+    @Override
+    public int cost() {
+        return 10;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
 
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

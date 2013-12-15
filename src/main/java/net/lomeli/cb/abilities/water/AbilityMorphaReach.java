@@ -13,6 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.lib.Strings;
 
 public class AbilityMorphaReach extends CrystalAbility {
 
@@ -51,9 +52,26 @@ public class AbilityMorphaReach extends CrystalAbility {
             }
         }
     }
+    
+    @Override
+    public int cost() {
+        return 200;
+    }
 
     private int decreaseAirSupply(int par1, EntityLivingBase entity, Random rand) {
         int j = EnchantmentHelper.getRespiration(entity);
         return j > 0 && rand.nextInt(j + 1) > 0 ? par1 : par1 - 1;
+    }
+    
+    @Override
+    public String getAbilityName() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+    }
+
+    @Override
+    public String getAbilityDesc() {
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
+                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

@@ -15,13 +15,17 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import net.lomeli.cb.lib.Strings;
 
 public class ModEntities {
-    public static int fireWolfID, darkChickenID;
+    public static int fireWolfID, darkChickenID, thunderCowId;
 
     public static void loadEntities() {
         registerEntity(EntityFireWolf.class, "firewolf", fireWolfID, 70, 2, 7, Color.red.getRGB(), Color.lightGray.getRGB(),
                 new Type[] { Type.NETHER });
-        registerEntity(EntityDarkChicken.class, "darkChicken", darkChickenID, 65, 2, 5, new Color(72, 0, 117).getRGB(), new Color(181,
-                0, 0).getRGB(), new Type[] { Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MAGICAL, Type.MOUNTAIN, Type.PLAINS, Type.WASTELAND});
+        registerEntity(EntityDarkChicken.class, "darkChicken", darkChickenID, 65, 2, 5, new Color(72, 0, 117).getRGB(),
+                new Color(181, 0, 0).getRGB(), new Type[] { Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MAGICAL, Type.MOUNTAIN,
+                        Type.PLAINS, Type.WASTELAND });
+        registerEntity(EntityThunderCow.class, "thunderCow", thunderCowId, 65, 2, 6, new Color(79, 70, 57).getRGB(),
+                Color.yellow.getRGB(), new Type[] { Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MAGICAL, Type.MOUNTAIN,
+                        Type.PLAINS, Type.WASTELAND });
 
     }
 
