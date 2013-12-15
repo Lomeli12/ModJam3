@@ -16,6 +16,14 @@ public class CrystalAbility {
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
 
     }
+    
+    public String getAbilityName(){
+        return null;
+    }
+    
+    public String getAbilityDesc(){
+        return null;
+    }
 
     public int cost() {
         return 10;

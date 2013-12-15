@@ -51,7 +51,6 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
                     if(++cookTime >= 500) {
                         Fluid itemFluid = FluidElements.getFluidBaseOnStack(inventory[0]);
                         if(itemFluid != null) {
-                            System.out.println(itemFluid.getLocalizedName());
                             FluidStack crystalFluid = new FluidStack(itemFluid, 1000);
                             if(crystalFluid != null) {
                                 fill(null, crystalFluid, true);
@@ -74,7 +73,7 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
                                             .getFluid())) {
                                 tank.drain(((TileCrystalizer) tile).fill(
                                         DirectionUtil.getDirectionFromTile(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord),
-                                                tile).getOpposite(), tank.getFluid(), true), true);
+                                                tile), tank.getFluid(), true), true);
                                 break;
                             }
                         }

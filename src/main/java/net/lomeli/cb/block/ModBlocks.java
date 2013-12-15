@@ -47,7 +47,6 @@ public class ModBlocks {
         }
         
         MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
-        MinecraftForge.setBlockHarvestLevel(crystal, "pickaxe", 2);
         
         OreDictionary.registerOre("oreFireShard", shardBlocks[0]);
         OreDictionary.registerOre("oreWaterShard", shardBlocks[1]);

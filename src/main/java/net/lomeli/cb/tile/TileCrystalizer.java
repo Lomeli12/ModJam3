@@ -56,7 +56,6 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
             if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null && tank2.getFluid() != null
                     && tank2.getFluid().getFluid() != null && tank3.getFluid() != null && tank3.getFluid().getFluid() != null) {
                 if(tank1.getFluidAmount() >= 1000 && tank2.getFluidAmount() >= 1000 && tank3.getFluidAmount() >= 1000) {
-                    System.out.println("Ready");
                     if(tank1.getFluidAmount() >= 1000) {
                         firstEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
                         tank1.drain(1000, true);
@@ -110,7 +109,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
 
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
-        ForgeDirection dir = ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)).getOpposite();
+        ForgeDirection dir = ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
         ForgeDirection left = ForgeDirection.UNKNOWN, right = ForgeDirection.UNKNOWN;
 
         if(dir == ForgeDirection.NORTH || dir == ForgeDirection.SOUTH) {

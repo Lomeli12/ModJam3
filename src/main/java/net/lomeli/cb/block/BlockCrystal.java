@@ -16,7 +16,7 @@ public class BlockCrystal extends BlockCB implements ITileEntityProvider {
 
     public BlockCrystal(int par1) {
         super(par1, Material.glass, "blank");
-        this.setHardness(5.0F);
+        this.setHardness(10.0F);
         this.setResistance(50.0F);
     }
 
@@ -45,10 +45,9 @@ public class BlockCrystal extends BlockCB implements ITileEntityProvider {
     public boolean renderAsNormalBlock() {
         return false;
     }
-    
+
     @Override
-    public int quantityDropped(Random par1Random) {
+    public int idDropped(int par1, Random par2Random, int par3){
         return 0;
     }
-
 }

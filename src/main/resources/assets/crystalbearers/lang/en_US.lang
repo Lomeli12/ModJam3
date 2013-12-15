@@ -39,3 +39,16 @@ fluid.liquidDarkCrystal=Liquid Shadow Crystal
 
 entity.crystalbearers:firewolf.name=Fire Wolf
 entity.crystalbearers:darkChicken.name=Shadow Chicken
+
+ability.crystalbearers:AirBubbleName=Air Bubble
+ability.crystalbearers:AirBubble=Replenishes nearby player's air when it hits 0.
+ability.crystalbearers:FallessName=Falless
+ability.crystalbearers:Falless=Prevents fall damage.
+ability.crystalbearers:PowerAirName=Air Power
+ability.crystalbearers:PowerAir=Generates 40 units of power per 7 ticks from a glowstone block underneath.
+ability.crystalbearers:RagingWindsName=Raging Winds
+ability.crystalbearers:RagingWinds=Blows nearby entities away.
+ability.crystalbearers:ShardPowerAirName=Shard Power: Air
+ability.crystalbearers:ShardPowerAir=Generates 20 units of power per 7 ticks from an Air Shard block underneath.
+ability.crystalbearers:ToxicAirName=Toxic Air
+ability.crystalbearers:ToxicAir=Poisons nearby entities

@@ -4,18 +4,19 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
+
+import net.lomeli.cb.CrystalBearers;
 
 public class BlockDarkStone extends BlockCB {
 
     public BlockDarkStone(int par1, String texture) {
         super(par1, Material.rock, texture);
         this.setTickRandomly(true);
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(CrystalBearers.modTab);
         this.setHardness(2.0F);
         this.setResistance(10.0F);
         this.setStepSound(soundStoneFootstep);
