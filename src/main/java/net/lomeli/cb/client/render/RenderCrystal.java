@@ -42,12 +42,12 @@ public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRen
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(56F, 0F, 242F, 0.7F);
+        GL11.glColor4f(56F, 0F, 130F, 0.7F);
 
         model.render(0.0625F);
 
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glColor4f(56F, 0F, 242F, 1F);
+        GL11.glColor4f(56F, 0F, 130F, 1F);
 
         GL11.glPopMatrix();
     }

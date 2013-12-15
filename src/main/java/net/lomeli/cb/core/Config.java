@@ -41,6 +41,7 @@ public class Config {
 
         ItemIds.shardID = config.get(item, "shard", 6000).getInt(6000);
         ItemIds.crystalItemID = config.get(item, "crystalItem", 6001).getInt(6001);
+        ItemIds.recordID = config.get(item, "notaneasteregg", 6002).getInt(6002);
     }
     
     private static void loadEntityIDs(){
