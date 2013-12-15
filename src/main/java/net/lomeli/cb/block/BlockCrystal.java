@@ -1,5 +1,7 @@
 package net.lomeli.cb.block;
 
+import java.util.Random;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -42,6 +44,11 @@ public class BlockCrystal extends BlockCB implements ITileEntityProvider {
     @Override
     public boolean renderAsNormalBlock() {
         return false;
+    }
+    
+    @Override
+    public int quantityDropped(Random par1Random) {
+        return 0;
     }
 
 }

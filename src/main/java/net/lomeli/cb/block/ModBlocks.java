@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -47,5 +48,11 @@ public class ModBlocks {
         
         MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
         MinecraftForge.setBlockHarvestLevel(crystal, "pickaxe", 2);
+        
+        OreDictionary.registerOre("oreFireShard", shardBlocks[0]);
+        OreDictionary.registerOre("oreWaterShard", shardBlocks[1]);
+        OreDictionary.registerOre("oreEarthShard", shardBlocks[2]);
+        OreDictionary.registerOre("oreAirShard", shardBlocks[3]);
+        OreDictionary.registerOre("oreDarkShard", shardBlocks[4]);
     }
 }

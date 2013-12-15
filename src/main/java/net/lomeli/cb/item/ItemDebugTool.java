@@ -12,8 +12,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.abilities.DebugAbility;
-import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.element.ElementRegistry;
+import net.lomeli.cb.lib.BlockIds;
 import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.TileCrystal;
 
@@ -24,7 +24,7 @@ public class ItemDebugTool extends Item {
     public ItemDebugTool(int par1) {
         super(par1);
         this.setCreativeTab(CrystalBearers.modTab);
-        this.blockID = ModBlocks.crystal.blockID;
+        this.blockID = BlockIds.crystalID;
         this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":itemDebug");
     }
 

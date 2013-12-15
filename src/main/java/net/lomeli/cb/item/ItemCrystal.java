@@ -6,21 +6,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.element.ElementRegistry;
+import net.lomeli.cb.lib.BlockIds;
 import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.TileCrystal;
 
-public class ItemCrystal extends ItemCB{
+public class ItemCrystal extends ItemCB {
     private int blockID;
-    
+
     public ItemCrystal(int par1) {
         super(par1, "crystal");
-        this.blockID = ModBlocks.crystal.blockID;
+        this.blockID = BlockIds.crystalID;
         this.setMaxStackSize(1);
         this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":crystal");
     }
-    
+
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8,
             float par9, float par10) {
@@ -37,7 +37,7 @@ public class ItemCrystal extends ItemCB{
                 && (Block.blocksList[i1] == null || !Block.blocksList[i1].isBlockReplaceable(par3World, par4, par5, par6))) {
             if(par7 == 0)
                 --par5;
-            
+
             if(par7 == 1)
                 ++par5;
 
@@ -90,17 +90,19 @@ public class ItemCrystal extends ItemCB{
         TileEntity tile = world.getBlockTileEntity(x, y, z);
         if(tile != null) {
             if(tile instanceof TileCrystal) {
-                ((TileCrystal) tile).setAbilityOne(ElementRegistry.getAbilityOne(stack));
-                ((TileCrystal) tile).setAbilityTwo(ElementRegistry.getAbilityTwo(stack));
-                ((TileCrystal) tile).setPowerAbility(ElementRegistry.getPower(stack));
-                ((TileCrystal) tile).abilitiesSet = true;
-                ((TileCrystal) tile).firstEle = stack.getTagCompound().getInteger("element1");;
-                ((TileCrystal) tile).secondEle = stack.getTagCompound().getInteger("element2");
-                ((TileCrystal) tile).thridEle = stack.getTagCompound().getInteger("powerElement");
-                ((TileCrystal) tile).ability1ID = stack.getTagCompound().getInteger("element1Ability");
-                ((TileCrystal) tile).ability2ID = stack.getTagCompound().getInteger("element2Ability");
-                ((TileCrystal) tile).passiveAbility = stack.getTagCompound().getBoolean("powerElementAbility");
-                ((TileCrystal) tile).setIsNatural(false);
+                if(stack.getTagCompound() != null) {
+                    ((TileCrystal) tile).setAbilityOne(ElementRegistry.getAbilityOne(stack));
+                    ((TileCrystal) tile).setAbilityTwo(ElementRegistry.getAbilityTwo(stack));
+                    ((TileCrystal) tile).setPowerAbility(ElementRegistry.getPower(stack));
+                    ((TileCrystal) tile).abilitiesSet = true;
+                    ((TileCrystal) tile).firstEle = stack.getTagCompound().getInteger("element1");
+                    ((TileCrystal) tile).secondEle = stack.getTagCompound().getInteger("element2");
+                    ((TileCrystal) tile).thridEle = stack.getTagCompound().getInteger("powerElement");
+                    ((TileCrystal) tile).ability1ID = stack.getTagCompound().getInteger("element1Ability");
+                    ((TileCrystal) tile).ability2ID = stack.getTagCompound().getInteger("element2Ability");
+                    ((TileCrystal) tile).passiveAbility = stack.getTagCompound().getBoolean("powerElementAbility");
+                    ((TileCrystal) tile).setIsNatural(false);
+                }
             }
         }
 

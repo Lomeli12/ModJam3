@@ -4,6 +4,7 @@ import java.io.File;
 
 import net.minecraftforge.common.Configuration;
 
+import net.lomeli.cb.entities.ModEntities;
 import net.lomeli.cb.lib.BlockIds;
 import net.lomeli.cb.lib.ItemIds;
 
@@ -17,6 +18,7 @@ public class Config {
 
         loadBlockID();
         loadItemID();
+        loadEntityIDs();
 
         config.save();
     }
@@ -39,5 +41,12 @@ public class Config {
 
         ItemIds.shardID = config.get(item, "shard", 6000).getInt(6000);
         ItemIds.crystalItemID = config.get(item, "crystalItem", 6001).getInt(6001);
+    }
+    
+    private static void loadEntityIDs(){
+        String entity = "Entity";
+        
+        ModEntities.fireWolfID  = config.get(entity, "fireWolf", 110).getInt(110);
+        ModEntities.darkChickenID = config.get(entity, "darkChicken", 111).getInt(111);
     }
 }

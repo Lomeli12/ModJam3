@@ -35,3 +35,6 @@ fluid.liquidWaterCrystal=Liquid Wave Crystal
 fluid.liquidEarthCrystal=Liquid Terra Crystal
 fluid.liquidAirCrystal=Liquid Aer Crystal
 fluid.liquidDarkCrystal=Liquid Shadow Crystal
+
+entity.crystalbearers:firewolf.name=Fire Wolf
+entity.crystalbearers:darkChicken.name=Shadow Chicken

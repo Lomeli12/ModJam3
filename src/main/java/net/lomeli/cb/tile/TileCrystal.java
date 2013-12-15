@@ -41,7 +41,6 @@ public class TileCrystal extends TileEntity implements ICrystal {
     public void updateEntity() {
         super.updateEntity();
         if(!worldObj.isRemote) {
-            System.out.println(xCoord + ", " + yCoord + ", " + zCoord);
             if(abilityOne() != null && abilityTwo() != null && powerAbility() != null) {
                 if(getPower() < getMaxPower())
                     powerAbility().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);

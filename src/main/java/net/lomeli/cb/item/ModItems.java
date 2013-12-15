@@ -3,6 +3,8 @@ package net.lomeli.cb.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import net.minecraftforge.oredict.OreDictionary;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.lomeli.cb.lib.ItemIds;
@@ -24,5 +26,11 @@ public class ModItems {
 
         GameRegistry.registerItem(shard, "crystalShard");
         GameRegistry.registerItem(crystalItem, "crystalItem");
+        
+        OreDictionary.registerOre("fireShard", shards[0]);
+        OreDictionary.registerOre("waterShard", shards[1]);
+        OreDictionary.registerOre("earthShard", shards[2]);
+        OreDictionary.registerOre("airShard", shards[3]);
+        OreDictionary.registerOre("darkShard", shards[4]);
     }
 }

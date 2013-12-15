@@ -3,8 +3,11 @@ package net.lomeli.cb.client.render;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
+import net.minecraftforge.client.IItemRenderer;
 
 import net.lomeli.cb.client.model.ModelCrystal;
 import net.lomeli.cb.lib.Strings;
@@ -15,7 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderCrystal extends TileEntitySpecialRenderer {
+public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRenderer{
     private ModelCrystal model;
 
     public RenderCrystal() {
@@ -37,25 +40,31 @@ public class RenderCrystal extends TileEntitySpecialRenderer {
 
         GL11.glScaled(1.5d, -1.5d, 1.5d);
 
-        GL11.glColor3d(255, 0, 0);
-
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        if(tile.isNatural())
-            GL11.glColor4f(73F, 12F, 84F, 0.7F);
-        else
-            GL11.glColor4f(tile.red, tile.green, tile.blue, 0.65F);
+        GL11.glColor4f(56F, 0F, 242F, 0.7F);
 
         model.render(0.0625F);
 
         GL11.glDisable(GL11.GL_BLEND);
-        if(tile.isNatural())
-            GL11.glColor4f(73F, 12F, 84F, 1F);
-        else
-            GL11.glColor4f(tile.red, tile.green, tile.blue, 1F);
-        //GL11.glColor4f(tile.red, tile.green, tile.blue, 1.0F);
+        GL11.glColor4f(56F, 0F, 242F, 1F);
 
         GL11.glPopMatrix();
+    }
+
+    @Override
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+        return true;
+    }
+
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        renderCrystal(new TileCrystal(), 0.1D, 0.1D, 0.1D, 0.1F);
     }
 
 }
