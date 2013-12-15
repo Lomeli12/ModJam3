@@ -46,33 +46,33 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
                         }
                     }
                 }
-            }else {
-                if(crystal && ++tick >= 500) {
-                    tick = 0;
-                    crystal = false;
-                    throwCrystalIntoChest(secondEle, thirdEle, firstEle);
-                }
+            }
+            if(crystal && ++tick >= 500) {
+                tick = 0;
+                crystal = false;
+                throwCrystalIntoChest(secondEle, thirdEle, firstEle);
+            }
 
-                if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null && tank2.getFluid() != null
-                        && tank2.getFluid().getFluid() != null && tank3.getFluid() != null && tank3.getFluid().getFluid() != null) {
-                    if(tank1.getFluidAmount() >= 1000 && tank2.getFluidAmount() >= 1000 && tank3.getFluidAmount() >= 1000) {
-                        System.out.println("Ready");
-                        if(tank1.getFluidAmount() >= 1000) {
-                            firstEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
-                            tank1.drain(1000, true);
-                        }
-                        if(tank2.getFluidAmount() >= 1000) {
-                            secondEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
-                            tank2.drain(1000, true);
-                        }
-                        if(tank3.getFluidAmount() >= 1000) {
-                            thirdEle = FluidElements.getFluidElement(tank3.getFluid().getFluid()).getElementID();
-                            tank3.drain(1000, true);
-                        }
-                        crystal = true;
+            if(tank1.getFluid() != null && tank1.getFluid().getFluid() != null && tank2.getFluid() != null
+                    && tank2.getFluid().getFluid() != null && tank3.getFluid() != null && tank3.getFluid().getFluid() != null) {
+                if(tank1.getFluidAmount() >= 1000 && tank2.getFluidAmount() >= 1000 && tank3.getFluidAmount() >= 1000) {
+                    System.out.println("Ready");
+                    if(tank1.getFluidAmount() >= 1000) {
+                        firstEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
+                        tank1.drain(1000, true);
                     }
+                    if(tank2.getFluidAmount() >= 1000) {
+                        secondEle = FluidElements.getFluidElement(tank1.getFluid().getFluid()).getElementID();
+                        tank2.drain(1000, true);
+                    }
+                    if(tank3.getFluidAmount() >= 1000) {
+                        thirdEle = FluidElements.getFluidElement(tank3.getFluid().getFluid()).getElementID();
+                        tank3.drain(1000, true);
+                    }
+                    crystal = true;
                 }
             }
+
         }
     }
 
@@ -181,7 +181,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
         tank2.readFromNBT(tag);
         tank3.readFromNBT(tag);
         heldItem = new ItemStack(tag.getInteger("HeldItemID"), 1, tag.getInteger("HeldItemMeta"));
-        
+
         firstEle = tag.getInteger("firstEle");
         secondEle = tag.getInteger("secondEle");
         thirdEle = tag.getInteger("neutralEle");

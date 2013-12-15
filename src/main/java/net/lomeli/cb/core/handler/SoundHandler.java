@@ -33,9 +33,8 @@ public class SoundHandler {
     @SideOnly(Side.CLIENT)
     @ForgeSubscribe
     public void onPlayStreaming(PlayStreamingEvent event) {
-        if(event.name == "chickenTechno") {
+        if(event.name == "chickenTechno")
             FMLClientHandler.instance().getClient().sndManager.playStreaming(Strings.MOD_ID.toLowerCase() + ":chickenTechno",
                     event.x + 0.5F, event.y + 0.5F, event.z + 0.5F);
-        }
     }
 }
