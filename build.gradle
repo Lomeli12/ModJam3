@@ -26,8 +26,8 @@ buildscript {
 
 apply plugin: "forge"
 
-group = 'net.lomeli.something'
-archivesBaseName = 'Something'
+group = 'net.lomeli.cb'
+archivesBaseName = 'Crystal Bearers'
 version = "$releaseVersion"
 
 minecraft {

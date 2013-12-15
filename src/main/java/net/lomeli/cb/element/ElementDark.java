@@ -7,7 +7,7 @@ import net.lomeli.cb.abilities.dark.AbilityEnrichedEarth;
 import net.lomeli.cb.abilities.dark.AbilityMagnetism;
 import net.lomeli.cb.abilities.dark.AbilityOreater;
 import net.lomeli.cb.abilities.dark.AbilityPowerDark;
-import net.lomeli.cb.abilities.dark.AbilitySpeardDark;
+import net.lomeli.cb.abilities.dark.AbilitySpreadDark;
 import net.lomeli.cb.abilities.dark.AbilityShardPowerDark;
 
 public class ElementDark implements IElement {
@@ -51,7 +51,7 @@ public class ElementDark implements IElement {
 
     @Override
     public CrystalAbility recessiveNegative() {
-        return new AbilitySpeardDark();
+        return new AbilitySpreadDark();
     }
 
     @Override

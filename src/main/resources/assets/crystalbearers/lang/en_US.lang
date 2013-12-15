@@ -1,9 +1,11 @@
+# Element Names
 element.crystalbearers:earthElement=Earth
 element.crystalbearers:airElement=Air
 element.crystalbearers:waterElement=Water
 element.crystalbearers:fireElement=Fire
 element.crystalbearers:darkElement=Dark
 
+# Item Names
 item.crystalbearers:itemDebug.name=Item Debug
 item.crystalbearers:shard.0=Lava Shard
 item.crystalbearers:shard.1=Wave Shard
@@ -13,6 +15,7 @@ item.crystalbearers:shard.4=Shadow Shard
 item.crystalbearers:crystal.name=Crystal
 item.crystalbearers:Record.name=Music Disc
 
+# Block Names
 tile.crystalbearers:stone.name=Dark Stone
 tile.crystalbearers:cobble.name=Dark Cobblestone
 tile.crystalbearers:crystal.name=Crystal
@@ -29,17 +32,23 @@ tile.crystalbearers:oreShard.4=Shadow Shard Ore
 tile.crystalbearers:crystalizer.name=Crystalizer
 tile.crystalbearers:smelter.name=Crystal Smelter
 
+# Tab Name
 itemGroup.crystalbearers=Crystal Bearers
 
+# Fluid Name
 fluid.liquidFireCrystal=Liquid Fire Crystal
 fluid.liquidWaterCrystal=Liquid Wave Crystal
 fluid.liquidEarthCrystal=Liquid Terra Crystal
 fluid.liquidAirCrystal=Liquid Aer Crystal
 fluid.liquidDarkCrystal=Liquid Shadow Crystal
 
+# Entities
 entity.crystalbearers:firewolf.name=Fire Wolf
 entity.crystalbearers:darkChicken.name=Shadow Chicken
 
+# Ability
+
+# Air
 ability.crystalbearers:AirBubbleName=Air Bubble
 ability.crystalbearers:AirBubble=Replenishes nearby player's air when it hits 0.
 ability.crystalbearers:FallessName=Falless
@@ -51,4 +60,18 @@ ability.crystalbearers:RagingWinds=Blows nearby entities away.
 ability.crystalbearers:ShardPowerAirName=Shard Power: Air
 ability.crystalbearers:ShardPowerAir=Generates 20 units of power per 7 ticks from an Air Shard block underneath.
 ability.crystalbearers:ToxicAirName=Toxic Air
-ability.crystalbearers:ToxicAir=Poisons nearby entities
+ability.crystalbearers:ToxicAir=Poisons nearby entities.
+
+# Dark
+ability.crystalbearers:EnrichedEarthName=Enriched Earth
+ability.crystalbearers:EnrichedEarth=Replenishes ores in the nearby area.
+ability.crystalbearers:MagnetismName=Magnetism
+ability.crystalbearers:Magnetism=Drags ores within a 40 block radius closer to the crystal.
+ability.crystalbearers:OreaterName=Oreater
+ability.crystalbearers:Oreater=Turns nearby ores into stone.
+ability.crystalbearers:PowerDarkName=Dark Power
+ability.crystalbearers:PowerDark=Generates 40 units of power per 7 ticks from a obsidian block underneath.
+ability.crystalbearers:ShardPowerDarkName=Shard Power: Dark
+ability.crystalbearers:ShardPowerDark=Generates 20 units of power per 7 ticks from an Shadow Shard block underneath.
+ability.crystalbearers:SpreadDarkName=Spread Darkness
+ability.crystalbearers:SpreadDark=Turns nearby stone/cobble into dark stone, which spawns hostiles.
