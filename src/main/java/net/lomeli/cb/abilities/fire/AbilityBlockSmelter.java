@@ -2,7 +2,7 @@ package net.lomeli.cb.abilities.fire;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.World;
@@ -25,14 +25,8 @@ public class AbilityBlockSmelter extends CrystalAbility {
                 for(int z1 = z - radius; z1 <= z + 5; z1++) {
                     int id = worldObj.getBlockId(x1, y1, z1), meta = worldObj.getBlockMetadata(x1, y1, z1);
                     ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(id, 1, meta));
-                    if(result != null && rand.nextBoolean()) {
-                        try{
-                            Block newBlock = Block.blocksList[result.itemID];
-                            if(newBlock != null)
-                                worldObj.setBlock(x1, y1, z1, result.itemID, result.getItemDamage(), 2);
-                        }catch(Exception e){
-                        }
-                    }
+                    if(result != null && rand.nextBoolean() && result.getItem() instanceof ItemBlock)
+                        worldObj.setBlock(x1, y1, z1, result.itemID, result.getItemDamage(), 2);
                 }
     }
 
