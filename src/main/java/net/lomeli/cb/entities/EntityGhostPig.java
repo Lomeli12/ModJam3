@@ -76,7 +76,7 @@ public class EntityGhostPig extends EntityMob{
     }
 
     protected String getHurtSound() {
-        return "mob.pig.hurt";
+        return "mob.pig.death";
     }
 
     protected String getDeathSound() {
@@ -84,7 +84,7 @@ public class EntityGhostPig extends EntityMob{
     }
 
     protected float getSoundVolume() {
-        return 0.4F;
+        return 0.8F;
     }
     
     public void onUpdate() {
@@ -117,7 +117,7 @@ public class EntityGhostPig extends EntityMob{
     }
 
     public boolean attackEntityAsMob(Entity par1Entity) {
-        par1Entity.motionY += 20F;
+        par1Entity.motionY = 5F;
         return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) 2);
     }
 
