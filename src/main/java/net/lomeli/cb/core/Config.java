@@ -51,5 +51,6 @@ public class Config {
         ModEntities.fireWolfID = config.get(entity, "fireWolf", 110).getInt(110);
         ModEntities.darkChickenID = config.get(entity, "darkChicken", 111).getInt(111);
         ModEntities.thunderCowId = config.get(entity, "thunderCow", 112).getInt(112);
+        ModEntities.ghostPigID = config.get(entity, "ghostPig", 113).getInt(113);
     }
 }

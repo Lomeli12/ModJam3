@@ -13,7 +13,7 @@ import net.lomeli.cb.block.BlockShardBlock.ItemShardBlock;
 import net.lomeli.cb.lib.BlockIds;
 
 public class ModBlocks {
-    public static Block darkStone, darkCobble, crystal, lavaStone, smeltry, crystalizer, shardBlock, oreShard;
+    public static Block darkStone, darkCobble, crystal, smeltry, crystalizer, shardBlock, oreShard;
 
     public static ItemStack[] shardBlocks, oreShards;
 

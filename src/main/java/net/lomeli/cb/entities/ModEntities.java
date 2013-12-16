@@ -15,7 +15,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import net.lomeli.cb.lib.Strings;
 
 public class ModEntities {
-    public static int fireWolfID, darkChickenID, thunderCowId;
+    public static int fireWolfID, darkChickenID, thunderCowId, ghostPigID;
 
     public static void loadEntities() {
         registerEntity(EntityFireWolf.class, "firewolf", fireWolfID, 70, 2, 7, Color.red.getRGB(), Color.lightGray.getRGB(),
@@ -26,7 +26,9 @@ public class ModEntities {
         registerEntity(EntityThunderCow.class, "thunderCow", thunderCowId, 65, 2, 6, new Color(79, 70, 57).getRGB(),
                 Color.yellow.getRGB(), new Type[] { Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MAGICAL, Type.MOUNTAIN,
                         Type.PLAINS, Type.WASTELAND });
-
+        registerEntity(EntityGhostPig.class, "ghostPig", ghostPigID, 65, 2, 6, Color.pink.getRGB(),
+                Color.yellow.getRGB(), new Type[] { Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MAGICAL, Type.MOUNTAIN,
+                        Type.PLAINS, Type.WASTELAND });
     }
 
     @SuppressWarnings("unchecked")

@@ -47,6 +47,7 @@ fluid.liquidDarkCrystal=Liquid Shadow Crystal
 entity.crystalbearers:firewolf.name=Fire Wolf
 entity.crystalbearers:darkChicken.name=Shadow Chicken
 entity.crystalbearers:thunderCow.name=Thunder Cow
+entity.crystalbearers:ghostPig.name=Ghost Pig
 
 # Ability
 
