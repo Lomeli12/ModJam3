@@ -16,12 +16,13 @@ public class AbilityEnrichedEarth extends CrystalAbility {
     public AbilityEnrichedEarth() {
         this.blockList = new ArrayList<Integer>();
         this.blockList.add(Block.oreCoal.blockID);
-        this.blockList.add(Block.oreDiamond.blockID);
-        this.blockList.add(Block.oreEmerald.blockID);
-        this.blockList.add(Block.oreGold.blockID);
         this.blockList.add(Block.oreIron.blockID);
         this.blockList.add(Block.oreLapis.blockID);
         this.blockList.add(Block.oreRedstone.blockID);
+        
+        this.blockList.add(Block.oreDiamond.blockID);
+        this.blockList.add(Block.oreEmerald.blockID);
+        this.blockList.add(Block.oreGold.blockID);
         this.blockList.add(Block.oreRedstoneGlowing.blockID);
     }
 
@@ -38,9 +39,13 @@ public class AbilityEnrichedEarth extends CrystalAbility {
             for(int y1 = y - radius; y1 <= y + 5; y1++)
                 for(int z1 = z - radius; z1 <= z + 5; z1++) {
                     int id = worldObj.getBlockId(x1, y1, z1);
-                    if(rand.nextInt(10000) < 5) {
-                        if(id == Block.stone.blockID)
-                            worldObj.setBlock(x1, y1, z1, this.blockList.get(rand.nextInt(this.blockList.size())));
+                    if(rand.nextInt(10000000) < 2) {
+                        if(id == Block.stone.blockID){
+                            if(rand.nextInt(2000) < 10)
+                                worldObj.setBlock(x1, y1, z1, this.blockList.get(rand.nextInt(this.blockList.size())));
+                            else
+                                worldObj.setBlock(x1, y1, z1, this.blockList.get(rand.nextInt(4)));
+                        }
                     }
                 }
     }
