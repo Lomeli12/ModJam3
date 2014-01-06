@@ -21,7 +21,7 @@ public class AbilityAnimalLove extends CrystalAbility {
     @SuppressWarnings("unchecked")
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
-        if(rand.nextInt(10000) < 150000) {
+        if(rand.nextInt(10000) < 50) {
             List<?> list = worldObj.getChunkProvider().getPossibleCreatures(EnumCreatureType.creature, x, y, z);
             if(list.size() > 0) {
                 try {

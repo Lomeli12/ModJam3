@@ -29,6 +29,7 @@ public class EntityDarkChicken extends EntityMob {
 
     public EntityDarkChicken(World par1World) {
         super(par1World);
+        this.setSize(0.3F, 0.7F);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIBreakDoor(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
@@ -119,10 +120,6 @@ public class EntityDarkChicken extends EntityMob {
 
     public void onUpdate() {
         super.onUpdate();
-    }
-
-    public float getEyeHeight() {
-        return this.height * 0.8F;
     }
 
     public int getVerticalFaceSpeed() {

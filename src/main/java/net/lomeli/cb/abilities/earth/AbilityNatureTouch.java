@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import net.minecraftforge.oredict.OreDictionary;
 
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.lib.Strings;
@@ -19,10 +16,7 @@ public class AbilityNatureTouch extends CrystalAbility {
 
     public AbilityNatureTouch() {
         this.blockList = new ArrayList<Integer>();
-        for(ItemStack saplings : OreDictionary.getOres("treeSapling")) {
-            if(saplings != null)
-                this.blockList.add(saplings.itemID);
-        }
+        this.blockList.add(Block.sapling.blockID);
         this.blockList.add(Block.tallGrass.blockID);
         this.blockList.add(Block.plantRed.blockID);
         this.blockList.add(Block.plantYellow.blockID);
@@ -43,8 +37,11 @@ public class AbilityNatureTouch extends CrystalAbility {
                     int id = worldObj.getBlockId(x1, y1, z1);
                     if(id == 0) {
                         if(Block.plantRed.canPlaceBlockAt(worldObj, x1, y1, z1)) {
-                            if(rand.nextInt(10000) < 15)
-                                worldObj.setBlock(x1, y1, z1, this.blockList.get(rand.nextInt(this.blockList.size())));
+                            if(rand.nextInt(10000) < 1){
+                                int i = rand.nextInt(this.blockList.size());
+                                if(i < this.blockList.size())
+                                    worldObj.setBlock(x1, y1, z1, this.blockList.get(i));
+                            }
                         }
                     }
                 }

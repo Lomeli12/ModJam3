@@ -33,6 +33,7 @@ public class EntityFireWolf extends EntityMob {
     public EntityFireWolf(World par1World) {
         super(par1World);
         this.isImmuneToFire = true;
+        this.setSize(0.6F, 0.8F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIBreakDoor(this));

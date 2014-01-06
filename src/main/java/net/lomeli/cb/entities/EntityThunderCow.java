@@ -23,6 +23,7 @@ public class EntityThunderCow extends EntityMob {
 
     public EntityThunderCow(World par1World) {
         super(par1World);
+        this.setSize(0.9F, 1.3F);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIBreakDoor(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
