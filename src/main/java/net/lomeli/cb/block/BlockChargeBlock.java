@@ -42,6 +42,7 @@ public class BlockChargeBlock extends BlockCB implements ITileEntityProvider {
             if(tile != null){
                 if(!player.isSneaking()){
                     player.addChatMessage("Charge: " + tile.getCurrentCharge() + "/" + tile.getChargeCapcity());
+                    return true;
                 }
             }
         }

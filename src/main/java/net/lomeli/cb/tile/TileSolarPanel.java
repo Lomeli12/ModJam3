@@ -26,7 +26,7 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
                     if (x != xCoord || z != zCoord) {
                         TileEntity tile = worldObj.getBlockTileEntity(x, yCoord, z);
                         if (tile != null && tile instanceof IEnergy) {
-                            if ((((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity()) && canCompleteTask(1)) {
+                            if (!((IEnergy) tile).isGenerator() && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity()) && canCompleteTask(1)) {
                                 ((IEnergy) tile).addCharge(useCharge(1));
                             }
                         }
@@ -67,6 +67,16 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
         return currentCharge >= charge;
     }
 
+    @Override
+    public boolean isChargeBox() {
+        return true;
+    }
+    
+    @Override
+    public boolean isGenerator() {
+        return true;
+    }
+    
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
