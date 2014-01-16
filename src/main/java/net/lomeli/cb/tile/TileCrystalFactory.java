@@ -1,11 +1,13 @@
 package net.lomeli.cb.tile;
 
 import net.lomeli.cb.element.FluidElements;
+import net.lomeli.cb.element.IElement;
 import net.lomeli.cb.item.IShard;
+import net.lomeli.cb.item.ModItems;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -21,22 +23,28 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileCrystalFactory extends TileEntity implements IEnergy, IInventory, IFluidHandler {
+public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInventory, IFluidHandler {
 
-    private FluidTank tank1, tank2, tank3;
+    private FluidTank[] tanks;
     private ItemStack[] inventory;
     private boolean hasMaster, isMaster;
     private int masterX, masterY, masterZ, currentCharge, maxCharge;
     private boolean[] toDoStuff;
     private int[] cookingTime;
+    private IElement[] elements;
 
     public TileCrystalFactory() {
         inventory = new ItemStack[9];
         toDoStuff = new boolean[4];
+        elements = new IElement[3];
         cookingTime = new int[4];
         maxCharge = 20000;
         hasMaster = false;
         isMaster = false;
+        tanks = new FluidTank[3];
+        for (int i = 0; i < tanks.length; i++) {
+            tanks[i] = new FluidTank(1000);
+        }
     }
 
     @Override
@@ -47,11 +55,12 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
                 if (isMaster()) {
                     if (!checkMultiBlockForm())
                         resetMultiBlockStructure();
-                    
-                    for(int i = 0; i < 3; i++){
+
+                    for (int i = 0; i < 3; i++) {
                         smeltCrystals(i);
                     }
-                    
+
+                    formCrystal();
                 } else {
                     if (!checkForMaster())
                         resetMultiBlockStructure(masterX, masterY, masterZ);
@@ -62,38 +71,63 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
             }
         }
     }
-    
-    public void smeltCrystals(int group) {
+
+    public boolean isReadyToForm() {
+        int j = 0;
+        for (int i = 0; i < tanks.length; i++) {
+            if (tanks[i].getFluidAmount() >= 1000)
+                j++;
+        }
+        return j >= 3;
+    }
+
+    public void startFormationProcess() {
+        toDoStuff[3] = isReadyToForm();
+        cookingTime[3] = 1500;
+    }
+
+    public void formCrystal() {
         if (!worldObj.isRemote) {
-            switch (group) {
-            case 0:
-                if (checkForShards(0)){
-                    if(--cookingTime[group] <= 0){
-                        toDoStuff[group] = false;
-                        Fluid newElementFluid = FluidElements.getFluidBaseOnStack(getStackInSlot(0));
-                        if(newElementFluid != null && tank1.getFluidAmount() == 0){
-                            setInventorySlotContents(0, null);
-                            tank1.fill(new FluidStack(newElementFluid, 1000), true);
+            if (toDoStuff[3]) {
+                if (--cookingTime[3] == 0) {
+                    ItemStack crystal = new ItemStack(ModItems.crystalItem);
+                    for (int i = 0; i < tanks.length; i++) {
+                        if (tanks[i].getFluid() != null && tanks[i].getFluidAmount() > 0) {
+                            elements[i] = FluidElements.getFluidElement(tanks[i].getFluid().getFluid());
+                            tanks[i].setFluid(null);
                         }
                     }
-                } else {
-                    cookingTime[group] = 0;
-                    toDoStuff[group] = false;
+                    
                 }
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
+            }
+        }
+    }
+
+    public void smeltCrystals(int group) {
+        if (!worldObj.isRemote) {
+            if (group < 3) {
+                if (checkForShards(group) && toDoStuff[group]) {
+                    if (--cookingTime[group] <= 0) {
+                        toDoStuff[group] = false;
+                        Fluid newElementFluid = FluidElements.getFluidBaseOnStack(getStackInSlot(group));
+                        if (newElementFluid != null && tanks[group].getFluidAmount() == 0) {
+                            setInventorySlotContents(group, null);
+                            tanks[group].fill(new FluidStack(newElementFluid, 1000), true);
+                        }
+                        cookingTime[group] = 0;
+                        toDoStuff[group] = false;
+                    }
+                } else
+                    cookingTime[group] = 0;
             }
         }
     }
 
     public void process(int group) {
         if (!worldObj.isRemote) {
-            if(checkForShards(group)){
+            if (checkForShards(group)) {
                 toDoStuff[group] = true;
-                cookingTime[group] = 300;
+                cookingTime[group] = 500;
             }
         }
     }
@@ -197,11 +231,11 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
                 return tile != null ? tile.fill(from, resource, doFill) : 0;
             } else {
                 if (from.equals(ForgeDirection.UP))
-                    return tank1.fill(resource, doFill);
+                    return tanks[0].fill(resource, doFill);
                 else if (from.equals(ForgeDirection.DOWN))
-                    return tank2.fill(resource, doFill);
+                    return tanks[1].fill(resource, doFill);
                 else
-                    return tank3.fill(resource, doFill);
+                    return tanks[2].fill(resource, doFill);
             }
         }
         return 0;
@@ -220,11 +254,11 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
                 return tile != null ? tile.drain(from, maxDrain, doDrain) : null;
             } else {
                 if (from.equals(ForgeDirection.UP))
-                    return tank1.drain(maxDrain, doDrain);
+                    return tanks[0].drain(maxDrain, doDrain);
                 else if (from.equals(ForgeDirection.DOWN))
-                    return tank2.drain(maxDrain, doDrain);
+                    return tanks[1].drain(maxDrain, doDrain);
                 else
-                    return tank3.drain(maxDrain, doDrain);
+                    return tanks[2].drain(maxDrain, doDrain);
             }
         }
         return null;
@@ -242,7 +276,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
 
     @Override
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        return new FluidTankInfo[] { tank1.getInfo(), tank2.getInfo(), tank3.getInfo() };
+        return new FluidTankInfo[] { tanks[0].getInfo(), tanks[1].getInfo(), tanks[2].getInfo() };
     }
 
     @Override
@@ -311,9 +345,9 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         if (hasMaster()) {
-            if (isMaster()) {
-
-            } else {
+            if (isMaster())
+                return i < 3 ? (itemstack.getItem() instanceof IShard) : i == inventory.length ? false : true;
+            else {
                 TileCrystalFactory tile = (TileCrystalFactory) worldObj.getBlockTileEntity(masterX, masterY, masterZ);
                 return tile != null ? tile.isItemValidForSlot(i, itemstack) : false;
             }
@@ -400,9 +434,9 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
     }
 
     public void readNBT(NBTTagCompound data) {
-        tank1.readFromNBT(data);
-        tank2.readFromNBT(data);
-        tank3.readFromNBT(data);
+        for (int i = 0; i < tanks.length; i++) {
+            tanks[i].readFromNBT(data);
+        }
         NBTTagList tagList = data.getTagList("Inventory");
         for (int i = 0; i < tagList.tagCount(); ++i) {
             NBTTagCompound tagCompound = (NBTTagCompound) tagList.tagAt(i);
@@ -410,6 +444,19 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
             if (slot >= 0 && slot < this.inventory.length)
                 this.inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
         }
+
+        currentCharge = data.getInteger("currentCharge");
+        masterX = data.getInteger("masterX");
+        masterY = data.getInteger("masterY");
+        masterZ = data.getInteger("masterZ");
+        hasMaster = data.getBoolean("hasMaster");
+        isMaster = data.getBoolean("isMaster");
+        cookingTime = data.getIntArray("cookingTimes");
+
+        for (int i = 0; i < toDoStuff.length; i++) {
+            toDoStuff[i] = data.getBoolean("toDoGroup_" + i);
+        }
+
     }
 
     @Override
@@ -419,9 +466,9 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
     }
 
     public void writeNBT(NBTTagCompound data) {
-        tank1.writeToNBT(data);
-        tank2.writeToNBT(data);
-        tank3.writeToNBT(data);
+        for (int i = 0; i < tanks.length; i++) {
+            tanks[i].writeToNBT(data);
+        }
         NBTTagList tagList = new NBTTagList();
         for (int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
             if (inventory[currentIndex] != null) {
@@ -433,6 +480,19 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
             }
         }
         data.setTag("Inventory", tagList);
+
+        data.setInteger("currentCharge", currentCharge);
+        data.setInteger("masterX", masterX);
+        data.setInteger("masterY", masterY);
+        data.setInteger("masterZ", masterZ);
+        data.setBoolean("hasMaster", hasMaster);
+        data.setBoolean("isMaster", isMaster);
+
+        data.setIntArray("cookingTimes", cookingTime);
+
+        for (int i = 0; i < toDoStuff.length; i++) {
+            data.setBoolean("toDoGroup_" + i, toDoStuff[i]);
+        }
     }
 
     @Override
@@ -448,5 +508,30 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, IInventor
         super.onDataPacket(networkManager, packet);
         NBTTagCompound nbtTag = packet.data;
         readNBT(nbtTag);
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) {
+        int[] i = new int[1];
+        i[0] = 0;
+        if (var1 == 1)
+            i[0] = 2;
+        else if (var1 == 0)
+            i[0] = 1;
+        return i;
+    }
+
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+        if (j == 1)
+            return this.isItemValidForSlot(2, itemstack);
+        else if (j == 0)
+            return this.isItemValidForSlot(1, itemstack);
+        return isItemValidForSlot(0, itemstack);
+    }
+
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+        return i == inventory.length;
     }
 }
