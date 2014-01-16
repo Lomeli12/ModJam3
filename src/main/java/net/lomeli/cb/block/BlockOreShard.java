@@ -59,7 +59,7 @@ public class BlockOreShard extends BlockCB {
     }
 
     public static class ItemOreBlock extends ItemBlock {
-
+        
         public ItemOreBlock(int par1) {
             super(par1);
             this.setMaxDamage(0);

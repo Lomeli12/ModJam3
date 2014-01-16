@@ -57,11 +57,11 @@ public class BlockCrystal extends BlockCB implements ITileEntityProvider {
         TileCrystal tile = (TileCrystal) world.getBlockTileEntity(x, y, z);
         if(tile != null) {
             if(tile.red == 0)
-                tile.red = rand.nextInt(200);
+                tile.red = rand.nextFloat();
             if(tile.blue == 0)
-                tile.blue = rand.nextInt(200);
+                tile.blue = rand.nextFloat();
             if(tile.green == 0)
-                tile.green = rand.nextInt(200);
+                tile.green = rand.nextFloat();
         }
         return super.onBlockPlaced(world, x, y, z, par5, par6, par7, par8, par9);
     }

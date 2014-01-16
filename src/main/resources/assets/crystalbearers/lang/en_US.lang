@@ -15,6 +15,7 @@ item.crystalbearers:shard.4=Shadow Shard
 item.crystalbearers:crystal.name=Crystal
 item.crystalbearers:Record.name=Music Disc
 item.crystalbearers:scanner.name=Crystal Scanner
+item.crystalbearers:battery.0.name=Crystal Battery
 
 # Block Names
 tile.crystalbearers:stone.name=Dark Stone
@@ -32,6 +33,9 @@ tile.crystalbearers:oreShard.3=Aer Shard Ore
 tile.crystalbearers:oreShard.4=Shadow Shard Ore
 tile.crystalbearers:crystalizer.name=Crystalizer
 tile.crystalbearers:smelter.name=Crystal Smelter
+tile.crystalbearers:chargeBox.0=Basic Charge Box
+tile.crystalbearers:chargeBox.1=Adv. Charge Box
+tile.crystalbearers:chargeBox.2=Creative Charge Box
 
 # Tab Name
 itemGroup.crystalbearers=Crystal Bearers

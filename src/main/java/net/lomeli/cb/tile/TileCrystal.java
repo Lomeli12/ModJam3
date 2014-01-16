@@ -31,9 +31,9 @@ public class TileCrystal extends TileEntity implements ICrystal {
             ability2ID = rand.nextInt(4);
             abilitiesSet = true;
             setIsNatural(true);
-            red = rand.nextInt(200);
-            green = rand.nextInt(200);
-            blue = rand.nextInt(200);
+            red = rand.nextFloat();
+            green = rand.nextFloat();
+            blue = rand.nextFloat();
         }
     }
 

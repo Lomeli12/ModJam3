@@ -92,13 +92,13 @@ public class ModelFireWolf extends ModelBase {
 
     public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
 
-        this.wolfTail.rotateAngleY = 0.0F;
+        //this.wolfTail.rotateAngleY = 0.0F;
 
         this.wolfBody.setRotationPoint(0.0F, 14.0F, 2.0F);
         this.wolfBody.rotateAngleX = ((float) Math.PI / 2F);
         this.wolfMane.setRotationPoint(-1.0F, 14.0F, -3.0F);
         this.wolfMane.rotateAngleX = this.wolfBody.rotateAngleX;
-        this.wolfTail.setRotationPoint(-1.0F, 12.0F, 8.0F);
+        //this.wolfTail.setRotationPoint(-1.0F, 12.0F, 8.0F);
         this.wolfLeg1.setRotationPoint(-2.5F, 16.0F, 7.0F);
         this.wolfLeg2.setRotationPoint(0.5F, 16.0F, 7.0F);
         this.wolfLeg3.setRotationPoint(-2.5F, 16.0F, -4.0F);
@@ -113,6 +113,6 @@ public class ModelFireWolf extends ModelBase {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
         this.wolfHeadMain.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.wolfHeadMain.rotateAngleY = par4 / (180F / (float) Math.PI);
-        this.wolfTail.rotateAngleX = par3;
+        //this.wolfTail.rotateAngleX = par3;
     }
 }

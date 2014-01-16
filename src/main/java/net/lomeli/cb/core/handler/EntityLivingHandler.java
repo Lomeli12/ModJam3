@@ -22,28 +22,24 @@ import net.lomeli.cb.item.ModItems;
 public class EntityLivingHandler {
     @ForgeSubscribe
     public void onEntityDeath(LivingDeathEvent event) {
-        if(!event.entityLiving.worldObj.isRemote) {
-            if(event.entityLiving instanceof EntityDarkChicken) {
-                EntityItem item = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX ,
-                        event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(ModItems.shard,
-                                event.entityLiving.worldObj.rand.nextInt(4), 4));
+        if (!event.entityLiving.worldObj.isRemote) {
+            if (event.entityLiving instanceof EntityDarkChicken) {
+                EntityItem item = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(
+                        ModItems.shard, event.entityLiving.worldObj.rand.nextInt(4), 4));
                 event.entityLiving.worldObj.spawnEntityInWorld(item);
-            }else if(event.entityLiving instanceof EntityThunderCow) {
-                EntityItem item = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX + 3,
-                        event.entityLiving.posY, event.entityLiving.posZ + 3, new ItemStack(ModItems.shard,
-                                event.entityLiving.worldObj.rand.nextInt(4), 3));
-                event.entityLiving.worldObj.spawnEntityInWorld(item);
-                EntityLightningBolt bolt = new EntityLightningBolt(event.entityLiving.worldObj, event.entityLiving.posX,
-                        event.entityLiving.posY, event.entityLiving.posZ);
+            } else if (event.entityLiving instanceof EntityThunderCow) {
+                EntityLightningBolt bolt = new EntityLightningBolt(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
                 event.entityLiving.worldObj.spawnEntityInWorld(bolt);
-            }else if(event.entityLiving instanceof EntityGhostPig) {
-                EntityItem item = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX ,
-                        event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(ModItems.shard,
-                                event.entityLiving.worldObj.rand.nextInt(4), 2));
+                EntityItem item = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX + 3, event.entityLiving.posY, event.entityLiving.posZ + 3, new ItemStack(
+                        ModItems.shard, event.entityLiving.worldObj.rand.nextInt(4), 3));
                 event.entityLiving.worldObj.spawnEntityInWorld(item);
-            }else if(event.entityLiving instanceof EntityPig) {
-                if(event.source.getSourceOfDamage() instanceof EntityPlayer) {
-                    if(event.entityLiving.worldObj.rand.nextInt(100) < 10) {
+            } else if (event.entityLiving instanceof EntityGhostPig) {
+                EntityItem item = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(
+                        ModItems.shard, event.entityLiving.worldObj.rand.nextInt(4), 2));
+                event.entityLiving.worldObj.spawnEntityInWorld(item);
+            } else if (event.entityLiving instanceof EntityPig) {
+                if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
+                    if (event.entityLiving.worldObj.rand.nextInt(100) < 10) {
                         EntityGhostPig ghost = new EntityGhostPig(event.entityLiving.worldObj);
                         ghost.setLocationAndAngles(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ,
                                 event.entityLiving.worldObj.rand.nextFloat() * 360.0F, 0.0F);
@@ -58,8 +54,8 @@ public class EntityLivingHandler {
     @ForgeSubscribe
     public void onSpawnEvent(LivingSpawnEvent event) {
         Random rand = new Random();
-        if(event.entityLiving instanceof EntityFireWolf) {
-            if(rand.nextInt(100) < 5)
+        if (event.entityLiving instanceof EntityFireWolf) {
+            if (rand.nextInt(100) < 5)
                 ((EntityLiving) event.entityLiving).setCustomNameTag("Firewolf20");
         }
     }
