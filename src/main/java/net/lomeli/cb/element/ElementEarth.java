@@ -1,14 +1,14 @@
 package net.lomeli.cb.element;
 
-import net.minecraft.util.StatCollector;
-
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.earth.AbilityAnimalLove;
 import net.lomeli.cb.abilities.earth.AbilityNatureDevourer;
 import net.lomeli.cb.abilities.earth.AbilityNatureTouch;
 import net.lomeli.cb.abilities.earth.AbilityPowerEarth;
-import net.lomeli.cb.abilities.earth.AbilityTerrainDesecrator;
 import net.lomeli.cb.abilities.earth.AbilityShardPowerEarth;
+import net.lomeli.cb.abilities.earth.AbilityTerrainDesecrator;
+
+import net.minecraft.util.StatCollector;
 
 public class ElementEarth implements IElement {
     private int id;

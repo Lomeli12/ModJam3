@@ -2,22 +2,22 @@ package net.lomeli.cb.core.handler;
 
 import java.util.Random;
 
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.item.ItemStack;
-
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-
 import net.lomeli.cb.entities.EntityDarkChicken;
 import net.lomeli.cb.entities.EntityFireWolf;
 import net.lomeli.cb.entities.EntityGhostPig;
 import net.lomeli.cb.entities.EntityThunderCow;
 import net.lomeli.cb.item.ModItems;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
 public class EntityLivingHandler {
     @ForgeSubscribe

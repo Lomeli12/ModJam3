@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.lib.Strings;
+
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
 
 public class AbilityOreater extends CrystalAbility {
 
@@ -35,12 +35,12 @@ public class AbilityOreater extends CrystalAbility {
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
         int radius = 10;
 
-        for(int x1 = x - radius; x1 <= x + 5; x1++)
-            for(int y1 = y - radius; y1 <= y + 5; y1++)
-                for(int z1 = z - radius; z1 <= z + 5; z1++) {
+        for (int x1 = x - radius; x1 <= x + 5; x1++)
+            for (int y1 = y - radius; y1 <= y + 5; y1++)
+                for (int z1 = z - radius; z1 <= z + 5; z1++) {
                     int id = worldObj.getBlockId(x1, y1, z1);
-                    if(rand.nextInt(10000) < 4500) {
-                        if(this.blockList.contains(id))
+                    if (rand.nextInt(10000) < 4500) {
+                        if (this.blockList.contains(id))
                             worldObj.setBlock(x1, y1, z1, Block.stone.blockID);
                     }
                 }
@@ -53,13 +53,11 @@ public class AbilityOreater extends CrystalAbility {
 
     @Override
     public String getAbilityName() {
-        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
-                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":" + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length()) + "Name";
     }
 
     @Override
     public String getAbilityDesc() {
-        return "ability." + Strings.MOD_ID.toLowerCase() + ":"
-                + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
+        return "ability." + Strings.MOD_ID.toLowerCase() + ":" + this.getClass().getSimpleName().substring(7, this.getClass().getSimpleName().length());
     }
 }

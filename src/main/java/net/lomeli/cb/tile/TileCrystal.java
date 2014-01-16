@@ -2,15 +2,15 @@ package net.lomeli.cb.tile;
 
 import java.util.Random;
 
+import net.lomeli.cb.abilities.CrystalAbility;
+import net.lomeli.cb.abilities.DebugAbility;
+import net.lomeli.cb.element.ElementRegistry;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-
-import net.lomeli.cb.abilities.CrystalAbility;
-import net.lomeli.cb.abilities.DebugAbility;
-import net.lomeli.cb.element.ElementRegistry;
 
 public class TileCrystal extends TileEntity implements ICrystal {
     public Random rand;
@@ -24,7 +24,7 @@ public class TileCrystal extends TileEntity implements ICrystal {
     public TileCrystal() {
         rand = new Random();
         abilities = new CrystalAbility[3];
-        if(!abilitiesSet) {
+        if (!abilitiesSet) {
             firstEle = rand.nextInt(ElementRegistry.elements.size());
             secondEle = rand.nextInt(ElementRegistry.elements.size());
             ability1ID = rand.nextInt(4);
@@ -40,23 +40,23 @@ public class TileCrystal extends TileEntity implements ICrystal {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(!worldObj.isRemote) {
-            if(abilityOne() != null && abilityTwo() != null && powerAbility() != null) {
-                if(getPower() < getMaxPower())
+        if (!worldObj.isRemote) {
+            if (abilityOne() != null && abilityTwo() != null && powerAbility() != null) {
+                if (getPower() < getMaxPower())
                     powerAbility().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
 
                 this.usePower(abilityOne().cost());
-                if(this.canActivate()) {
+                if (this.canActivate()) {
                     abilityOne().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                     this.active = false;
                 }
 
                 this.usePower(abilityTwo().cost());
-                if(this.canActivate()) {
+                if (this.canActivate()) {
                     abilityTwo().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                     this.active = false;
                 }
-            }else {
+            } else {
                 this.setAbilityOne(ElementRegistry.elements.get(firstEle).abilities()[ability1ID]);
                 this.setAbilityTwo(ElementRegistry.elements.get(secondEle).abilities()[ability2ID]);
                 this.setPowerAbility(new DebugAbility());
@@ -97,16 +97,16 @@ public class TileCrystal extends TileEntity implements ICrystal {
     @Override
     public void addPower(int power) {
         this.energy += power;
-        if(this.energy > this.getMaxPower())
+        if (this.energy > this.getMaxPower())
             this.energy = this.getMaxPower();
     }
 
     @Override
     public void usePower(int power) {
-        if(this.energy >= power) {
+        if (this.energy >= power) {
             active = true;
             this.energy -= power;
-        }else
+        } else
             active = false;
     }
 
@@ -141,7 +141,7 @@ public class TileCrystal extends TileEntity implements ICrystal {
 
         tag.setInteger("ability1", ability1ID);
         tag.setInteger("ability2", ability2ID);
-        if(!this.natural) {
+        if (!this.natural) {
             tag.setBoolean("ability3", passiveAbility);
             tag.setInteger("element3", thridEle);
         }
@@ -165,7 +165,7 @@ public class TileCrystal extends TileEntity implements ICrystal {
         this.secondEle = tag.getInteger("element2");
         this.ability1ID = tag.getInteger("ability1");
         this.ability2ID = tag.getInteger("ability2");
-        if(!natural) {
+        if (!natural) {
             this.thridEle = tag.getInteger("element3");
             this.passiveAbility = tag.getBoolean("ability3");
         }

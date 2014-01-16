@@ -8,15 +8,15 @@ import net.minecraftforge.common.ForgeDirection;
 public class DirectionUtil {
     public static ForgeDirection getDirectionFromTile(TileEntity baseTile, TileEntity targetTile) {
         int x = (targetTile.xCoord - baseTile.xCoord), z = (targetTile.zCoord - baseTile.zCoord);
-        if(x != 0) {
-            if(x > 0)
+        if (x != 0) {
+            if (x > 0)
                 return ForgeDirection.EAST;
-            else if(x < 0)
+            else if (x < 0)
                 return ForgeDirection.WEST;
-        }else if(z != 0) {
-            if(z > 0)
+        } else if (z != 0) {
+            if (z > 0)
                 return ForgeDirection.NORTH;
-            else if(z < 0)
+            else if (z < 0)
                 return ForgeDirection.SOUTH;
         }
         return ForgeDirection.UNKNOWN;

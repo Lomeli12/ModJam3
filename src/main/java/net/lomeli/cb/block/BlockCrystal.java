@@ -2,6 +2,8 @@ package net.lomeli.cb.block;
 
 import java.util.Random;
 
+import net.lomeli.cb.tile.TileCrystal;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -9,8 +11,6 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.lomeli.cb.tile.TileCrystal;
 
 public class BlockCrystal extends BlockCB implements ITileEntityProvider {
 
@@ -55,12 +55,12 @@ public class BlockCrystal extends BlockCB implements ITileEntityProvider {
     public int onBlockPlaced(World world, int x, int y, int z, int par5, float par6, float par7, float par8, int par9) {
         Random rand = new Random();
         TileCrystal tile = (TileCrystal) world.getBlockTileEntity(x, y, z);
-        if(tile != null) {
-            if(tile.red == 0)
+        if (tile != null) {
+            if (tile.red == 0)
                 tile.red = rand.nextFloat();
-            if(tile.blue == 0)
+            if (tile.blue == 0)
                 tile.blue = rand.nextFloat();
-            if(tile.green == 0)
+            if (tile.green == 0)
                 tile.green = rand.nextFloat();
         }
         return super.onBlockPlaced(world, x, y, z, par5, par6, par7, par8, par9);

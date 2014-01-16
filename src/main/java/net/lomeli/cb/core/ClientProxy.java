@@ -1,24 +1,24 @@
 package net.lomeli.cb.core;
 
+import net.lomeli.cb.block.ModBlocks;
+import net.lomeli.cb.client.render.RenderCrystal;
+import net.lomeli.cb.client.render.RenderDarkChicken;
+import net.lomeli.cb.client.render.RenderFireWolf;
+import net.lomeli.cb.client.render.RenderGhostPig;
+import net.lomeli.cb.client.render.RenderThunderCow;
+import net.lomeli.cb.core.handler.SoundHandler;
+import net.lomeli.cb.entities.EntityDarkChicken;
+import net.lomeli.cb.entities.EntityFireWolf;
+import net.lomeli.cb.entities.EntityGhostPig;
+import net.lomeli.cb.entities.EntityThunderCow;
+import net.lomeli.cb.item.ModItems;
+import net.lomeli.cb.tile.TileCrystal;
+
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-
-import net.lomeli.cb.block.ModBlocks;
-import net.lomeli.cb.client.render.RenderGhostPig;
-import net.lomeli.cb.client.render.RenderCrystal;
-import net.lomeli.cb.client.render.RenderDarkChicken;
-import net.lomeli.cb.client.render.RenderFireWolf;
-import net.lomeli.cb.client.render.RenderThunderCow;
-import net.lomeli.cb.core.handler.SoundHandler;
-import net.lomeli.cb.entities.EntityGhostPig;
-import net.lomeli.cb.entities.EntityDarkChicken;
-import net.lomeli.cb.entities.EntityFireWolf;
-import net.lomeli.cb.entities.EntityThunderCow;
-import net.lomeli.cb.item.ModItems;
-import net.lomeli.cb.tile.TileCrystal;
 
 public class ClientProxy extends CommonProxy {
     @Override

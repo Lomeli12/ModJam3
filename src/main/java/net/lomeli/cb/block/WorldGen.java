@@ -58,21 +58,20 @@ public class WorldGen implements IWorldGenerator {
 
     @SuppressWarnings("unused")
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
-            IChunkProvider chunkProvider) {
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int x, y, z;
         int numOre;
         int numCluster;
         int tcount = 0;
-        if(world.provider.dimensionId == 0) {
-            for(OreData data : oreList) {
+        if (world.provider.dimensionId == 0) {
+            for (OreData data : oreList) {
                 tcount++;
 
                 numCluster = random.nextInt(data.clusterPerChunk);
-                if(numCluster == 0 && data.clusterPerChunk != 0)
+                if (numCluster == 0 && data.clusterPerChunk != 0)
                     numCluster = 1;
 
-                for(int count = 0; count < numCluster; count++) {
+                for (int count = 0; count < numCluster; count++) {
                     x = random.nextInt(16);
                     z = random.nextInt(16);
                     y = random.nextInt(data.maxHeight - data.minHeight);
@@ -94,15 +93,15 @@ public class WorldGen implements IWorldGenerator {
         lz = z;
         int id;
         id = world.getBlockId(lx, ly, lz);
-        if(id != Block.stone.blockID && id != Block.dirt.blockID)
+        if (id != Block.stone.blockID && id != Block.dirt.blockID)
             return;
 
-        for(int i = 0; i < ntg; i++) {
+        for (int i = 0; i < ntg; i++) {
 
             id = world.getBlockId(lx, ly, lz);
 
             world.setBlock(lx, ly, lz, blockID, meta, 2);
-            switch(rand.nextInt(3)) {
+            switch (rand.nextInt(3)) {
             case 0:
                 lx = lx + (rand.nextInt(4) - 2);
                 break;

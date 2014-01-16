@@ -1,5 +1,8 @@
 package net.lomeli.cb.block;
 
+import net.lomeli.cb.lib.Strings;
+import net.lomeli.cb.tile.TileCrystalizer;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -15,9 +18,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.lomeli.cb.lib.Strings;
-import net.lomeli.cb.tile.TileCrystalizer;
-
 public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;
@@ -32,7 +32,7 @@ public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         iconArray = new Icon[4];
-        for(int i = 0; i < iconArray.length; i++) {
+        for (int i = 0; i < iconArray.length; i++) {
             iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.blockTexture + i);
         }
     }
@@ -59,46 +59,44 @@ public class BlockCrystalizer extends BlockCB implements ITileEntityProvider {
     }
 
     @Override
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase,
-            ItemStack par6ItemStack) {
-        int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+        int l = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-        if(l == 0)
+        if (l == 0)
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
 
-        if(l == 1)
+        if (l == 1)
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
 
-        if(l == 2)
+        if (l == 2)
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
 
-        if(l == 3)
+        if (l == 3)
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
 
-        if(par6ItemStack.hasDisplayName()) {
-            ((TileEntityFurnace) par1World.getBlockTileEntity(par2, par3, par4))
-                    .setGuiDisplayName(par6ItemStack.getDisplayName());
+        if (par6ItemStack.hasDisplayName()) {
+            ((TileEntityFurnace) par1World.getBlockTileEntity(par2, par3, par4)).setGuiDisplayName(par6ItemStack.getDisplayName());
         }
     }
 
     private void setDefaultDirection(World par1World, int par2, int par3, int par4) {
-        if(!par1World.isRemote) {
+        if (!par1World.isRemote) {
             int l = par1World.getBlockId(par2, par3, par4 - 1);
             int i1 = par1World.getBlockId(par2, par3, par4 + 1);
             int j1 = par1World.getBlockId(par2 - 1, par3, par4);
             int k1 = par1World.getBlockId(par2 + 1, par3, par4);
             byte b0 = 3;
 
-            if(Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+            if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
                 b0 = 3;
 
-            if(Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+            if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
                 b0 = 2;
 
-            if(Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+            if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
                 b0 = 5;
 
-            if(Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+            if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
                 b0 = 4;
 
             par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);

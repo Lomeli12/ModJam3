@@ -1,5 +1,7 @@
 package net.lomeli.cb.client.render;
 
+import net.lomeli.cb.lib.Strings;
+
 import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -7,8 +9,6 @@ import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.lomeli.cb.lib.Strings;
 
 @SideOnly(Side.CLIENT)
 public class RenderDarkChicken extends RenderLiving {

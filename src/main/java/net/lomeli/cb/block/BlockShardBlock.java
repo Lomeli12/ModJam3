@@ -2,6 +2,9 @@ package net.lomeli.cb.block;
 
 import java.util.List;
 
+import net.lomeli.cb.CrystalBearers;
+import net.lomeli.cb.lib.Strings;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -14,9 +17,6 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.lomeli.cb.CrystalBearers;
-import net.lomeli.cb.lib.Strings;
 
 public class BlockShardBlock extends Block {
     @SideOnly(Side.CLIENT)
@@ -33,7 +33,7 @@ public class BlockShardBlock extends Block {
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         iconArray = new Icon[5];
-        for(int i = 0; i < iconArray.length; i++) {
+        for (int i = 0; i < iconArray.length; i++) {
             iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":shardBlock_" + i);
         }
     }
@@ -41,7 +41,7 @@ public class BlockShardBlock extends Block {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
@@ -82,8 +82,7 @@ public class BlockShardBlock extends Block {
         @Override
         public String getItemDisplayName(ItemStack stack) {
             String unlocalizedName = stack.getUnlocalizedName();
-            return StatCollector.translateToLocal(unlocalizedName.substring(0, unlocalizedName.length() - 5) + "."
-                    + stack.getItemDamage());
+            return StatCollector.translateToLocal(unlocalizedName.substring(0, unlocalizedName.length() - 5) + "." + stack.getItemDamage());
         }
     }
 }

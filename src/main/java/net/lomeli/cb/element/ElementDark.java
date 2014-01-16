@@ -1,14 +1,14 @@
 package net.lomeli.cb.element;
 
-import net.minecraft.util.StatCollector;
-
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.dark.AbilityEnrichedEarth;
 import net.lomeli.cb.abilities.dark.AbilityMagnetism;
 import net.lomeli.cb.abilities.dark.AbilityOreater;
 import net.lomeli.cb.abilities.dark.AbilityPowerDark;
-import net.lomeli.cb.abilities.dark.AbilitySpreadDark;
 import net.lomeli.cb.abilities.dark.AbilityShardPowerDark;
+import net.lomeli.cb.abilities.dark.AbilitySpreadDark;
+
+import net.minecraft.util.StatCollector;
 
 public class ElementDark implements IElement {
 

@@ -1,14 +1,14 @@
 package net.lomeli.cb.element;
 
-import net.minecraft.util.StatCollector;
-
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.fire.AbilityBainOfIce;
 import net.lomeli.cb.abilities.fire.AbilityBlockSmelter;
 import net.lomeli.cb.abilities.fire.AbilityCombustable;
 import net.lomeli.cb.abilities.fire.AbilityPowerFire;
-import net.lomeli.cb.abilities.fire.AbilitySpontanousCombustion;
 import net.lomeli.cb.abilities.fire.AbilityShardPowerFire;
+import net.lomeli.cb.abilities.fire.AbilitySpontanousCombustion;
+
+import net.minecraft.util.StatCollector;
 
 public class ElementFire implements IElement {
     private int id;

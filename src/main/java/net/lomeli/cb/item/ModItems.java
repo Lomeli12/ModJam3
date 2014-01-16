@@ -1,5 +1,7 @@
 package net.lomeli.cb.item;
 
+import net.lomeli.cb.lib.ItemIds;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -7,28 +9,28 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import net.lomeli.cb.lib.ItemIds;
-
 public class ModItems {
-    public static Item shard, crystalItem, easterEgg, scanner;
+    public static Item shard, crystalItem, easterEgg, scanner, battery;
     public static ItemStack[] shards;
 
     public static void loadItems() {
         shards = new ItemStack[5];
         shard = new ItemShard(ItemIds.shardID);
 
-        for(int i = 0; i < shards.length; i++) {
+        for (int i = 0; i < shards.length; i++) {
             shards[i] = new ItemStack(shard, 1, i);
         }
 
         crystalItem = new ItemCrystal(ItemIds.crystalItemID);
         easterEgg = new ItemChickenRecord(ItemIds.recordID);
         scanner = new ItemScanner(ItemIds.scannerID);
+        battery = new ItemBattery(ItemIds.crystalBatteryID);
 
         GameRegistry.registerItem(shard, "crystalShard");
         GameRegistry.registerItem(crystalItem, "crystalItem");
         GameRegistry.registerItem(easterEgg, "record");
         GameRegistry.registerItem(scanner, "scanner");
+        GameRegistry.registerItem(battery, "battery");
 
         OreDictionary.registerOre("crystalShard", new ItemStack(shard, 1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("fireShard", shards[0]);

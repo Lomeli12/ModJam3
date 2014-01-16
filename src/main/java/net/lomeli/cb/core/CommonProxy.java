@@ -1,10 +1,10 @@
 package net.lomeli.cb.core;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 import net.lomeli.cb.tile.TileCrystal;
 import net.lomeli.cb.tile.TileCrystalSmelter;
 import net.lomeli.cb.tile.TileCrystalizer;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
     public void registerTile() {

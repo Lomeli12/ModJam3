@@ -2,6 +2,9 @@ package net.lomeli.cb.block;
 
 import java.util.List;
 
+import net.lomeli.cb.CrystalBearers;
+import net.lomeli.cb.lib.Strings;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,9 +16,6 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.lomeli.cb.CrystalBearers;
-import net.lomeli.cb.lib.Strings;
 
 public class BlockOreShard extends BlockCB {
     @SideOnly(Side.CLIENT)
@@ -30,7 +30,7 @@ public class BlockOreShard extends BlockCB {
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         iconArray = new Icon[5];
-        for(int i = 0; i < iconArray.length; i++) {
+        for (int i = 0; i < iconArray.length; i++) {
             iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.blockTexture + i);
         }
     }
@@ -38,7 +38,7 @@ public class BlockOreShard extends BlockCB {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
@@ -59,7 +59,7 @@ public class BlockOreShard extends BlockCB {
     }
 
     public static class ItemOreBlock extends ItemBlock {
-        
+
         public ItemOreBlock(int par1) {
             super(par1);
             this.setMaxDamage(0);

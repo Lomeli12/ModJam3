@@ -16,6 +16,7 @@ item.crystalbearers:crystal.name=Crystal
 item.crystalbearers:Record.name=Music Disc
 item.crystalbearers:scanner.name=Crystal Scanner
 item.crystalbearers:battery.0.name=Crystal Battery
+item.crystalbearers:battery.1.name=Bright Battery
 
 # Block Names
 tile.crystalbearers:stone.name=Dark Stone
@@ -36,6 +37,9 @@ tile.crystalbearers:smelter.name=Crystal Smelter
 tile.crystalbearers:chargeBox.0=Basic Charge Box
 tile.crystalbearers:chargeBox.1=Adv. Charge Box
 tile.crystalbearers:chargeBox.2=Creative Charge Box
+tile.crystalbearers:factory.name=Crystal Factory Block
+tile.crystalbearers:solarpanel.name=Solar Panel
+tile.crystalbearers:modularCrystal.name=Modular Crystal Stand
 
 # Tab Name
 itemGroup.crystalbearers=Crystal Bearers
@@ -125,9 +129,12 @@ ability.crystalbearers:ShardPowerWater=Generates 20 units of power per 7 ticks f
 ability.crystalbearers:ReplenishWaterName=Replenish Water
 ability.crystalbearers:ReplenishWater=Fills nearby tanks with water.
 
-
 # Books
 book.crystalbearers:SmeltBookName=Crystal Smeltery Book
 book.crystalbearers:SmeltBook=Requires a lava source below it and 64 crystal shards of the same time. Will melt the shards and auto-output to nearby Crystalizers.
 book.crystalbearers:CrystalizerName=Guide to making Crystals
 book.crystalbearers:Crystalizer=Requires 3 types of crystal fluid. Inputs from the sides (except the front) and outputs to an inventory above (not ISided).
+
+# Gui
+gui.crystalbearers:modularDevice=Modular Crystal Stand
+gui.crystalbearers:crystalFactory=Crystal Factory

@@ -1,5 +1,10 @@
 package net.lomeli.cb.block;
 
+import net.lomeli.cb.block.BlockChargeBlock.ItemChargeBlock;
+import net.lomeli.cb.block.BlockOreShard.ItemOreBlock;
+import net.lomeli.cb.block.BlockShardBlock.ItemShardBlock;
+import net.lomeli.cb.lib.BlockIds;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -8,12 +13,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import net.lomeli.cb.block.BlockOreShard.ItemOreBlock;
-import net.lomeli.cb.block.BlockShardBlock.ItemShardBlock;
-import net.lomeli.cb.lib.BlockIds;
-
 public class ModBlocks {
-    public static Block darkStone, darkCobble, crystal, smeltry, crystalizer, shardBlock, oreShard;
+    public static Block darkStone, darkCobble, crystal, smeltry, crystalizer, shardBlock, oreShard, chargeBox, solarPanel, crystalFactory, modularCrystal;
 
     public static ItemStack[] shardBlocks, oreShards;
 
@@ -28,6 +29,8 @@ public class ModBlocks {
         crystalizer = new BlockCrystalizer(BlockIds.crystalizerID);
         shardBlock = new BlockShardBlock(BlockIds.shardBlockID);
         oreShard = new BlockOreShard(BlockIds.oreShardID);
+        chargeBox = new BlockChargeBlock(BlockIds.chargeBoxID);
+        solarPanel = new BlockSolarPanel(BlockIds.solarPanelID);
 
         registerBlock();
     }
@@ -36,12 +39,15 @@ public class ModBlocks {
         GameRegistry.registerBlock(darkStone, "darkStone");
         GameRegistry.registerBlock(darkCobble, "darkCobble");
         GameRegistry.registerBlock(crystal, "crystal");
+        GameRegistry.registerBlock(solarPanel, "solarPanel");
 
         GameRegistry.registerBlock(smeltry, "smelter");
         GameRegistry.registerBlock(crystalizer, "crystalizer");
         GameRegistry.registerBlock(shardBlock, ItemShardBlock.class, "shardBlock");
         GameRegistry.registerBlock(oreShard, ItemOreBlock.class, "oreShard");
-        for(int i = 0; i < 5; i++) {
+        GameRegistry.registerBlock(chargeBox, ItemChargeBlock.class, "chargeBlock");
+
+        for (int i = 0; i < 5; i++) {
             shardBlocks[i] = new ItemStack(oreShard, 1, i);
             oreShards[i] = new ItemStack(shardBlock, 1, i);
         }

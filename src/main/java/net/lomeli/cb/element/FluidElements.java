@@ -2,13 +2,13 @@ package net.lomeli.cb.element;
 
 import java.util.HashMap;
 
+import net.lomeli.cb.item.IShard;
+import net.lomeli.cb.item.ModItems;
+
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-
-import net.lomeli.cb.item.IShard;
-import net.lomeli.cb.item.ModItems;
 
 public class FluidElements {
     public static Fluid fireFluid, waterFluid, earthFluid, airFluid, darkFluid;
@@ -54,7 +54,7 @@ public class FluidElements {
     }
 
     public static Fluid getFluidBaseOnStack(ItemStack stack) {
-        if(stack != null && stack.getItem() instanceof IShard)
+        if (stack != null && stack.getItem() instanceof IShard)
             return ((IShard) stack.getItem()).getFluid(stack);
         return null;
     }

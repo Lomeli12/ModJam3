@@ -57,11 +57,12 @@ public class ModelFireWolf extends ModelBase {
         this.wolfHeadMain.setTextureOffset(0, 10).addBox(-1.5F, 0.0F, -5.0F, 3, 3, 4, f);
     }
 
+    @Override
     public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         super.render(par1Entity, par2, par3, par4, par5, par6, par7);
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
 
-        if(this.isChild) {
+        if (this.isChild) {
             float f6 = 2.0F;
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, 5.0F * par7, 2.0F * par7);
@@ -78,7 +79,7 @@ public class ModelFireWolf extends ModelBase {
             this.wolfTail.renderWithRotation(par7);
             this.wolfMane.render(par7);
             GL11.glPopMatrix();
-        }else {
+        } else {
             this.wolfHeadMain.renderWithRotation(par7);
             this.wolfBody.render(par7);
             this.wolfLeg1.render(par7);
@@ -90,15 +91,16 @@ public class ModelFireWolf extends ModelBase {
         }
     }
 
+    @Override
     public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
 
-        //this.wolfTail.rotateAngleY = 0.0F;
+        // this.wolfTail.rotateAngleY = 0.0F;
 
         this.wolfBody.setRotationPoint(0.0F, 14.0F, 2.0F);
         this.wolfBody.rotateAngleX = ((float) Math.PI / 2F);
         this.wolfMane.setRotationPoint(-1.0F, 14.0F, -3.0F);
         this.wolfMane.rotateAngleX = this.wolfBody.rotateAngleX;
-        //this.wolfTail.setRotationPoint(-1.0F, 12.0F, 8.0F);
+        // this.wolfTail.setRotationPoint(-1.0F, 12.0F, 8.0F);
         this.wolfLeg1.setRotationPoint(-2.5F, 16.0F, 7.0F);
         this.wolfLeg2.setRotationPoint(0.5F, 16.0F, 7.0F);
         this.wolfLeg3.setRotationPoint(-2.5F, 16.0F, -4.0F);
@@ -109,10 +111,11 @@ public class ModelFireWolf extends ModelBase {
         this.wolfLeg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F) * 1.4F * par3;
     }
 
+    @Override
     public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
         this.wolfHeadMain.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.wolfHeadMain.rotateAngleY = par4 / (180F / (float) Math.PI);
-        //this.wolfTail.rotateAngleX = par3;
+        // this.wolfTail.rotateAngleX = par3;
     }
 }

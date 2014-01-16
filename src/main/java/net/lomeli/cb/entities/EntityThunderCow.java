@@ -36,6 +36,7 @@ public class EntityThunderCow extends EntityMob {
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
@@ -44,14 +45,17 @@ public class EntityThunderCow extends EntityMob {
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
     }
 
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     public void setAttackTarget(EntityLivingBase par1EntityLivingBase) {
         super.setAttackTarget(par1EntityLivingBase);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.getDataWatcher().addObject(12, Byte.valueOf((byte) 0));
@@ -59,72 +63,86 @@ public class EntityThunderCow extends EntityMob {
         this.getDataWatcher().addObject(14, Byte.valueOf((byte) 0));
     }
 
+    @Override
     protected void playStepSound(int par1, int par2, int par3, int par4) {
         this.playSound("mob.cow.step", 0.15F, 1.0F);
     }
 
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
     }
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
 
     }
 
+    @Override
     protected String getLivingSound() {
         return "mob.cow.say";
     }
 
+    @Override
     protected String getHurtSound() {
         return "mob.cow.hurt";
     }
 
+    @Override
     protected String getDeathSound() {
         return "mob.cow.death";
     }
 
+    @Override
     protected float getSoundVolume() {
         return 0.4F;
     }
 
+    @Override
     public void onUpdate() {
         super.onUpdate();
     }
 
+    @Override
     public float getEyeHeight() {
         return this.height * 0.5F;
     }
 
+    @Override
     public int getVerticalFaceSpeed() {
         return super.getVerticalFaceSpeed();
     }
 
+    @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if(!super.attackEntityFrom(par1DamageSource, par2))
+        if (!super.attackEntityFrom(par1DamageSource, par2))
             return false;
         else {
             EntityLivingBase entitylivingbase = this.getAttackTarget();
 
-            if(entitylivingbase == null && this.getEntityToAttack() instanceof EntityLivingBase) {
+            if (entitylivingbase == null && this.getEntityToAttack() instanceof EntityLivingBase) {
                 entitylivingbase = (EntityLivingBase) this.getEntityToAttack();
             }
 
-            if(entitylivingbase == null && par1DamageSource.getEntity() instanceof EntityLivingBase) {
+            if (entitylivingbase == null && par1DamageSource.getEntity() instanceof EntityLivingBase) {
                 entitylivingbase = (EntityLivingBase) par1DamageSource.getEntity();
             }
             return true;
         }
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity par1Entity) {
-        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) 2);
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2);
     }
 
+    @Override
     public int getMaxSpawnedInChunk() {
         return 8;
     }
 
+    @Override
     protected boolean canDespawn() {
         return true;
     }

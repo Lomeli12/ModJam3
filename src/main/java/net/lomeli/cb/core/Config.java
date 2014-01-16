@@ -2,11 +2,11 @@ package net.lomeli.cb.core;
 
 import java.io.File;
 
-import net.minecraftforge.common.Configuration;
-
 import net.lomeli.cb.entities.ModEntities;
 import net.lomeli.cb.lib.BlockIds;
 import net.lomeli.cb.lib.ItemIds;
+
+import net.minecraftforge.common.Configuration;
 
 public class Config {
     private static Configuration config;
@@ -34,6 +34,10 @@ public class Config {
         BlockIds.crystalizerID = config.get(block, "crystalizer", 455).getInt(455);
         BlockIds.shardBlockID = config.get(block, "shardBlock", 456).getInt(456);
         BlockIds.oreShardID = config.get(block, "oreShard", 457).getInt(457);
+        BlockIds.chargeBoxID = config.get(block, "chargeBox", 458).getInt(458);
+        BlockIds.solarPanelID = config.get(block, "solarPanel", 459).getInt(459);
+        BlockIds.crystalFactoryID = config.get(block, "crystalFactory", 460).getInt(460);
+        BlockIds.modularCrystalID = config.get(block, "modularCrystal", 461).getInt(461);
     }
 
     private static void loadItemID() {
@@ -43,6 +47,7 @@ public class Config {
         ItemIds.crystalItemID = config.get(item, "crystalItem", 6001).getInt(6001);
         ItemIds.recordID = config.get(item, "notaneasteregg", 6002).getInt(6002);
         ItemIds.scannerID = config.get(item, "scanner", 6003).getInt(6003);
+        ItemIds.crystalBatteryID = config.get(item, "crystalBattery", 6004).getInt(6004);
     }
 
     private static void loadEntityIDs() {

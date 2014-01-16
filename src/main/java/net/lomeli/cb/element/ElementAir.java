@@ -1,14 +1,14 @@
 package net.lomeli.cb.element;
 
-import net.minecraft.util.StatCollector;
-
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.air.AbilityAirBubble;
 import net.lomeli.cb.abilities.air.AbilityFalless;
-import net.lomeli.cb.abilities.air.AbilityRagingWinds;
-import net.lomeli.cb.abilities.air.AbilityToxicAir;
-import net.lomeli.cb.abilities.air.AbilityShardPowerAir;
 import net.lomeli.cb.abilities.air.AbilityPowerAir;
+import net.lomeli.cb.abilities.air.AbilityRagingWinds;
+import net.lomeli.cb.abilities.air.AbilityShardPowerAir;
+import net.lomeli.cb.abilities.air.AbilityToxicAir;
+
+import net.minecraft.util.StatCollector;
 
 public class ElementAir implements IElement {
     private int id;

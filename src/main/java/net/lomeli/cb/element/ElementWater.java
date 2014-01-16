@@ -1,7 +1,5 @@
 package net.lomeli.cb.element;
 
-import net.minecraft.util.StatCollector;
-
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.water.AbilityDrenchedEarth;
 import net.lomeli.cb.abilities.water.AbilityMoistSoil;
@@ -9,6 +7,8 @@ import net.lomeli.cb.abilities.water.AbilityMorphaReach;
 import net.lomeli.cb.abilities.water.AbilityPowerWater;
 import net.lomeli.cb.abilities.water.AbilityReplenishWater;
 import net.lomeli.cb.abilities.water.AbilityShardPowerWater;
+
+import net.minecraft.util.StatCollector;
 
 public class ElementWater implements IElement {
     private int id;

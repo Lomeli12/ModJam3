@@ -2,16 +2,16 @@ package net.lomeli.cb.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import net.lomeli.cb.client.model.ModelCrystal;
+import net.lomeli.cb.lib.Strings;
+import net.lomeli.cb.tile.TileCrystal;
+
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.client.IItemRenderer;
-
-import net.lomeli.cb.client.model.ModelCrystal;
-import net.lomeli.cb.lib.Strings;
-import net.lomeli.cb.tile.TileCrystal;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -31,8 +31,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRen
     }
 
     public void renderCrystal(TileCrystal tile, double d0, double d1, double d2, float f) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Strings.MOD_ID.toLowerCase(),
-                "textures/model/Crystal.png"));
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Strings.MOD_ID.toLowerCase(), "textures/model/Crystal.png"));
 
         GL11.glPushMatrix();
 
@@ -67,8 +66,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRen
     }
 
     public void renderCrystalItem(TileCrystal tile, double d0, double d1, double d2, float f) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Strings.MOD_ID.toLowerCase(),
-                "textures/model/Crystal.png"));
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Strings.MOD_ID.toLowerCase(), "textures/model/Crystal.png"));
 
         GL11.glPushMatrix();
 

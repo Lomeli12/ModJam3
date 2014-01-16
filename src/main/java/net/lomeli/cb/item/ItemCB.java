@@ -1,13 +1,13 @@
 package net.lomeli.cb.item;
 
+import net.lomeli.cb.CrystalBearers;
+import net.lomeli.cb.lib.Strings;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import net.lomeli.cb.CrystalBearers;
-import net.lomeli.cb.lib.Strings;
 
 public class ItemCB extends Item {
     protected String itemTexture;

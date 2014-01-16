@@ -1,11 +1,11 @@
 package net.lomeli.cb.client.render;
 
+import net.lomeli.cb.lib.Strings;
+
 import net.minecraft.client.model.ModelCow;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
-import net.lomeli.cb.lib.Strings;
 
 public class RenderThunderCow extends RenderLiving {
 

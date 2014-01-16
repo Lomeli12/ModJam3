@@ -1,10 +1,10 @@
 package net.lomeli.cb.core;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-
 import net.lomeli.cb.item.ModItems;
 import net.lomeli.cb.lib.Strings;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 
 public class CreativeTabCrystals extends CreativeTabs {
 
