@@ -31,7 +31,8 @@ public class ModBlocks {
         oreShard = new BlockOreShard(BlockIds.oreShardID);
         chargeBox = new BlockChargeBlock(BlockIds.chargeBoxID);
         solarPanel = new BlockSolarPanel(BlockIds.solarPanelID);
-
+        crystalFactory = new BlockCrystalFactory(BlockIds.crystalFactoryID);
+        
         registerBlock();
     }
 
@@ -40,6 +41,7 @@ public class ModBlocks {
         GameRegistry.registerBlock(darkCobble, "darkCobble");
         GameRegistry.registerBlock(crystal, "crystal");
         GameRegistry.registerBlock(solarPanel, "solarPanel");
+        GameRegistry.registerBlock(crystalFactory, "crystalFactory");
 
         GameRegistry.registerBlock(smeltry, "smelter");
         GameRegistry.registerBlock(crystalizer, "crystalizer");
