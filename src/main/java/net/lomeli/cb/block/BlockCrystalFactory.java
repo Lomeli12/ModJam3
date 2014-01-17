@@ -33,7 +33,7 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        iconArray = new Icon[5];
+        iconArray = new Icon[6];
         for (int i = 0; i < iconArray.length; i++) {
             iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.blockTexture + i);
         }
@@ -44,6 +44,8 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
         if (par2 == 6) {
             if (par1 < 2)
                 return this.iconArray[3];
+            else
+                return this.iconArray[4];
         } else if (par2 == 3) {
             if (par1 < 2)
                 return this.iconArray[5];

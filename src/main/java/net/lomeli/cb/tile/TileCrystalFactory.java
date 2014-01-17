@@ -43,8 +43,6 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         elements = new IElement[3];
         cookingTime = new int[4];
         maxCharge = 20000;
-        hasMaster = false;
-        isMaster = false;
         tanks = new FluidTank[3];
         for (int i = 0; i < tanks.length; i++) {
             tanks[i] = new FluidTank(1000);
