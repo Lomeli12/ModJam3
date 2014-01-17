@@ -16,7 +16,7 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
         if (!worldObj.isRemote) {
             if (worldObj.isDaytime() && !(worldObj.isThundering() || worldObj.isRaining()) && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) {
                 if (++tick == 10) {
-                    int possibleCharge = (int) (5 * (worldObj.getTotalWorldTime() % 20L));
+                    int possibleCharge = (int) (worldObj.getTotalWorldTime() % 20L);
                     addCharge(possibleCharge);
                     tick = 0;
                 }

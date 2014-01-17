@@ -27,14 +27,17 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInventory, IFluidHandler {
 
-    private FluidTank[] tanks;
+    public FluidTank[] tanks;
     private ItemStack[] inventory;
     private boolean hasMaster, isMaster;
     private int masterX, masterY, masterZ, currentCharge, maxCharge;
     private boolean[] toDoStuff;
-    private int[] cookingTime;
+    public int[] cookingTime;
     private IElement[] elements;
 
     public TileCrystalFactory() {
@@ -42,7 +45,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         toDoStuff = new boolean[4];
         elements = new IElement[3];
         cookingTime = new int[4];
-        maxCharge = 20000;
+        maxCharge = 30000;
         tanks = new FluidTank[3];
         for (int i = 0; i < tanks.length; i++) {
             tanks[i] = new FluidTank(1000);
@@ -59,11 +62,11 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
                         resetMultiBlockStructure();
 
                     for (int i = 0; i < 3; i++) {
-                        if (canCompleteTask(1))
+                        if (canCompleteTask(5))
                             smeltCrystals(i);
                     }
 
-                    if (canCompleteTask(2))
+                    if (canCompleteTask(10))
                         formCrystal();
                 } else {
                     if (!checkForMaster())
@@ -89,13 +92,13 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
 
     public void startFormationProcess() {
         toDoStuff[3] = isReadyToForm();
-        cookingTime[3] = 1500;
+        cookingTime[3] = 1000;
     }
 
     public void formCrystal() {
         if (!worldObj.isRemote) {
             if (toDoStuff[3]) {
-                useCharge(2);
+                useCharge(10);
                 if (--cookingTime[3] == 0) {
                     Random rand = new Random();
                     ItemStack crystal = new ItemStack(ModItems.crystalItem);
@@ -158,7 +161,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         if (!worldObj.isRemote) {
             if (group < 3) {
                 if (checkForShards(group) && toDoStuff[group]) {
-                    useCharge(1);
+                    useCharge(5);
                     if (--cookingTime[group] <= 0) {
                         toDoStuff[group] = false;
                         Fluid newElementFluid = FluidElements.getFluidBaseOnStack(getStackInSlot(group));
@@ -500,7 +503,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
     public boolean canCompleteTask(int charge) {
         if (hasMaster()) {
             if (isMaster()) {
-                return getChargeCapcity() >= charge;
+                return getCurrentCharge() >= charge;
             } else {
                 TileCrystalFactory tile = (TileCrystalFactory) worldObj.getBlockTileEntity(masterX, masterY, masterZ);
                 return tile != null ? tile.canCompleteTask(charge) : false;
@@ -625,5 +628,31 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
     @Override
     public boolean canExtractItem(int i, ItemStack itemstack, int j) {
         return i == inventory.length;
+    }
+    
+    public int getTank1Amount() {
+        return tanks[0].getFluidAmount();
+    }
+    
+    public int getTank2Amount() {
+        return tanks[1].getFluidAmount();
+    }
+    
+    public int getTank3Amount() {
+        return tanks[2].getFluidAmount();
+    }
+    
+    public void setCurrentCharge(int i){
+        currentCharge = i;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public int getCookProgressScaled(int par1) {
+        return ((cookingTime[3] - 1500) * par1) / 1500;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public int getEnergyScaled(int par1) {
+        return (getCurrentCharge() * par1) / getChargeCapcity();
     }
 }

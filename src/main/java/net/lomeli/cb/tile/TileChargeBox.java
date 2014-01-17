@@ -45,7 +45,7 @@ public class TileChargeBox extends TileEntity implements IEnergy {
                                 }
                             } else if (tile instanceof IEnergy) {
                                 if (!((IEnergy) tile).isGenerator() && !((IEnergy) tile).isChargeBox() && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity())) {
-                                    if (canCompleteTask(2))
+                                    if (canCompleteTask(1))
                                         ((IEnergy) tile).addCharge(useCharge(1));
                                 }
                             }

@@ -2,6 +2,7 @@ package net.lomeli.cb.block;
 
 import java.util.Random;
 
+import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.TileCrystalFactory;
 
@@ -60,11 +61,10 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
                 TileCrystalFactory tile = (TileCrystalFactory) world.getBlockTileEntity(x, y, z);
                 if (tile != null) {
                     if (tile.hasMaster()) {
-                        if (tile.isMaster()) {
-                            player.addChatMessage("I am the master!");
-                        } else {
-                            player.addChatMessage("I'm a servant block! My master is at (" + tile.getMasterX() + ", " + tile.getMasterY() + ", " + tile.getMasterZ() + ")");
-                        }
+                        if (tile.isMaster())
+                            player.openGui(CrystalBearers.instance, 99, world, x, y, z);
+                        else
+                            player.openGui(CrystalBearers.instance, 99, world, tile.getMasterX(), tile.getMasterY(), tile.getMasterZ());
                         return true;
                     }
                 }
