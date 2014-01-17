@@ -61,17 +61,21 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
                         resetMultiBlockStructure();
 
                     for (int i = 0; i < 3; i++) {
-                        smeltCrystals(i);
+                        if (canCompleteTask(1))
+                            smeltCrystals(i);
                     }
 
-                    formCrystal();
+                    if (canCompleteTask(2))
+                        formCrystal();
                 } else {
                     if (!checkForMaster())
                         resetMultiBlockStructure(masterX, masterY, masterZ);
                 }
             } else {
-                if (checkMultiBlockForm())
+                if (checkMultiBlockForm()) {
                     setupMultiBlockStructure();
+                    setMetaForBlocks();
+                }
             }
         }
     }
@@ -93,6 +97,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
     public void formCrystal() {
         if (!worldObj.isRemote) {
             if (toDoStuff[3]) {
+                useCharge(2);
                 if (--cookingTime[3] == 0) {
                     Random rand = new Random();
                     ItemStack crystal = new ItemStack(ModItems.crystalItem);
@@ -104,42 +109,42 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
                     }
                     int ability1 = rand.nextInt(2), ability2 = rand.nextInt(2);
                     boolean power = false;
-                    if(getStackInSlot(3) != null){
+                    if (getStackInSlot(3) != null) {
                         ItemStack slot = getStackInSlot(3);
-                        if(slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())){
-                            if(getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                        if (slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())) {
+                            if (getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
                                 ability1 = 1;
                                 inventory[4].stackSize--;
-                            }else
+                            } else
                                 ability1 = 0;
-                        }else if(slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())){
-                            if(getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                        } else if (slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())) {
+                            if (getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
                                 ability1 = 3;
                                 inventory[4].stackSize--;
-                            }else
+                            } else
                                 ability1 = 2;
                         }
                         slot.stackSize--;
                     }
-                    if(getStackInSlot(5) != null){
+                    if (getStackInSlot(5) != null) {
                         ItemStack slot = getStackInSlot(5);
-                        if(slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())){
-                            if(getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                        if (slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())) {
+                            if (getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
                                 ability2 = 1;
                                 inventory[6].stackSize--;
-                            }else
+                            } else
                                 ability2 = 0;
-                        }else if(slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())){
-                            if(getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                        } else if (slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())) {
+                            if (getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
                                 ability2 = 3;
                                 inventory[6].stackSize--;
-                            }else
+                            } else
                                 ability2 = 2;
                         }
                         slot.stackSize--;
                     }
-                    if(getStackInSlot(7) != null){
-                        if(getStackInSlot(7).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                    if (getStackInSlot(7) != null) {
+                        if (getStackInSlot(7).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
                             power = true;
                             inventory[7].stackSize--;
                         }
@@ -155,6 +160,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         if (!worldObj.isRemote) {
             if (group < 3) {
                 if (checkForShards(group) && toDoStuff[group]) {
+                    useCharge(1);
                     if (--cookingTime[group] <= 0) {
                         toDoStuff[group] = false;
                         Fluid newElementFluid = FluidElements.getFluidBaseOnStack(getStackInSlot(group));
@@ -212,8 +218,10 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
             for (int y = par2; y < par2 + 3; y++)
                 for (int z = par3 - 1; z < par3 + 2; z++) {
                     TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
-                    if (tile != null && (tile instanceof TileCrystalFactory))
+                    if (tile != null && (tile instanceof TileCrystalFactory)) {
                         ((TileCrystalFactory) tile).reset();
+                        worldObj.setBlockMetadataWithNotify(x, y, z, 0, 2);
+                    }
                 }
     }
 
@@ -232,6 +240,44 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
                 }
     }
 
+    public void setMetaForBlocks() {
+        // Master
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 2);
+        
+        // Centers
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 2, zCoord, 5, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 1, zCoord, 5, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 1, zCoord, 5, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 1, zCoord + 1, 5, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 1, zCoord - 1, 5, 2);
+        
+        // Horizontal
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord, 6, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord, zCoord, 6, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 2, zCoord, 6, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 2, zCoord, 6, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord - 1, 4, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord + 1, 4, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 2, zCoord - 1, 4, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 2, zCoord + 1, 4, 2);
+        
+        // Vertical
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 1, zCoord - 1, 3, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 1, zCoord + 1, 3, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 1, zCoord - 1, 3, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 1, zCoord + 1, 3, 2);
+        
+        // Corners
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord - 1, 1, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord + 1, 1, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord, zCoord - 1, 1, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord, zCoord + 1, 1, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 2, zCoord - 1, 1, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 2, zCoord + 1, 1, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 2, zCoord - 1, 1, 2);
+        worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 2, zCoord + 1, 1, 2);
+    }
+    
     public boolean hasMaster() {
         return hasMaster;
     }

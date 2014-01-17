@@ -105,6 +105,7 @@ public class TileChargeBox extends TileEntity implements IEnergy {
 
     public void writeTag(NBTTagCompound tag) {
         tag.setInteger("CrystalCharge", currentCharge);
+        tag.setInteger("maxCharge", maxCharge);
     }
 
     @Override
@@ -115,6 +116,7 @@ public class TileChargeBox extends TileEntity implements IEnergy {
 
     public void readNBT(NBTTagCompound tag) {
         currentCharge = tag.getInteger("CrystalCharge");
+        maxCharge = tag.getInteger("maxCharge");
     }
 
     @Override
