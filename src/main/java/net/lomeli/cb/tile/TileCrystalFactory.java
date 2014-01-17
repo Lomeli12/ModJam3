@@ -1,5 +1,8 @@
 package net.lomeli.cb.tile;
 
+import java.util.Random;
+
+import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.element.IElement;
 import net.lomeli.cb.item.IShard;
@@ -8,6 +11,7 @@ import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -90,14 +94,58 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         if (!worldObj.isRemote) {
             if (toDoStuff[3]) {
                 if (--cookingTime[3] == 0) {
+                    Random rand = new Random();
                     ItemStack crystal = new ItemStack(ModItems.crystalItem);
                     for (int i = 0; i < tanks.length; i++) {
-                        if (tanks[i].getFluid() != null && tanks[i].getFluidAmount() > 0) {
+                        if (tanks[i].getFluid() != null && tanks[i].getFluid().getFluid() != null && tanks[i].getFluidAmount() > 0) {
                             elements[i] = FluidElements.getFluidElement(tanks[i].getFluid().getFluid());
                             tanks[i].setFluid(null);
                         }
                     }
-                    
+                    int ability1 = rand.nextInt(2), ability2 = rand.nextInt(2);
+                    boolean power = false;
+                    if(getStackInSlot(3) != null){
+                        ItemStack slot = getStackInSlot(3);
+                        if(slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())){
+                            if(getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                                ability1 = 1;
+                                inventory[4].stackSize--;
+                            }else
+                                ability1 = 0;
+                        }else if(slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())){
+                            if(getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                                ability1 = 3;
+                                inventory[4].stackSize--;
+                            }else
+                                ability1 = 2;
+                        }
+                        slot.stackSize--;
+                    }
+                    if(getStackInSlot(5) != null){
+                        ItemStack slot = getStackInSlot(5);
+                        if(slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())){
+                            if(getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                                ability2 = 1;
+                                inventory[6].stackSize--;
+                            }else
+                                ability2 = 0;
+                        }else if(slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())){
+                            if(getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                                ability2 = 3;
+                                inventory[6].stackSize--;
+                            }else
+                                ability2 = 2;
+                        }
+                        slot.stackSize--;
+                    }
+                    if(getStackInSlot(7) != null){
+                        if(getStackInSlot(7).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())){
+                            power = true;
+                            inventory[7].stackSize--;
+                        }
+                    }
+                    ElementRegistry.writeElementToItem(crystal, elements[0].getElementID(), ability1, elements[1].getElementID(), ability2, elements[2].getElementID(), power);
+                    setInventorySlotContents(8, crystal);
                 }
             }
         }
