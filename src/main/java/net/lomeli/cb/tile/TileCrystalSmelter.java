@@ -144,26 +144,18 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
     }
 
     @Override
-    public ItemStack decrStackSize(int par1, int par2) {
-        if (this.inventory[par1] != null) {
-            ItemStack itemstack;
-
-            if (this.inventory[par1].stackSize <= par2) {
-                itemstack = this.inventory[par1];
-                this.inventory[par1] = null;
-                this.onInventoryChanged();
-                return itemstack;
-            } else {
-                itemstack = this.inventory[par1].splitStack(par2);
-
-                if (this.inventory[par1].stackSize == 0)
-                    this.inventory[par1] = null;
-
-                this.onInventoryChanged();
-                return itemstack;
+    public ItemStack decrStackSize(int slot, int amount) {
+        ItemStack itemStack = getStackInSlot(slot);
+        if (itemStack != null) {
+            if (itemStack.stackSize <= amount)
+                setInventorySlotContents(slot, null);
+            else {
+                itemStack.splitStack(amount);
+                if (itemStack.stackSize == 0)
+                    setInventorySlotContents(slot, null);
             }
-        } else
-            return null;
+        }
+        return itemStack;
     }
 
     @Override

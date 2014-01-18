@@ -25,7 +25,7 @@ public class AbilityBlockSmelter extends CrystalAbility {
                 for (int z1 = z - radius; z1 <= z + 5; z1++) {
                     int id = worldObj.getBlockId(x1, y1, z1), meta = worldObj.getBlockMetadata(x1, y1, z1);
                     ItemStack result = FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(id, 1, meta));
-                    if (result != null && rand.nextInt(1000) < 9 && result.getItem() instanceof ItemBlock)
+                    if (result != null && rand.nextInt(1000) < 15 && result.getItem() instanceof ItemBlock)
                         worldObj.setBlock(x1, y1, z1, result.itemID, result.getItemDamage(), 2);
                 }
     }

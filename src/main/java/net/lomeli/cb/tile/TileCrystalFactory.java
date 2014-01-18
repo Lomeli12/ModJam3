@@ -36,7 +36,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
     private ItemStack[] inventory;
     private boolean hasMaster, isMaster;
     private int masterX, masterY, masterZ, currentCharge, maxCharge;
-    private boolean[] toDoStuff;
+    public boolean[] toDoStuff;
     public int[] cookingTime;
     private IElement[] elements;
 
@@ -91,15 +91,18 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
     }
 
     public void startFormationProcess() {
-        toDoStuff[3] = isReadyToForm();
-        cookingTime[3] = 1000;
+        if (!worldObj.isRemote) {
+            toDoStuff[3] = isReadyToForm();
+            cookingTime[3] = 1000;
+        }
     }
 
     public void formCrystal() {
         if (!worldObj.isRemote) {
             if (toDoStuff[3]) {
                 useCharge(10);
-                if (--cookingTime[3] == 0) {
+                if (--cookingTime[3] <= 0) {
+                    cookingTime[3] = 1000;
                     Random rand = new Random();
                     ItemStack crystal = new ItemStack(ModItems.crystalItem);
                     for (int i = 0; i < tanks.length; i++) {
@@ -108,50 +111,61 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
                             tanks[i].setFluid(null);
                         }
                     }
-                    int ability1 = rand.nextInt(2), ability2 = rand.nextInt(2);
-                    boolean power = false;
-                    if (getStackInSlot(3) != null) {
-                        ItemStack slot = getStackInSlot(3);
-                        if (slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())) {
-                            if (getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
-                                ability1 = 1;
-                                inventory[4].stackSize--;
-                            } else
-                                ability1 = 0;
-                        } else if (slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())) {
-                            if (getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
-                                ability1 = 3;
-                                inventory[4].stackSize--;
-                            } else
-                                ability1 = 2;
-                        }
-                        slot.stackSize--;
-                    }
-                    if (getStackInSlot(5) != null) {
-                        ItemStack slot = getStackInSlot(5);
-                        if (slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())) {
-                            if (getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
-                                ability2 = 1;
-                                inventory[6].stackSize--;
-                            } else
-                                ability2 = 0;
-                        } else if (slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())) {
-                            if (getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
-                                ability2 = 3;
-                                inventory[6].stackSize--;
-                            } else
-                                ability2 = 2;
-                        }
-                        slot.stackSize--;
-                    }
-                    if (getStackInSlot(7) != null) {
-                        if (getStackInSlot(7).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
-                            power = true;
-                            inventory[7].stackSize--;
+                    boolean continueProcess = true;
+                    for (int i = 0; i < elements.length; i++) {
+                        if (elements[i] == null) {
+                            continueProcess = false;
+                            break;
                         }
                     }
-                    ElementRegistry.writeElementToItem(crystal, elements[0].getElementID(), ability1, elements[1].getElementID(), ability2, elements[2].getElementID(), power);
-                    setInventorySlotContents(8, crystal);
+
+                    if (continueProcess) {
+                        int ability1 = rand.nextInt(2), ability2 = rand.nextInt(2);
+                        boolean power = false;
+                        if (getStackInSlot(3) != null) {
+                            ItemStack slot = getStackInSlot(3);
+                            if (slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())) {
+                                if (getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
+                                    ability1 = 1;
+                                    decrStackSize(4, 1);
+                                } else
+                                    ability1 = 0;
+                            } else if (slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())) {
+                                if (getStackInSlot(4) != null && getStackInSlot(4).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
+                                    ability1 = 3;
+                                    decrStackSize(4, 1);
+                                } else
+                                    ability1 = 2;
+                            }
+                            decrStackSize(3, 1);
+                        }
+                        if (getStackInSlot(5) != null) {
+                            ItemStack slot = getStackInSlot(5);
+                            if (slot.getUnlocalizedName().equals(Item.ingotGold.getUnlocalizedName())) {
+                                if (getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
+                                    ability2 = 1;
+                                    decrStackSize(6, 1);
+                                } else
+                                    ability2 = 0;
+                            } else if (slot.getUnlocalizedName().equals(Item.rottenFlesh.getUnlocalizedName())) {
+                                if (getStackInSlot(6) != null && getStackInSlot(6).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
+                                    ability2 = 3;
+                                    decrStackSize(6, 1);
+                                } else
+                                    ability2 = 2;
+                            }
+                            decrStackSize(5, 1);
+                        }
+                        if (getStackInSlot(7) != null) {
+                            if (getStackInSlot(7).getUnlocalizedName().equals(Item.goldNugget.getUnlocalizedName())) {
+                                power = true;
+                                decrStackSize(7, 1);
+                            }
+                        }
+                        ElementRegistry.writeElementToItem(crystal, elements[0].getElementID(), ability1, elements[1].getElementID(), ability2, elements[2].getElementID(), power);
+                        setInventorySlotContents(8, crystal);
+                    }
+                    toDoStuff[3] = false;
                 }
             }
         }
@@ -166,7 +180,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
                         toDoStuff[group] = false;
                         Fluid newElementFluid = FluidElements.getFluidBaseOnStack(getStackInSlot(group));
                         if (newElementFluid != null && tanks[group].getFluidAmount() == 0) {
-                            setInventorySlotContents(group, null);
+                            decrStackSize(group, 40);
                             tanks[group].fill(new FluidStack(newElementFluid, 1000), true);
                         }
                         cookingTime[group] = 0;
@@ -244,14 +258,14 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
     public void setMetaForBlocks() {
         // Master
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 2);
-        
+
         // Centers
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 2, zCoord, 5, 2);
         worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 1, zCoord, 5, 2);
         worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 1, zCoord, 5, 2);
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 1, zCoord + 1, 5, 2);
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 1, zCoord - 1, 5, 2);
-        
+
         // Horizontal
         worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord, 6, 2);
         worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord, zCoord, 6, 2);
@@ -261,13 +275,13 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord + 1, 4, 2);
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 2, zCoord - 1, 4, 2);
         worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 2, zCoord + 1, 4, 2);
-        
+
         // Vertical
         worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 1, zCoord - 1, 3, 2);
         worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord + 1, zCoord + 1, 3, 2);
         worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 1, zCoord - 1, 3, 2);
         worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 1, zCoord + 1, 3, 2);
-        
+
         // Corners
         worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord - 1, 1, 2);
         worldObj.setBlockMetadataWithNotify(xCoord - 1, yCoord, zCoord + 1, 1, 2);
@@ -278,7 +292,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 2, zCoord - 1, 1, 2);
         worldObj.setBlockMetadataWithNotify(xCoord + 1, yCoord + 2, zCoord + 1, 1, 2);
     }
-    
+
     public boolean hasMaster() {
         return hasMaster;
     }
@@ -381,32 +395,68 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
 
     @Override
     public ItemStack getStackInSlot(int i) {
-        return inventory[i];
+        if (hasMaster()) {
+            if (isMaster())
+                return inventory[i];
+            else {
+                TileCrystalFactory tile = (TileCrystalFactory) worldObj.getBlockTileEntity(masterX, masterY, masterZ);
+                return tile != null ? tile.getStackInSlot(i) : null;
+            }
+        }
+        return null;
     }
 
     @Override
     public ItemStack decrStackSize(int slot, int amount) {
-        ItemStack itemStack = getStackInSlot(slot);
-        if (itemStack != null) {
-            if (itemStack.stackSize <= amount)
-                setInventorySlotContents(slot, null);
-            else {
-                itemStack.splitStack(amount);
-                if (itemStack.stackSize == 0)
-                    setInventorySlotContents(slot, null);
+        if (hasMaster()) {
+            if (isMaster()) {
+                ItemStack itemStack = getStackInSlot(slot);
+                if (itemStack != null) {
+                    if (itemStack.stackSize <= amount)
+                        setInventorySlotContents(slot, null);
+                    else {
+                        itemStack.splitStack(amount);
+                        if (itemStack.stackSize == 0)
+                            setInventorySlotContents(slot, null);
+                    }
+                }
+                return itemStack;
+            } else {
+                TileCrystalFactory tile = (TileCrystalFactory) worldObj.getBlockTileEntity(masterX, masterY, masterZ);
+                return tile != null ? tile.decrStackSize(slot, amount) : null;
             }
         }
-        return itemStack;
+        return null;
     }
 
     @Override
     public ItemStack getStackInSlotOnClosing(int i) {
-        return inventory[i];
+        if (hasMaster()) {
+            if (isMaster()) {
+                if (inventory[i] != null) {
+                    ItemStack returnStack = inventory[i].copy();
+                    inventory[i] = null;
+                    return returnStack;
+                }
+            } else {
+                TileCrystalFactory tile = (TileCrystalFactory) worldObj.getBlockTileEntity(masterX, masterY, masterZ);
+                return tile != null ? tile.getStackInSlotOnClosing(i) : null;
+            }
+        }
+        return null;
     }
 
     @Override
     public void setInventorySlotContents(int i, ItemStack itemstack) {
-        inventory[i] = itemstack;
+        if (hasMaster()) {
+            if (isMaster())
+                inventory[i] = itemstack;
+            else {
+                TileCrystalFactory tile = (TileCrystalFactory) worldObj.getBlockTileEntity(masterX, masterY, masterZ);
+                if (tile != null)
+                    tile.setInventorySlotContents(i, itemstack);
+            }
+        }
     }
 
     @Override
@@ -627,32 +677,27 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
 
     @Override
     public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-        return i == inventory.length;
+        return i < 3;
     }
-    
+
     public int getTank1Amount() {
         return tanks[0].getFluidAmount();
     }
-    
+
     public int getTank2Amount() {
         return tanks[1].getFluidAmount();
     }
-    
+
     public int getTank3Amount() {
         return tanks[2].getFluidAmount();
     }
-    
-    public void setCurrentCharge(int i){
+
+    public void setCurrentCharge(int i) {
         currentCharge = i;
     }
-    
+
     @SideOnly(Side.CLIENT)
     public int getCookProgressScaled(int par1) {
         return ((cookingTime[3] - 1500) * par1) / 1500;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    public int getEnergyScaled(int par1) {
-        return (getCurrentCharge() * par1) / getChargeCapcity();
     }
 }

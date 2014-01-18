@@ -15,8 +15,8 @@ item.crystalbearers:shard.4=Shadow Shard
 item.crystalbearers:crystal.name=Crystal
 item.crystalbearers:Record.name=Music Disc
 item.crystalbearers:scanner.name=Crystal Scanner
-item.crystalbearers:battery.0.name=Crystal Battery
-item.crystalbearers:battery.1.name=Bright Battery
+item.crystalbearers:battery.0=Crystal Battery
+item.crystalbearers:battery.1=Bright Battery
 
 # Block Names
 tile.crystalbearers:stone.name=Dark Stone
@@ -138,3 +138,6 @@ book.crystalbearers:Crystalizer=Requires 3 types of crystal fluid. Inputs from t
 # Gui
 gui.crystalbearers:modularDevice=Modular Crystal Stand
 gui.crystalbearers:crystalFactory=Crystal Factory
+gui.crystalbearers:smelt=Smelt
+gui.crystalbearers:crystalize=Crystalize
+gui.crystalbearers:empty=Empty

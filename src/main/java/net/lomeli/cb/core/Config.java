@@ -10,6 +10,7 @@ import net.minecraftforge.common.Configuration;
 
 public class Config {
     private static Configuration config;
+    public static int crystalTick;
 
     public static void loadConfig(File configFile) {
         config = new Configuration(configFile);
@@ -19,6 +20,8 @@ public class Config {
         loadBlockID();
         loadItemID();
         loadEntityIDs();
+        
+        crystalTick = config.get("Options", "crystalTick", 600, "How many ticks of cool time between each crystal's ability usage (default 600)").getInt(600);
 
         config.save();
     }

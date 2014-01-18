@@ -10,6 +10,7 @@ import net.lomeli.cb.core.handler.BlockBreakHandler;
 import net.lomeli.cb.core.handler.CraftingHandler;
 import net.lomeli.cb.core.handler.EntityLivingHandler;
 import net.lomeli.cb.core.handler.GuiHandler;
+import net.lomeli.cb.core.handler.PacketHandler;
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.entities.ModEntities;
@@ -30,9 +31,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Strings.MOD_ID, name = Strings.MOD_NAME, version = Strings.VERSION)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { Strings.PACKETS }, packetHandler = PacketHandler.class)
 public class CrystalBearers {
-    
+
     @Mod.Instance(Strings.MOD_ID)
     public static CrystalBearers instance;
 
@@ -62,7 +63,7 @@ public class CrystalBearers {
 
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
         MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
-        
+
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
         GameRegistry.registerWorldGenerator(new WorldGen());

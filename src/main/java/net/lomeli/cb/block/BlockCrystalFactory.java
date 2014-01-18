@@ -80,7 +80,9 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
 
     @Override
     public void breakBlock(World world, int x, int y, int z, int id, int meta) {
-        dropInventory(world, x, y, z);
+        TileCrystalFactory tile = (TileCrystalFactory) world.getBlockTileEntity(x, y, z);
+        if(tile != null && tile.isMaster())
+            dropInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, id, meta);
     }
 

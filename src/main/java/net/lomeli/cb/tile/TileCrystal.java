@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.abilities.DebugAbility;
+import net.lomeli.cb.core.Config;
 import net.lomeli.cb.element.ElementRegistry;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileCrystal extends TileEntity implements ICrystal {
     public Random rand;
-    private int energy;
+    private int energy, tick;
     private boolean active, natural;
     private CrystalAbility[] abilities;
     public int firstEle, secondEle, thridEle, ability1ID, ability2ID;
@@ -42,19 +43,24 @@ public class TileCrystal extends TileEntity implements ICrystal {
         super.updateEntity();
         if (!worldObj.isRemote) {
             if (abilityOne() != null && abilityTwo() != null && powerAbility() != null) {
-                if (getPower() < getMaxPower())
-                    powerAbility().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
-
-                this.usePower(abilityOne().cost());
-                if (this.canActivate()) {
-                    abilityOne().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
-                    this.active = false;
+                if (tick % 60 == 0){
+                    if (getPower() < getMaxPower())
+                        powerAbility().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
                 }
+                if (++tick >= Config.crystalTick) {
 
-                this.usePower(abilityTwo().cost());
-                if (this.canActivate()) {
-                    abilityTwo().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
-                    this.active = false;
+                    this.usePower(abilityOne().cost());
+                    if (this.canActivate()) {
+                        abilityOne().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
+                        this.active = false;
+                    }
+
+                    this.usePower(abilityTwo().cost());
+                    if (this.canActivate()) {
+                        abilityTwo().enviromentalEffect(worldObj, xCoord, yCoord, zCoord, worldObj.rand);
+                        this.active = false;
+                    }
+                    tick = 0;
                 }
             } else {
                 this.setAbilityOne(ElementRegistry.elements.get(firstEle).abilities()[ability1ID]);
@@ -148,6 +154,7 @@ public class TileCrystal extends TileEntity implements ICrystal {
         tag.setFloat("red", red);
         tag.setFloat("blue", blue);
         tag.setFloat("green", green);
+        tag.setInteger("tick", tick);
     }
 
     @Override
@@ -172,6 +179,7 @@ public class TileCrystal extends TileEntity implements ICrystal {
         this.red = tag.getFloat("red");
         this.green = tag.getFloat("green");
         this.blue = tag.getFloat("blue");
+        this.tick = tag.getInteger("tick");
     }
 
     @Override

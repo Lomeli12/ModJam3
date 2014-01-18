@@ -20,19 +20,19 @@ public class ContainerCrystalFactory extends Container {
 
     public ContainerCrystalFactory(InventoryPlayer inventoryPlayer, TileCrystalFactory tileEntity) {
         tile = tileEntity;
-        
+
         this.addSlotToContainer(new SlotShard(tile, 0, 40, 18));
         this.addSlotToContainer(new SlotShard(tile, 1, 82, 18));
         this.addSlotToContainer(new SlotShard(tile, 2, 116, 18));
-        
+
         this.addSlotToContainer(new Slot(tile, 3, 31, 87));
         this.addSlotToContainer(new Slot(tile, 4, 49, 87));
         this.addSlotToContainer(new Slot(tile, 5, 73, 87));
         this.addSlotToContainer(new Slot(tile, 6, 91, 87));
         this.addSlotToContainer(new Slot(tile, 7, 116, 87));
-        
+
         this.addSlotToContainer(new SlotOutput(tile, 8, 166, 42));
-        
+
         for (int l = 0; l < 3; ++l) {
             for (int i1 = 0; i1 < 9; ++i1) {
                 this.addSlotToContainer(new Slot(inventoryPlayer, i1 + l * 9 + 9, 26 + i1 * 18, 139 + l * 18));
@@ -41,6 +41,15 @@ public class ContainerCrystalFactory extends Container {
 
         for (int j1 = 0; j1 < 9; j1++) {
             this.addSlotToContainer(new Slot(inventoryPlayer, j1, 26 + j1 * 18, 197));
+        }
+    }
+
+    public void activate(int group, boolean finalStep) {
+        if (finalStep)
+            tile.startFormationProcess();
+        else {
+            if (group < 3)
+                tile.process(group);
         }
     }
 
@@ -115,7 +124,7 @@ public class ContainerCrystalFactory extends Container {
     public boolean canInteractWith(EntityPlayer entityplayer) {
         return true;
     }
-    
+
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         return null;
