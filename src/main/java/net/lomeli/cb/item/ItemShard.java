@@ -40,7 +40,7 @@ public class ItemShard extends ItemCB implements IShard {
     @SideOnly(Side.CLIENT)
     @Override
     public Icon getIconFromDamage(int meta) {
-        return this.iconArray[meta];
+        return meta <  iconArray.length ? iconArray[meta] : iconArray[0];
     }
 
     @Override

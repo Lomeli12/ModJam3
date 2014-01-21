@@ -81,10 +81,13 @@ public class GuiCrystalFactory extends GuiContainer {
         super.drawGuiContainerForegroundLayer(x, y);
 
         List<String> text = new ArrayList<String>();
-        text.add(tile.getCurrentCharge() + "/" + tile.getChargeCapcity() + " Jewels");
-        drawToolTipOverArea(mouseX, mouseY, 7, 26, 22, 102, text, fontRenderer);
+        if (tile.getCurrentCharge() > 0) {
+            text.clear();
+            text.add(tile.getCurrentCharge() + "/" + tile.getChargeCapcity() + " Jewels");
+            drawToolTipOverArea(mouseX, mouseY, 7, 26, 22, 102, text, fontRenderer);
+        }
 
-        if (tile.tanks[0].getFluid() != null && tile.tanks[0].getFluid().getFluid() != null) {
+        if (tile.tanks[0].getFluidAmount() > 0 || (tile.tanks[0].getFluid() != null && tile.tanks[0].getFluid().getFluid() != null)) {
             text.clear();
             text.add(tile.tanks[0].getFluid().getFluid().getUnlocalizedName());
             text.add(tile.tanks[0].getFluidAmount() + "/" + tile.tanks[0].getCapacity() + "mB");
@@ -94,8 +97,8 @@ public class GuiCrystalFactory extends GuiContainer {
             text.add("Empty");
             drawToolTipOverArea(mouseX, mouseY, 40, 39, 56, 82, text, fontRenderer);
         }
-        
-        if (tile.tanks[1].getFluid() != null && tile.tanks[1].getFluid().getFluid() != null) {
+
+        if (tile.tanks[1].getFluidAmount() > 0 || (tile.tanks[1].getFluid() != null && tile.tanks[1].getFluid().getFluid() != null)) {
             text.clear();
             text.add(tile.tanks[1].getFluid().getFluid().getUnlocalizedName());
             text.add(tile.tanks[1].getFluidAmount() + "/" + tile.tanks[1].getCapacity() + "mB");
@@ -105,8 +108,8 @@ public class GuiCrystalFactory extends GuiContainer {
             text.add("Empty");
             drawToolTipOverArea(mouseX, mouseY, 82, 39, 97, 82, text, fontRenderer);
         }
-        
-        if (tile.tanks[2].getFluid() != null && tile.tanks[2].getFluid().getFluid() != null) {
+
+        if (tile.tanks[2].getFluidAmount() > 0 || (tile.tanks[2].getFluid() != null && tile.tanks[2].getFluid().getFluid() != null)){
             text.clear();
             text.add(tile.tanks[2].getFluid().getFluid().getUnlocalizedName());
             text.add(tile.tanks[2].getFluidAmount() + "/" + tile.tanks[2].getCapacity() + "mB");

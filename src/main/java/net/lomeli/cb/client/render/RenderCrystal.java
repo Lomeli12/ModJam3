@@ -35,7 +35,7 @@ public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRen
 
         GL11.glPushMatrix();
 
-        GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1F, (float) d2 + 0.5F);
+        GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 0.85F, (float) d2 + 0.5F);
 
         GL11.glScaled(1d, -1d, 1d);
 
@@ -70,9 +70,9 @@ public class RenderCrystal extends TileEntitySpecialRenderer implements IItemRen
 
         GL11.glPushMatrix();
 
-        GL11.glTranslatef((float) d0 + 0.5F, (float) d1 + 1F, (float) d2 + 0.5F);
+        GL11.glTranslatef(0, (float) d1 + 0.3F, 0);
 
-        GL11.glScaled(1d, -1d, 1d);
+        GL11.glScaled(1.3d, -1.3d, 1.3d);
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

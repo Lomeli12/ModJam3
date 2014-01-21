@@ -60,8 +60,13 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
                 if (isMaster()) {
                     if (!checkMultiBlockForm())
                         resetMultiBlockStructure();
-
+                    
                     for (int i = 0; i < 3; i++) {
+                        if(tanks[i].getFluid() != null && tanks[i].getFluid().getFluid() != null){
+                            if(tanks[i].getFluidAmount() <= 0)
+                                tanks[i].setFluid(null);
+                        }
+                        
                         if (canCompleteTask(5))
                             smeltCrystals(i);
                     }

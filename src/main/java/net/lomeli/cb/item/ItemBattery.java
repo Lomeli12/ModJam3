@@ -37,7 +37,7 @@ public class ItemBattery extends ItemCB{
     @SideOnly(Side.CLIENT)
     @Override
     public Icon getIconFromDamage(int meta) {
-        return this.iconArray[meta];
+        return meta <  iconArray.length ? iconArray[meta] : iconArray[0];
     }
 
     @Override

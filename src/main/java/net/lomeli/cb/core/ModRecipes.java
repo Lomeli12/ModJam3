@@ -39,6 +39,11 @@ public class ModRecipes {
         FurnaceRecipes.smelting().addSmelting(ModBlocks.oreShard.blockID, 2, ModItems.shards[2], 5);
         FurnaceRecipes.smelting().addSmelting(ModBlocks.oreShard.blockID, 3, ModItems.shards[3], 5);
         FurnaceRecipes.smelting().addSmelting(ModBlocks.oreShard.blockID, 4, ModItems.shards[4], 5);
+
+        GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.battery, true, "RIR", "ISI", "RIR", 'S', "crystalShard", 'I', Item.ingotIron, 'R', Item.redstone));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.battery, 1, 1), true, "EGE", "GBG", "SRS", 'E', Item.eyeOfEnder, 'G', Item.ingotGold, 'R',
+                Block.blockRedstone, 'S', "crystalShard", 'B', new ItemStack(ModItems.battery, 1, 0)));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.scanner, 1, 1), Item.book, "crystalShard"));
     }
 
 }

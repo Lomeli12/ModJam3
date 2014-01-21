@@ -1,11 +1,16 @@
 package net.lomeli.cb.core;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
+
 import net.lomeli.cb.block.ModBlocks;
+import net.lomeli.cb.client.gui.SmallFontRenderer;
 import net.lomeli.cb.client.render.RenderCrystal;
 import net.lomeli.cb.client.render.RenderDarkChicken;
 import net.lomeli.cb.client.render.RenderFireWolf;
 import net.lomeli.cb.client.render.RenderGhostPig;
 import net.lomeli.cb.client.render.RenderThunderCow;
+import net.lomeli.cb.core.handler.FluidIconHandler;
 import net.lomeli.cb.core.handler.SoundHandler;
 import net.lomeli.cb.entities.EntityDarkChicken;
 import net.lomeli.cb.entities.EntityFireWolf;
@@ -21,6 +26,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
+    public static SmallFontRenderer smallFontRenderer;
     @Override
     public void registerTile() {
         super.registerTile();
@@ -37,5 +43,11 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityGhostPig.class, new RenderGhostPig());
 
         MinecraftForge.EVENT_BUS.register(SoundHandler.getSoundHandler());
+        MinecraftForge.EVENT_BUS.register(new FluidIconHandler());
+        
+        FluidIconHandler.setFluidIcons();
+        
+        Minecraft mc = Minecraft.getMinecraft();
+        smallFontRenderer = new SmallFontRenderer(mc.gameSettings, new ResourceLocation("minecraft:textures/font/ascii.png"), mc.renderEngine, false);
     }
 }

@@ -13,4 +13,12 @@ public class Strings {
     public static final String SMELT = GUI_BASE + "smelt";
     public static final String CRYSTALIZE = GUI_BASE + "crystalize";
     public static final String EMPTY = GUI_BASE + "empty";
+    public static final String INVALID_RECIPE = GUI_BASE + "invalidRecipe";
+    
+    public static final String FLUID_BASE = "crystalbearers:";
+    public static final String FIRE_FLUID = FLUID_BASE + "liquidFireCrystal";
+    public static final String WATER_FLUID = FLUID_BASE + "liquidWaveCrystal";
+    public static final String EARTH_FLUID = FLUID_BASE + "liquidEarthCrystal";
+    public static final String AIR_FLUID = FLUID_BASE + "liquidAirCrystal";
+    public static final String DARK_FLUID = FLUID_BASE + "liquidDarkCrystal";
 }
