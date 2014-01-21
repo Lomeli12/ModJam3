@@ -11,6 +11,8 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -20,15 +22,14 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * From Mantle, because I like the small font used by Tinker's
+ * 
  * @author Anthony
- *
+ * 
  */
 @SideOnly(Side.CLIENT)
 public class SmallFontRenderer implements ResourceManagerReloadListener {
@@ -147,6 +148,7 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
         this.readGlyphSizes();
     }
 
+    @Override
     public void onResourceManagerReload(ResourceManager par1ResourceManager) {
         this.func_111272_d();
     }
@@ -167,7 +169,7 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
         int k = j / 16;
         int l = i / 16;
         byte b0 = 1;
-        float f = 8.0F / (float) l;
+        float f = 8.0F / l;
         int i1 = 0;
 
         while (i1 < 256) {
@@ -200,7 +202,7 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
                 }
 
                 ++l1;
-                this.charWidth[i1] = (int) (0.5D + (double) ((float) l1 * f)) + b0;
+                this.charWidth[i1] = (int) (0.5D + l1 * f) + b0;
                 ++i1;
                 break;
             }
@@ -228,11 +230,11 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
      * (posX,posY) location...
      */
     private float renderDefaultChar(int par1, boolean par2) {
-        float f = (float) (par1 % 16 * 8);
-        float f1 = (float) (par1 / 16 * 8);
+        float f = par1 % 16 * 8;
+        float f1 = par1 / 16 * 8;
         float f2 = par2 ? 1.0F : 0.0F;
         this.renderEngine.bindTexture(this.field_111273_g);
-        float f3 = (float) this.charWidth[par1] - 0.01F;
+        float f3 = this.charWidth[par1] - 0.01F;
         GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
         GL11.glTexCoord2f(f / 128.0F, f1 / 128.0F);
         GL11.glVertex3f(this.posX + f2, this.posY, 0.0F);
@@ -243,7 +245,7 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
         GL11.glTexCoord2f((f + f3 - 1.0F) / 128.0F, (f1 + 7.99F) / 128.0F);
         GL11.glVertex3f(this.posX + f3 - 1.0F - f2, this.posY + 7.99F, 0.0F);
         GL11.glEnd();
-        return (float) this.charWidth[par1];
+        return this.charWidth[par1];
     }
 
     private ResourceLocation func_111271_a(int par1) {
@@ -274,10 +276,10 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
             this.loadGlyphTexture(i);
             int j = this.glyphWidth[par1] >>> 4;
             int k = this.glyphWidth[par1] & 15;
-            float f = (float) j;
-            float f1 = (float) (k + 1);
-            float f2 = (float) (par1 % 16 * 16) + f;
-            float f3 = (float) ((par1 & 255) / 16 * 16);
+            float f = j;
+            float f1 = k + 1;
+            float f2 = par1 % 16 * 16 + f;
+            float f3 = (par1 & 255) / 16 * 16;
             float f4 = f1 - f - 0.02F;
             float f5 = par2 ? 1.0F : 0.0F;
             GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
@@ -350,7 +352,7 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
                 astring[j] = s1;
             }
 
-            String[] astring1 = (String[]) astring.clone();
+            String[] astring1 = astring.clone();
             Bidi.reorderVisually(abyte, 0, astring, 0, abyte.length);
             StringBuilder stringbuilder = new StringBuilder();
             i = 0;
@@ -437,7 +439,7 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
 
                     k = this.colorCode[j];
                     this.textColor = k;
-                    GL11.glColor4f((float) (k >> 16) / 255.0F, (float) (k >> 8 & 255) / 255.0F, (float) (k & 255) / 255.0F, this.alpha);
+                    GL11.glColor4f((k >> 16) / 255.0F, (k >> 8 & 255) / 255.0F, (k & 255) / 255.0F, this.alpha);
                 } else if (j == 16) {
                     this.randomStyle = true;
                 } else if (j == 17) {
@@ -509,10 +511,10 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
                     tessellator = Tessellator.instance;
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     tessellator.startDrawingQuads();
-                    tessellator.addVertex((double) this.posX, (double) (this.posY + (float) (this.FONT_HEIGHT / 2)), 0.0D);
-                    tessellator.addVertex((double) (this.posX + f1), (double) (this.posY + (float) (this.FONT_HEIGHT / 2)), 0.0D);
-                    tessellator.addVertex((double) (this.posX + f1), (double) (this.posY + (float) (this.FONT_HEIGHT / 2) - 1.0F), 0.0D);
-                    tessellator.addVertex((double) this.posX, (double) (this.posY + (float) (this.FONT_HEIGHT / 2) - 1.0F), 0.0D);
+                    tessellator.addVertex(this.posX, this.posY + this.FONT_HEIGHT / 2, 0.0D);
+                    tessellator.addVertex(this.posX + f1, this.posY + this.FONT_HEIGHT / 2, 0.0D);
+                    tessellator.addVertex(this.posX + f1, this.posY + this.FONT_HEIGHT / 2 - 1.0F, 0.0D);
+                    tessellator.addVertex(this.posX, this.posY + this.FONT_HEIGHT / 2 - 1.0F, 0.0D);
                     tessellator.draw();
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
@@ -522,15 +524,15 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     tessellator.startDrawingQuads();
                     int l = this.underlineStyle ? -1 : 0;
-                    tessellator.addVertex((double) (this.posX + (float) l), (double) (this.posY + (float) this.FONT_HEIGHT), 0.0D);
-                    tessellator.addVertex((double) (this.posX + f1), (double) (this.posY + (float) this.FONT_HEIGHT), 0.0D);
-                    tessellator.addVertex((double) (this.posX + f1), (double) (this.posY + (float) this.FONT_HEIGHT - 1.0F), 0.0D);
-                    tessellator.addVertex((double) (this.posX + (float) l), (double) (this.posY + (float) this.FONT_HEIGHT - 1.0F), 0.0D);
+                    tessellator.addVertex(this.posX + l, this.posY + this.FONT_HEIGHT, 0.0D);
+                    tessellator.addVertex(this.posX + f1, this.posY + this.FONT_HEIGHT, 0.0D);
+                    tessellator.addVertex(this.posX + f1, this.posY + this.FONT_HEIGHT - 1.0F, 0.0D);
+                    tessellator.addVertex(this.posX + l, this.posY + this.FONT_HEIGHT - 1.0F, 0.0D);
                     tessellator.draw();
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
 
-                this.posX += (float) ((int) f1);
+                this.posX += ((int) f1);
             }
         }
     }
@@ -564,13 +566,13 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
                 par4 = (par4 & 16579836) >> 2 | par4 & -16777216;
             }
 
-            this.red = (float) (par4 >> 16 & 255) / 255.0F;
-            this.blue = (float) (par4 >> 8 & 255) / 255.0F;
-            this.green = (float) (par4 & 255) / 255.0F;
-            this.alpha = (float) (par4 >> 24 & 255) / 255.0F;
+            this.red = (par4 >> 16 & 255) / 255.0F;
+            this.blue = (par4 >> 8 & 255) / 255.0F;
+            this.green = (par4 & 255) / 255.0F;
+            this.alpha = (par4 >> 24 & 255) / 255.0F;
             GL11.glColor4f(this.red, this.blue, this.green, this.alpha);
-            this.posX = (float) par2;
-            this.posY = (float) par3;
+            this.posX = par2;
+            this.posY = par3;
             this.renderStringAtPos(par1Str, par5);
             return (int) this.posX;
         }
@@ -722,6 +724,11 @@ public class SmallFontRenderer implements ResourceManagerReloadListener {
         this.textColor = par5;
         par1Str = this.trimStringNewline(par1Str);
         this.renderSplitString(par1Str, par2, par3, par4, false);
+    }
+
+    public int getStringHeight(String str, int width) {
+        int j = getStringWidth(str);
+        return ((j / width) * 9);
     }
 
     /**

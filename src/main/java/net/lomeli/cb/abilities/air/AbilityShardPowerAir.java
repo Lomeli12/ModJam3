@@ -18,9 +18,9 @@ public class AbilityShardPowerAir extends CrystalAbility {
         if (tile != null) {
             if (tile instanceof TileCrystal) {
                 if (worldObj.getBlockId(x, y - 1, z) == ModBlocks.shardBlock.blockID && worldObj.getBlockMetadata(x, y - 1, z) == 3) {
-                        ((TileCrystal) tile).addPower(20);
-                        if (rand.nextInt(10000) < 7)
-                            worldObj.setBlockToAir(x, y - 1, z);
+                    ((TileCrystal) tile).addPower(20);
+                    if (rand.nextInt(10000) < 7)
+                        worldObj.setBlockToAir(x, y - 1, z);
                 }
             }
         }

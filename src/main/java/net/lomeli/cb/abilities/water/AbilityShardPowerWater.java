@@ -18,9 +18,9 @@ public class AbilityShardPowerWater extends CrystalAbility {
         if (tile != null) {
             if (tile instanceof TileCrystal) {
                 if (worldObj.getBlockId(x, y - 1, z) == ModBlocks.shardBlock.blockID && worldObj.getBlockMetadata(x, y - 1, z) == 0) {
-                        ((TileCrystal) tile).addPower(20);
-                        if (rand.nextInt(10000) < 15)
-                            worldObj.setBlockToAir(x, y - 1, z);
+                    ((TileCrystal) tile).addPower(20);
+                    if (rand.nextInt(10000) < 15)
+                        worldObj.setBlockToAir(x, y - 1, z);
                 }
             }
         }

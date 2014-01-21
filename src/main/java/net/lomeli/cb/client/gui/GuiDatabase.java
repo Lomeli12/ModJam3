@@ -7,6 +7,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.lomeli.cb.client.gui.pages.PageBase;
+import net.lomeli.cb.client.gui.pages.PageText;
+import net.lomeli.cb.lib.PageInfo;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.client.gui.GuiButton;
@@ -29,15 +31,9 @@ public class GuiDatabase extends GuiScreen {
 
     public GuiDatabase(ItemStack book, EntityPlayer player) {
         BookPages.setPages(this);
-
         this.book = book;
         this.player = player;
         currentPage = getPage();
-    }
-
-    @Override
-    public void onGuiClosed() {
-        book.getTagCompound().setInteger("currentPage", currentPage);
     }
 
     @SuppressWarnings("unchecked")
@@ -49,18 +45,18 @@ public class GuiDatabase extends GuiScreen {
             maxPages = pagesLeft.size();
         else
             maxPages = pagesRight.size();
-
+        maxPages--;
         guiLeft = (width - bookImageWidth) / 2;
         guiTop = (height - bookImageHeight) / 2;
         pageLeftX = guiLeft + 15;
         pageRightX = guiLeft + 132;
         pageY = guiTop + 13;
 
-        byte b0 = 2;
-        this.buttonList.add(buttonNextPage = new GuiButtonNextPage(0, guiLeft + 120, b0 + 154, true));
-        this.buttonList.add(buttonPreviousPage = new GuiButtonNextPage(1, guiLeft + 38, b0 + 154, false));
+        buttonList.add(buttonNextPage = new GuiButtonNextPage(0, guiLeft + 220, guiTop + 180, true));
+        buttonList.add(buttonPreviousPage = new GuiButtonNextPage(1, guiLeft + 12, guiTop + 180, false));
     }
 
+    @Override
     protected void actionPerformed(GuiButton button) {
         if (button != null) {
             if (button.equals(buttonNextPage)) {
@@ -70,12 +66,12 @@ public class GuiDatabase extends GuiScreen {
                 if (currentPage > 0)
                     currentPage--;
             }
+            book.stackTagCompound.setInteger("currentPage", currentPage);
         }
     }
 
     @Override
     public void drawScreen(int par1, int par2, float par3) {
-        super.drawScreen(par1, par2, par3);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(new ResourceLocation(Strings.MOD_ID.toLowerCase(), "textures/gui/book.png"));
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, bookImageWidth, bookImageHeight);
@@ -90,6 +86,8 @@ public class GuiDatabase extends GuiScreen {
             else {
                 if (doesPlayerHaveTag(leftPage.getTag()))
                     leftPage.setPos(pageLeftX, pageY).draw();
+                else
+                    new PageText(this, PageInfo.uknown).setPos(pageLeftX, pageY).draw();
             }
         }
 
@@ -100,11 +98,14 @@ public class GuiDatabase extends GuiScreen {
             else {
                 if (doesPlayerHaveTag(rightPage.getTag()))
                     rightPage.setPos(pageRightX, pageY).draw();
+                else
+                    new PageText(this, PageInfo.uknown).setPos(pageRightX, pageY).draw();
             }
         }
 
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        super.drawScreen(par1, par2, par3);
     }
 
     public boolean doesPlayerHaveTag(String tag) {
@@ -112,8 +113,10 @@ public class GuiDatabase extends GuiScreen {
     }
 
     public int getPage() {
-        if (book.getTagCompound() == null)
+        if (book.stackTagCompound == null) {
             book.stackTagCompound = new NBTTagCompound();
+            return 0;
+        }
         return book.getTagCompound().getInteger("currentPage");
     }
 }

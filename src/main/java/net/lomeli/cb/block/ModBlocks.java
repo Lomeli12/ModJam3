@@ -32,7 +32,7 @@ public class ModBlocks {
         chargeBox = new BlockChargeBlock(BlockIds.chargeBoxID);
         solarPanel = new BlockSolarPanel(BlockIds.solarPanelID);
         crystalFactory = new BlockCrystalFactory(BlockIds.crystalFactoryID);
-        
+
         registerBlock();
     }
 

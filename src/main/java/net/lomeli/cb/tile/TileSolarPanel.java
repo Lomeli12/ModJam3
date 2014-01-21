@@ -71,12 +71,12 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
     public boolean isChargeBox() {
         return true;
     }
-    
+
     @Override
     public boolean isGenerator() {
         return true;
     }
-    
+
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);

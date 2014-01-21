@@ -10,8 +10,8 @@ public interface IEnergy {
     public abstract int useCharge(int charge);
 
     public abstract boolean canCompleteTask(int charge);
-    
+
     public abstract boolean isChargeBox();
-    
+
     public abstract boolean isGenerator();
 }

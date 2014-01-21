@@ -44,7 +44,8 @@ public class TileChargeBox extends TileEntity implements IEnergy {
                                         ((ICrystal) tile).addPower(useCharge(20));
                                 }
                             } else if (tile instanceof IEnergy) {
-                                if (!((IEnergy) tile).isGenerator() && !((IEnergy) tile).isChargeBox() && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity())) {
+                                if (!((IEnergy) tile).isGenerator() && !((IEnergy) tile).isChargeBox()
+                                        && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity())) {
                                     if (canCompleteTask(1))
                                         ((IEnergy) tile).addCharge(useCharge(1));
                                 }
@@ -91,7 +92,7 @@ public class TileChargeBox extends TileEntity implements IEnergy {
     public boolean isChargeBox() {
         return true;
     }
-    
+
     @Override
     public boolean isGenerator() {
         return false;

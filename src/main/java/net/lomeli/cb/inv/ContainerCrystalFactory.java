@@ -1,7 +1,7 @@
 package net.lomeli.cb.inv;
 
-import net.lomeli.cb.client.gui.SlotShard;
 import net.lomeli.cb.client.gui.SlotOutput;
+import net.lomeli.cb.client.gui.SlotShard;
 import net.lomeli.cb.tile.TileCrystalFactory;
 
 import net.minecraft.entity.player.EntityPlayer;

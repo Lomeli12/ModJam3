@@ -18,9 +18,9 @@ public class AbilityShardPowerDark extends CrystalAbility {
         if (tile != null) {
             if (tile instanceof TileCrystal) {
                 if (worldObj.getBlockId(x, y - 1, z) == ModBlocks.shardBlock.blockID && worldObj.getBlockMetadata(x, y, z) == 4) {
-                        ((TileCrystal) tile).addPower(20);
-                        if (rand.nextInt(1000) < 15)
-                            worldObj.setBlockToAir(x, y - 1, z);
+                    ((TileCrystal) tile).addPower(20);
+                    if (rand.nextInt(1000) < 15)
+                        worldObj.setBlockToAir(x, y - 1, z);
                 }
             }
         }

@@ -15,7 +15,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ItemRecipeUtil {
-    
+
     public static ItemStack[] getItemShapedRecipe(ItemStack stack) {
         ItemStack[] finalRecipe = new ItemStack[9];
         if (stack != null) {
@@ -48,9 +48,9 @@ public class ItemRecipeUtil {
                             inputs.setAccessible(true);
                             @SuppressWarnings("unchecked")
                             List<ItemStack> items = getField(ShapelessRecipes.class, List.class, main, 1);
-                            if(items != null){
-                                for (int i = 0; i < items.size(); i++){
-                                    if (i < finalRecipe.length) 
+                            if (items != null) {
+                                for (int i = 0; i < items.size(); i++) {
+                                    if (i < finalRecipe.length)
                                         finalRecipe[i] = items.get(i);
                                 }
                             }
@@ -72,7 +72,8 @@ public class ItemRecipeUtil {
                                     finalRecipe[i] = (ItemStack) firstInIndex;
                             }
                         }
-                    } else if (Class.forName("ic2.core.AdvRecipe").isAssignableFrom(main.getClass()) || Class.forName("ic2.core.AdvShapelessRecipe").isAssignableFrom(main.getClass())) {
+                    } else if (Class.forName("ic2.core.AdvRecipe").isAssignableFrom(main.getClass())
+                            || Class.forName("ic2.core.AdvShapelessRecipe").isAssignableFrom(main.getClass())) {
                         Field inputs = fields[2];
                         if (inputs.getType().isArray()) {
                             for (int i = 0; i < Array.getLength(inputs.get(main)); i++) {

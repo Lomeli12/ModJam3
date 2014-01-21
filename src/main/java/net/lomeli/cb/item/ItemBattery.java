@@ -13,8 +13,8 @@ import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBattery extends ItemCB{
-    
+public class ItemBattery extends ItemCB {
+
     @SideOnly(Side.CLIENT)
     private Icon[] iconArray;
 
@@ -37,7 +37,7 @@ public class ItemBattery extends ItemCB{
     @SideOnly(Side.CLIENT)
     @Override
     public Icon getIconFromDamage(int meta) {
-        return meta <  iconArray.length ? iconArray[meta] : iconArray[0];
+        return meta < iconArray.length ? iconArray[meta] : iconArray[0];
     }
 
     @Override

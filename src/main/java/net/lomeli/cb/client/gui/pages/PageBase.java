@@ -31,20 +31,20 @@ public class PageBase {
         this.mc = Minecraft.getMinecraft();
         requiresTag = false;
     }
-    
+
     public PageBase(int x, int y, GuiScreen gui) {
         this.gui = gui;
         this.mc = Minecraft.getMinecraft();
         requiresTag = false;
         this.setPos(x, y);
     }
-    
+
     public PageBase setPos(int x, int y) {
         this.x = x;
         this.y = y;
         return this;
     }
-    
+
     public PageBase setTag(String tag) {
         this.tag = tag;
         requiresTag = true;
@@ -54,11 +54,11 @@ public class PageBase {
     public void draw() {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
-    
+
     public String getTag() {
         return Strings.MOD_ID.toLowerCase() + ":" + tag;
     }
-    
+
     public boolean needsTag() {
         return requiresTag;
     }

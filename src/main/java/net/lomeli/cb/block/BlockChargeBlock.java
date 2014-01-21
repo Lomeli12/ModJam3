@@ -34,13 +34,13 @@ public class BlockChargeBlock extends BlockCB implements ITileEntityProvider {
         setHardness(2.0F);
         setResistance(10.0F);
     }
-    
+
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
         if (!world.isRemote) {
             TileChargeBox tile = (TileChargeBox) world.getBlockTileEntity(x, y, z);
-            if(tile != null){
-                if(!player.isSneaking()){
+            if (tile != null) {
+                if (!player.isSneaking()) {
                     player.addChatMessage("Charge: " + tile.getCurrentCharge() + "/" + tile.getChargeCapcity());
                     return true;
                 }

@@ -5,24 +5,29 @@ import java.awt.Color;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StatCollector;
 
-public class PageText extends PageBase{
-    
-    private String text;
+public class PageText extends PageBase {
 
-    public PageText(int x, int y, GuiScreen gui, String text) {
+    private String[] pageText;
+
+    public PageText(int x, int y, GuiScreen gui, String... text) {
         super(x, y, gui);
-        this.text = text;
+        this.pageText = text;
     }
-    
-    public PageText(GuiScreen gui, String text) {
+
+    public PageText(GuiScreen gui, String... text) {
         super(gui);
-        this.text = text;
+        this.pageText = text;
     }
-    
+
     @Override
     public void draw() {
         super.draw();
-        smallFontRenderer.drawSplitString(StatCollector.translateToLocal(text), x, y + 5, width, Color.BLACK.getRGB());
+        int textHeight = y + 5;
+
+        for (int i = 0; i < pageText.length; i++) {
+            smallFontRenderer.drawSplitString(StatCollector.translateToLocal(pageText[i]), x, textHeight, width, Color.BLACK.getRGB());
+            textHeight += smallFontRenderer.getStringHeight(StatCollector.translateToLocal(pageText[i]), width) + 20;
+        }
     }
 
 }

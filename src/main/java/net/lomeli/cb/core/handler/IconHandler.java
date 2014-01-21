@@ -1,6 +1,7 @@
 package net.lomeli.cb.core.handler;
 
 import net.lomeli.cb.element.FluidElements;
+import net.lomeli.cb.lib.PageInfo;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.util.Icon;
@@ -11,7 +12,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class FluidIconHandler {
+public class IconHandler {
     private static Icon[] fluidIcons = new Icon[5];
 
     @SideOnly(Side.CLIENT)
@@ -21,9 +22,11 @@ public class FluidIconHandler {
             for (int i = 0; i < fluidIcons.length; i++) {
                 fluidIcons[i] = event.map.registerIcon(Strings.MOD_ID.toLowerCase() + ":fluids/liquidCrystal_" + i);
             }
+
+            PageInfo.crystal = event.map.registerIcon(Strings.MOD_ID.toLowerCase() + ":images/crystal");
         }
     }
-    
+
     public static void setFluidIcons() {
         FluidElements.fireFluid.setIcons(fluidIcons[0]);
         FluidElements.waterFluid.setIcons(fluidIcons[1]);

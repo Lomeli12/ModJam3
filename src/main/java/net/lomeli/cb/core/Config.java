@@ -20,7 +20,7 @@ public class Config {
         loadBlockID();
         loadItemID();
         loadEntityIDs();
-        
+
         crystalTick = config.get("Options", "crystalTick", 600, "How many ticks of cool time between each crystal's ability usage (default 600)").getInt(600);
 
         config.save();

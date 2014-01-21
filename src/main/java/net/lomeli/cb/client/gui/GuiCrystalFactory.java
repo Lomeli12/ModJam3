@@ -53,6 +53,7 @@ public class GuiCrystalFactory extends GuiContainer {
         this.buttonList.add(crystalize = new GuiButtonCrystal(3, guiLeft + 135, guiTop + 70, fontRenderer.getStringWidth(form) + 4, 20, form));
     }
 
+    @Override
     protected void actionPerformed(GuiButton button) {
         if (button != null) {
             System.out.println(button.displayString);
@@ -109,7 +110,7 @@ public class GuiCrystalFactory extends GuiContainer {
             drawToolTipOverArea(mouseX, mouseY, 82, 39, 97, 82, text, fontRenderer);
         }
 
-        if (tile.tanks[2].getFluidAmount() > 0 || (tile.tanks[2].getFluid() != null && tile.tanks[2].getFluid().getFluid() != null)){
+        if (tile.tanks[2].getFluidAmount() > 0 || (tile.tanks[2].getFluid() != null && tile.tanks[2].getFluid().getFluid() != null)) {
             text.clear();
             text.add(tile.tanks[2].getFluid().getFluid().getUnlocalizedName());
             text.add(tile.tanks[2].getFluidAmount() + "/" + tile.tanks[2].getCapacity() + "mB");

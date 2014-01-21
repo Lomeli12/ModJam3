@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 public class EntityLivingHandler {
     @ForgeSubscribe
@@ -49,6 +50,11 @@ public class EntityLivingHandler {
                 }
             }
         }
+    }
+
+    @ForgeSubscribe
+    public void itemPickUpEvent(EntityItemPickupEvent event) {
+
     }
 
     @ForgeSubscribe

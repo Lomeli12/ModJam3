@@ -132,11 +132,16 @@ ability.crystalbearers:ReplenishWater=Fills nearby tanks with water.
 
 # Books
 book.crystalbearers:manual=The Crystal Database
-book.crystalbearers:SmeltBookName=Crystal Smeltery Book
-book.crystalbearers:CrystalizerName=Guide to making Crystals
-book.crystalbearers:shard=Elemental Shards 
+book.crystalbearers:unknown=This page is empty, but may reveal information in the future...
 book.crystalbearers:SmeltBook=Requires a lava source below it and 64 crystal shards of the same time. Will melt the shards and auto-output to nearby Crystalizers.
 book.crystalbearers:Crystalizer=Requires 3 types of crystal fluid. Inputs from the sides (except the front) and outputs to an inventory above (not ISided).
+book.crystalbearers:Quote="The greatest obstacle to discovery is not ignorance - it is the illusion of knowledge."
+book.crystalbearers:QuotePerson=-Daniel J. Boorstin
+book.crystalbearers:Intro1=This world is full or many natural resources, but none more useful than the crystals that scatter the land. No one is quite sure how they came to be or what gives them their properties, but much research has been done on how to utilize their power.
+book.crystalbearers:Intro2=This book will serve as your guide as well as a record log, allowing you to learn as you go and reveal to you the secrets of the crystals as locate them and make your own.
+book.crystalbearers:Crystal1=These crystal naturally generate throughout the world, mostly deep underground but they can form just under the dirt, an even rarer event, above ground.
+book.crystalbearers:Crystal2=All crystals have mystical abilities that affect the environment around them. It has been observed that natural crystals have completely random abilities, so take caution when approaching one.
+book.crystalbearers:Crystal3=Contrary to what one by believe, the crystals are incredibly durable, able to withstand explosions. It is recommended one use a something as strong as diamond to mine up this precious stone.
 
 # Gui
 gui.crystalbearers:modularDevice=Modular Crystal Stand

@@ -35,13 +35,13 @@ public class GuiHandler implements IGuiHandler {
                 if (tile instanceof TileCrystalFactory)
                     return new GuiCrystalFactory(player.inventory, (TileCrystalFactory) tile);
             }
-        } else if (ID == 0){
+        } else if (ID == 0) {
             if (player.getCurrentEquippedItem() != null) {
                 ItemStack stack = player.getCurrentEquippedItem();
-                if(stack.getUnlocalizedName().equals(ModItems.scanner.getUnlocalizedName())){
-                    if (stack.getItemDamage() == 0){
-                        
-                    }else if (stack.getItemDamage() == 1){
+                if (stack.getUnlocalizedName().equals(ModItems.scanner.getUnlocalizedName())) {
+                    if (stack.getItemDamage() == 0) {
+
+                    } else if (stack.getItemDamage() == 1) {
                         return new GuiDatabase(stack, player);
                     }
                 }
