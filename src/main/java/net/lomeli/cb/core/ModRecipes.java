@@ -44,6 +44,14 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.battery, 1, 1), true, "EGE", "GBG", "SRS", 'E', Item.eyeOfEnder, 'G', Item.ingotGold, 'R',
                 Block.blockRedstone, 'S', "crystalShard", 'B', new ItemStack(ModItems.battery, 1, 0)));
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.scanner, 1, 1), Item.book, "crystalShard"));
+        GameRegistry
+                .addRecipe(new ShapedOreRecipe(ModBlocks.chargeBox, true, "RWR", "BBB", "WRW", 'R', Item.redstone, 'W', "plankWood", 'B', new ItemStack(ModItems.battery, 1, 0)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.chargeBox, 1, 1), true, "IGI", "BCB", "III", 'I', Item.ingotIron, 'G', Item.glowstone, 'C',
+                new ItemStack(ModBlocks.chargeBox, 1, 0), 'B', new ItemStack(ModItems.battery, 1, 1)));
+        GameRegistry.addRecipe(new ShapedOreRecipe(ModBlocks.solarPanel, true, "GGG", "BSB", "OPO", 'G', Block.glass, 'S', Block.daylightSensor, 'O', Block.obsidian, 'B',
+                new ItemStack(ModItems.battery, 1, 0), 'P', "crystalShard"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.crystalFactory, 2), true, "ICI", "GBG", "ISI", 'I', Item.ingotIron, 'G', Item.ingotGold, 'C',
+                ModBlocks.crystalizer, 'S', ModBlocks.smeltry, 'B', new ItemStack(ModBlocks.chargeBox, 1, 1)));
     }
 
 }

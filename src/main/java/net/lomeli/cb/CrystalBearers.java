@@ -7,7 +7,6 @@ import net.lomeli.cb.core.Config;
 import net.lomeli.cb.core.CreativeTabCrystals;
 import net.lomeli.cb.core.ModRecipes;
 import net.lomeli.cb.core.handler.BlockBreakHandler;
-import net.lomeli.cb.core.handler.CraftingHandler;
 import net.lomeli.cb.core.handler.EntityLivingHandler;
 import net.lomeli.cb.core.handler.GuiHandler;
 import net.lomeli.cb.core.handler.PacketHandler;
@@ -50,14 +49,14 @@ public class CrystalBearers {
 
         ModItems.loadItems();
         ModBlocks.loadBlocks();
-
-        FluidElements.loadFluids();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.registerTile();
         proxy.registerRenders();
+        FluidElements.loadFluids();
+        FluidElements.registerFluids();
 
         ModEntities.loadEntities();
 
@@ -67,7 +66,6 @@ public class CrystalBearers {
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
         GameRegistry.registerWorldGenerator(new WorldGen());
-        GameRegistry.registerCraftingHandler(new CraftingHandler());
     }
 
     @Mod.EventHandler

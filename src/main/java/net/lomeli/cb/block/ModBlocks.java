@@ -19,7 +19,8 @@ public class ModBlocks {
     public static ItemStack[] shardBlocks, oreShards;
 
     public static void loadBlocks() {
-        shardBlocks = oreShards = new ItemStack[5];
+        shardBlocks = new ItemStack[5];
+        oreShards = new ItemStack[5];
 
         darkStone = new BlockDarkStone(BlockIds.darkStoneID, "stone").setUnlocalizedName("stone");
         darkCobble = new BlockDarkStone(BlockIds.darkCobbleID, "cobble").setUnlocalizedName("cobble");
@@ -50,16 +51,16 @@ public class ModBlocks {
         GameRegistry.registerBlock(chargeBox, ItemChargeBlock.class, "chargeBlock");
 
         for (int i = 0; i < 5; i++) {
-            shardBlocks[i] = new ItemStack(oreShard, 1, i);
-            oreShards[i] = new ItemStack(shardBlock, 1, i);
+            shardBlocks[i] = new ItemStack(shardBlock, 1, i);
+            oreShards[i] = new ItemStack(oreShard, 1, i);
         }
 
         MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
 
-        OreDictionary.registerOre("oreFireShard", shardBlocks[0]);
-        OreDictionary.registerOre("oreWaterShard", shardBlocks[1]);
-        OreDictionary.registerOre("oreEarthShard", shardBlocks[2]);
-        OreDictionary.registerOre("oreAirShard", shardBlocks[3]);
-        OreDictionary.registerOre("oreDarkShard", shardBlocks[4]);
+        OreDictionary.registerOre("oreFireShard", oreShards[0]);
+        OreDictionary.registerOre("oreWaterShard", oreShards[1]);
+        OreDictionary.registerOre("oreEarthShard", oreShards[2]);
+        OreDictionary.registerOre("oreAirShard", oreShards[3]);
+        OreDictionary.registerOre("oreDarkShard", oreShards[4]);
     }
 }

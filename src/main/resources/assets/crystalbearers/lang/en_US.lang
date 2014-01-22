@@ -15,7 +15,7 @@ item.crystalbearers:shard.4=Shadow Shard
 item.crystalbearers:crystal.name=Crystal
 item.crystalbearers:Record.name=Music Disc
 item.crystalbearers:scanner.0=Crystal Scanner
-item.crystalbearers:scanner.1=Crystal Database
+item.crystalbearers:scanner.1=Crystal Field Guide
 item.crystalbearers:battery.0=Crystal Battery
 item.crystalbearers:battery.1=Bright Battery
 
@@ -131,9 +131,9 @@ ability.crystalbearers:ReplenishWaterName=Replenish Water
 ability.crystalbearers:ReplenishWater=Fills nearby tanks with water.
 
 # Books
-book.crystalbearers:manual=The Crystal Database
+book.crystalbearers:manual=The Crystal Field Guide
 book.crystalbearers:unknown=This page is empty, but may reveal information in the future...
-book.crystalbearers:SmeltBook=Requires a lava source below it and 64 crystal shards of the same time. Will melt the shards and auto-output to nearby Crystalizers.
+book.crystalbearers:Smelt=Requires a lava source below it and 64 crystal shards of the same time. Will melt the shards and auto-output to nearby Crystalizers.
 book.crystalbearers:Crystalizer=Requires 3 types of crystal fluid. Inputs from the sides (except the front) and outputs to an inventory above (not ISided).
 book.crystalbearers:Quote="The greatest obstacle to discovery is not ignorance - it is the illusion of knowledge."
 book.crystalbearers:QuotePerson=-Daniel J. Boorstin
@@ -142,6 +142,8 @@ book.crystalbearers:Intro2=This book will serve as your guide as well as a recor
 book.crystalbearers:Crystal1=These crystal naturally generate throughout the world, mostly deep underground but they can form just under the dirt, an even rarer event, above ground.
 book.crystalbearers:Crystal2=All crystals have mystical abilities that affect the environment around them. It has been observed that natural crystals have completely random abilities, so take caution when approaching one.
 book.crystalbearers:Crystal3=Contrary to what one by believe, the crystals are incredibly durable, able to withstand explosions. It is recommended one use a something as strong as diamond to mine up this precious stone.
+book.crystalbearers:shard1=Shards are fragments of crystals mined up using a normal mining tool. Crystal Shards are separated into 5 categories: fire, water, earth, air, or dark.
+book.crystalbearers:shard2=Crystal Shards can also be found in ore form, as incompletely crystals that where devoured by the earth. Whereas shards mined from crystals are random, their ore forms are element specific. The following recipes apply to all shards.
 
 # Gui
 gui.crystalbearers:modularDevice=Modular Crystal Stand

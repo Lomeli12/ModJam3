@@ -6,16 +6,20 @@ import net.lomeli.cb.entities.EntityDarkChicken;
 import net.lomeli.cb.entities.EntityFireWolf;
 import net.lomeli.cb.entities.EntityGhostPig;
 import net.lomeli.cb.entities.EntityThunderCow;
+import net.lomeli.cb.item.IShard;
 import net.lomeli.cb.item.ModItems;
+import net.lomeli.cb.lib.PageInfo;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -54,7 +58,32 @@ public class EntityLivingHandler {
 
     @ForgeSubscribe
     public void itemPickUpEvent(EntityItemPickupEvent event) {
+        if (event.item != null && event.item.getEntityItem() != null && event.entityPlayer != null) {
+            EntityPlayer player = event.entityPlayer;
+            ItemStack item = event.item.getEntityItem();
+            /*if (item.getUnlocalizedName().equals(ModItems.crystalItem.getUnlocalizedName())) {
+                if (!player.getEntityData().getBoolean(PageInfo.advCrystalTag) && player.getEntityData().getBoolean(PageInfo.crystalTag)) {
+                    player.getEntityData().setBoolean(PageInfo.advCrystalTag, true);
+                }
+            } else */if (item.getItem() instanceof IShard) {
+                if (!player.getEntityData().getBoolean(PageInfo.crystalTag)) {
+                    System.out.println("TAG!");
+                    PacketHandler.sendPlayerDiscoveryPacket(PageInfo.crystalTag, (EntityPlayerMP)player);
+                }
+            }
+            System.out.println(item.getDisplayName());
+        }
+    }
 
+    @ForgeSubscribe
+    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+        if (event.entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.entity;
+            if (!player.getEntityData().getBoolean(PageInfo.book)) {
+                player.inventory.addItemStackToInventory(new ItemStack(ModItems.scanner, 1, 1));
+                player.getEntityData().setBoolean(PageInfo.book, true);
+            }
+        }
     }
 
     @ForgeSubscribe

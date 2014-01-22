@@ -27,9 +27,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * From Mantle, because I like the small font used by Tinker's
- * 
- * @author Anthony
- * 
  */
 @SideOnly(Side.CLIENT)
 public class SmallFontRenderer implements ResourceManagerReloadListener {

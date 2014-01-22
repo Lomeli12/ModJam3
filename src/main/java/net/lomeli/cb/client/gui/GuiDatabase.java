@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL12;
 
 import net.lomeli.cb.client.gui.pages.PageBase;
 import net.lomeli.cb.client.gui.pages.PageText;
+import net.lomeli.cb.core.handler.PacketHandler;
 import net.lomeli.cb.lib.PageInfo;
 import net.lomeli.cb.lib.Strings;
 
@@ -49,7 +50,7 @@ public class GuiDatabase extends GuiScreen {
         guiLeft = (width - bookImageWidth) / 2;
         guiTop = (height - bookImageHeight) / 2;
         pageLeftX = guiLeft + 15;
-        pageRightX = guiLeft + 132;
+        pageRightX = guiLeft + 135;
         pageY = guiTop + 13;
 
         buttonList.add(buttonNextPage = new GuiButtonNextPage(0, guiLeft + 220, guiTop + 180, true));
@@ -84,7 +85,7 @@ public class GuiDatabase extends GuiScreen {
             if (!leftPage.needsTag())
                 leftPage.setPos(pageLeftX, pageY).draw();
             else {
-                if (doesPlayerHaveTag(leftPage.getTag()))
+                if (PacketHandler.doesPlayerHaveTag(player, leftPage.getTag()))
                     leftPage.setPos(pageLeftX, pageY).draw();
                 else
                     new PageText(this, PageInfo.uknown).setPos(pageLeftX, pageY).draw();
@@ -96,7 +97,7 @@ public class GuiDatabase extends GuiScreen {
             if (!rightPage.needsTag())
                 rightPage.setPos(pageRightX, pageY).draw();
             else {
-                if (doesPlayerHaveTag(rightPage.getTag()))
+                if (PacketHandler.doesPlayerHaveTag(player, rightPage.getTag()))
                     rightPage.setPos(pageRightX, pageY).draw();
                 else
                     new PageText(this, PageInfo.uknown).setPos(pageRightX, pageY).draw();
@@ -106,10 +107,6 @@ public class GuiDatabase extends GuiScreen {
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         super.drawScreen(par1, par2, par3);
-    }
-
-    public boolean doesPlayerHaveTag(String tag) {
-        return player.getEntityData().getBoolean(tag);
     }
 
     public int getPage() {

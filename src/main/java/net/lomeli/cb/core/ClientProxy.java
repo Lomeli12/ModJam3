@@ -46,8 +46,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(SoundHandler.getSoundHandler());
         MinecraftForge.EVENT_BUS.register(new IconHandler());
 
-        IconHandler.setFluidIcons();
-
         Minecraft mc = Minecraft.getMinecraft();
         smallFontRenderer = new SmallFontRenderer(mc.gameSettings, new ResourceLocation("minecraft:textures/font/ascii.png"), mc.renderEngine, false);
     }

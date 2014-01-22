@@ -3,7 +3,6 @@ package net.lomeli.cb.core.handler;
 import net.lomeli.cb.block.ModBlocks;
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.item.ModItems;
-import net.lomeli.cb.lib.PageInfo;
 import net.lomeli.cb.tile.TileCrystal;
 
 import net.minecraft.entity.item.EntityItem;
@@ -22,8 +21,6 @@ public class BlockBreakHandler {
                     if (!event.world.isRemote) {
                         EntityItem item = new EntityItem(event.world, event.x, event.y, event.z, new ItemStack(ModItems.shard, 1, event.world.rand.nextInt(4)));
                         event.world.spawnEntityInWorld(item);
-                        if (!event.getPlayer().getEntityData().getBoolean(PageInfo.crystalTag))
-                            event.getPlayer().getEntityData().setBoolean(PageInfo.crystalTag, true);
                     }
                 } else {
                     if (!event.world.isRemote) {

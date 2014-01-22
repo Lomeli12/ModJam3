@@ -24,7 +24,7 @@ public class BlockShardBlock extends Block {
 
     public BlockShardBlock(int par1) {
         super(par1, Material.iron);
-        this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":shardBlock");
+        this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":shard");
         this.setCreativeTab(CrystalBearers.modTab);
         this.setHardness(2.0F);
         this.setResistance(10.0F);
@@ -82,7 +82,7 @@ public class BlockShardBlock extends Block {
         @Override
         public String getItemDisplayName(ItemStack stack) {
             String unlocalizedName = stack.getUnlocalizedName();
-            return StatCollector.translateToLocal(unlocalizedName.substring(0, unlocalizedName.length() - 5) + "." + stack.getItemDamage());
+            return StatCollector.translateToLocal(unlocalizedName + "." + stack.getItemDamage());
         }
     }
 }

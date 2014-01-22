@@ -29,8 +29,10 @@ public class PageItemDescription extends PageBase {
     @Override
     public void draw() {
         super.draw();
+        bindTexture(prop);
+        gui.drawTexturedModalRect(x - 2, y - 2, 35, 236, 20, 20);
         itemRenderer.renderItemAndEffectIntoGUI(largeFontRenderer, mc.renderEngine, stack, x, y);
-        largeFontRenderer.drawStringWithShadow(stack.getDisplayName(), x + 20, y + 2, Color.YELLOW.getRGB());
+        smallFontRenderer.drawStringWithShadow(stack.getDisplayName(), x + 20, y + 2, Color.YELLOW.getRGB());
         int textHeight = y + 20;
 
         for (int i = 0; i < pageText.length; i++) {

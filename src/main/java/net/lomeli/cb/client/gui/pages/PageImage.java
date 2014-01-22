@@ -3,26 +3,31 @@ package net.lomeli.cb.client.gui.pages;
 import java.awt.Color;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 public class PageImage extends PageBase {
-    private Icon image;
+    private ResourceLocation image;
     private String[] pageText;
+    private int imaageWidth, imageHeight, imageX, imageY;
 
-    public PageImage(GuiScreen gui, Icon image, String... imageDescription) {
+    public PageImage(GuiScreen gui, ResourceLocation image, int imageX, int imageY, int imageWidth, int imageHeight, String... imageDescription) {
         super(gui);
         this.image = image;
         pageText = imageDescription;
+        this.imageHeight = imageHeight;
+        this.imaageWidth = imageWidth;
+        this.imageX = imageX;
+        this.imageY = imageY;
     }
 
     @Override
     public void draw() {
         super.draw();
         if (image != null) {
-            gui.drawTexturedModelRectFromIcon(x, y, image, image.getIconWidth() + 1, image.getIconHeight() + 1);
-
-            int textHeight = y + image.getIconHeight() + 10;
+            bindTexture(image);
+            gui.drawTexturedModalRect(x, y, imageX, imageY, imaageWidth, imageHeight);
+            int textHeight = y + imageHeight;
             if (pageText != null) {
                 for (int i = 0; i < pageText.length; i++) {
                     smallFontRenderer.drawSplitString(StatCollector.translateToLocal(pageText[i]), x, textHeight, width, Color.BLACK.getRGB());

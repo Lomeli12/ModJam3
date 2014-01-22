@@ -2,6 +2,7 @@ package net.lomeli.cb.element;
 
 import java.util.HashMap;
 
+import net.lomeli.cb.core.handler.IconHandler;
 import net.lomeli.cb.item.IShard;
 import net.lomeli.cb.item.ModItems;
 import net.lomeli.cb.lib.Strings;
@@ -20,12 +21,14 @@ public class FluidElements {
         fluidElementList = new HashMap<Fluid, IElement>();
         shardList = new HashMap<ItemStack, Fluid>();
 
-        fireFluid = new Fluid("liquidFireCrystal").setUnlocalizedName(Strings.FIRE_FLUID);
-        waterFluid = new Fluid("liquidWaterCrystal").setUnlocalizedName(Strings.WATER_FLUID);
-        earthFluid = new Fluid("liquidEarthCrystal").setUnlocalizedName(Strings.EARTH_FLUID);
-        airFluid = new Fluid("liquidAirCrystal").setUnlocalizedName(Strings.AIR_FLUID);
-        darkFluid = new Fluid("liquidDarkCrystal").setUnlocalizedName(Strings.DARK_FLUID);
-
+        fireFluid = new Fluid("liquidFireCrystal").setUnlocalizedName(Strings.FIRE_FLUID).setIcons(IconHandler.fluidIcons[0]);
+        waterFluid = new Fluid("liquidWaterCrystal").setUnlocalizedName(Strings.WATER_FLUID).setIcons(IconHandler.fluidIcons[1]);
+        earthFluid = new Fluid("liquidEarthCrystal").setUnlocalizedName(Strings.EARTH_FLUID).setIcons(IconHandler.fluidIcons[2]);
+        airFluid = new Fluid("liquidAirCrystal").setUnlocalizedName(Strings.AIR_FLUID).setIcons(IconHandler.fluidIcons[3]);
+        darkFluid = new Fluid("liquidDarkCrystal").setUnlocalizedName(Strings.DARK_FLUID).setIcons(IconHandler.fluidIcons[4]);
+    }
+    
+    public static void registerFluids() {
         FluidRegistry.registerFluid(fireFluid);
         FluidRegistry.registerFluid(waterFluid);
         FluidRegistry.registerFluid(earthFluid);

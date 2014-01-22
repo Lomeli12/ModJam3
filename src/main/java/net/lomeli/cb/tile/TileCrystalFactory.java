@@ -471,7 +471,7 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
 
     @Override
     public boolean isInvNameLocalized() {
-        return true;
+        return false;
     }
 
     @Override

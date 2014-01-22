@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -17,12 +18,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class PageBase {
-    public int width = 110, height = 180, x = 0, y = 0;
+    public int width = 106, height = 180, x = 0, y = 0;
     public GuiScreen gui;
     protected static RenderItem itemRenderer = new RenderItem();
     protected Minecraft mc;
     private String tag;
     private boolean requiresTag;
+    protected ResourceLocation prop = new ResourceLocation(Strings.MOD_ID.toLowerCase(), "textures/images/imageSheet1.png");
     public static final FontRenderer largeFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
     public static final SmallFontRenderer smallFontRenderer = ClientProxy.smallFontRenderer;
 
@@ -56,10 +58,14 @@ public class PageBase {
     }
 
     public String getTag() {
-        return Strings.MOD_ID.toLowerCase() + ":" + tag;
+        return tag;
     }
 
     public boolean needsTag() {
         return requiresTag;
+    }
+    
+    public void bindTexture(ResourceLocation texture) {
+        mc.renderEngine.bindTexture(texture);
     }
 }

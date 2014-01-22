@@ -6,9 +6,12 @@ import java.io.DataOutputStream;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 
+import net.lomeli.cb.lib.PageInfo;
 import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.TileCrystalFactory;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
@@ -16,9 +19,11 @@ import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class PacketHandler implements IPacketHandler {
-    private static final byte tileCrystalPacket = 12;
+    private static final byte tileCrystalPacket = 12, playerDiscoveryPacket = 13;
 
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -28,6 +33,9 @@ public class PacketHandler implements IPacketHandler {
         switch (dataId) {
         case tileCrystalPacket:
             recieveTileCrystalFactoryPacket(data);
+            break;
+        case playerDiscoveryPacket:
+            recievePlayerDiscoveryPacket(data, player);
             break;
         }
     }
@@ -68,6 +76,47 @@ public class PacketHandler implements IPacketHandler {
             PacketDispatcher.sendPacketToServer(packet);
         } catch (Exception e) {
         }
+    }
+
+    public void recievePlayerDiscoveryPacket(ByteArrayDataInput data, Player player) {
+        short keySize = data.readShort();
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < keySize; i++) {
+            sBuilder.append(data.readChar());
+        }
+        String key = sBuilder.toString();
+        if (key != null && key.length() > 0) {
+            if (key.startsWith(PageInfo.baseTag)) {
+                System.out.println("ValidKey");
+                if (player instanceof EntityPlayer) {
+                    ((EntityPlayer) player).getEntityData().setBoolean(key, true);
+                }
+            }
+        }
+    }
+
+    public static void sendPlayerDiscoveryPacket(String key, EntityPlayerMP player) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            DataOutputStream dos = new DataOutputStream(baos);
+            Packet250CustomPayload packet = new Packet250CustomPayload();
+            dos.write(playerDiscoveryPacket);
+            dos.writeShort(key.length());
+            dos.writeChars(key);
+            dos.writeInt(player.entityId);
+            dos.close();
+            packet.channel = Strings.PACKETS;
+            packet.data = baos.toByteArray();
+            packet.length = baos.size();
+            packet.isChunkDataPacket = false;
+            PacketDispatcher.sendPacketToServer(packet);
+        } catch (Exception e) {
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static boolean doesPlayerHaveTag(EntityPlayer player, String tag) {
+        return MinecraftServer.getServer().getEntityWorld().getPlayerEntityByName(player.username).getEntityData().getBoolean(tag);
     }
 
     private static void writeCoord(DataOutputStream stream, int x, int y, int z) {
