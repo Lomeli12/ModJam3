@@ -32,7 +32,7 @@ public class PageInfo {
     public static final String baseTag = Strings.MOD_ID.toLowerCase() + ":";
     public static final String book = baseTag + "book";
     public static final String crystalTag = baseTag + "crystal";
-    //public static final String advCrystalTag = baseTag + "advCrystal";
+    public static final String advCrystalTag = baseTag + "advCrystal";
     public static final String batteryTag = baseTag + "battery";
     public static final String powerTag = baseTag + "power";
 }

@@ -61,17 +61,13 @@ public class EntityLivingHandler {
         if (event.item != null && event.item.getEntityItem() != null && event.entityPlayer != null) {
             EntityPlayer player = event.entityPlayer;
             ItemStack item = event.item.getEntityItem();
-            /*if (item.getUnlocalizedName().equals(ModItems.crystalItem.getUnlocalizedName())) {
-                if (!player.getEntityData().getBoolean(PageInfo.advCrystalTag) && player.getEntityData().getBoolean(PageInfo.crystalTag)) {
-                    player.getEntityData().setBoolean(PageInfo.advCrystalTag, true);
-                }
-            } else */if (item.getItem() instanceof IShard) {
-                if (!player.getEntityData().getBoolean(PageInfo.crystalTag)) {
-                    System.out.println("TAG!");
-                    PacketHandler.sendPlayerDiscoveryPacket(PageInfo.crystalTag, (EntityPlayerMP)player);
-                }
+            if (item.getUnlocalizedName().equals(ModItems.crystalItem.getUnlocalizedName())) {
+                if (!player.getEntityData().getBoolean(PageInfo.advCrystalTag) && player.getEntityData().getBoolean(PageInfo.crystalTag))
+                    PacketHandler.sendPlayerDiscoveryPacket(PageInfo.advCrystalTag, (EntityPlayerMP) player);
+            } else if (item.getItem() instanceof IShard) {
+                if (!player.getEntityData().getBoolean(PageInfo.crystalTag))
+                    PacketHandler.sendPlayerDiscoveryPacket(PageInfo.crystalTag, (EntityPlayerMP) player);
             }
-            System.out.println(item.getDisplayName());
         }
     }
 

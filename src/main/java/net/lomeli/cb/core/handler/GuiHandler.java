@@ -42,7 +42,7 @@ public class GuiHandler implements IGuiHandler {
                     if (stack.getItemDamage() == 0) {
 
                     } else if (stack.getItemDamage() == 1) {
-                        return new GuiDatabase(stack, player);
+                        return new GuiDatabase(player);
                     }
                 }
             }

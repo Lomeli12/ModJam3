@@ -16,25 +16,21 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiDatabase extends GuiScreen {
     public static List<PageBase> pagesLeft = new ArrayList<PageBase>();
     public static List<PageBase> pagesRight = new ArrayList<PageBase>();
-    private ItemStack book;
     private EntityPlayer player;
 
     private int bookImageWidth = 256, bookImageHeight = 207, guiLeft, guiTop, currentPage, maxPages;
     public int pageLeftX, pageRightX, pageY;
     private GuiButtonNextPage buttonNextPage, buttonPreviousPage;
 
-    public GuiDatabase(ItemStack book, EntityPlayer player) {
+    public GuiDatabase(EntityPlayer player) {
         BookPages.setPages(this);
-        this.book = book;
         this.player = player;
-        currentPage = getPage();
+        this.currentPage = 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -67,7 +63,6 @@ public class GuiDatabase extends GuiScreen {
                 if (currentPage > 0)
                     currentPage--;
             }
-            book.stackTagCompound.setInteger("currentPage", currentPage);
         }
     }
 
@@ -107,13 +102,5 @@ public class GuiDatabase extends GuiScreen {
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         super.drawScreen(par1, par2, par3);
-    }
-
-    public int getPage() {
-        if (book.stackTagCompound == null) {
-            book.stackTagCompound = new NBTTagCompound();
-            return 0;
-        }
-        return book.getTagCompound().getInteger("currentPage");
     }
 }

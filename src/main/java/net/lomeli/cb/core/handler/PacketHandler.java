@@ -87,9 +87,9 @@ public class PacketHandler implements IPacketHandler {
         String key = sBuilder.toString();
         if (key != null && key.length() > 0) {
             if (key.startsWith(PageInfo.baseTag)) {
-                System.out.println("ValidKey");
                 if (player instanceof EntityPlayer) {
-                    ((EntityPlayer) player).getEntityData().setBoolean(key, true);
+                    if (((EntityPlayer) player).entityId == data.readInt())
+                        ((EntityPlayer) player).getEntityData().setBoolean(key, true);
                 }
             }
         }
