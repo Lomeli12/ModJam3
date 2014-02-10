@@ -3,15 +3,13 @@ package net.lomeli.cb.block;
 import net.lomeli.cb.block.BlockChargeBlock.ItemChargeBlock;
 import net.lomeli.cb.block.BlockOreShard.ItemOreBlock;
 import net.lomeli.cb.block.BlockShardBlock.ItemShardBlock;
-import net.lomeli.cb.lib.BlockIds;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
     public static Block darkStone, darkCobble, crystal, smeltry, crystalizer, shardBlock, oreShard, chargeBox, solarPanel, crystalFactory, modularCrystal;
@@ -22,17 +20,17 @@ public class ModBlocks {
         shardBlocks = new ItemStack[5];
         oreShards = new ItemStack[5];
 
-        darkStone = new BlockDarkStone(BlockIds.darkStoneID, "stone").setUnlocalizedName("stone");
-        darkCobble = new BlockDarkStone(BlockIds.darkCobbleID, "cobble").setUnlocalizedName("cobble");
-        crystal = new BlockCrystal(BlockIds.crystalID).setUnlocalizedName("crystal");
+        darkStone = new BlockDarkStone("stone").setBlockName("stone");
+        darkCobble = new BlockDarkStone("cobble").setBlockName("cobble");
+        crystal = new BlockCrystal().setBlockName("crystal");
 
-        smeltry = new BlockSmelter(BlockIds.smelteryID);
-        crystalizer = new BlockCrystalizer(BlockIds.crystalizerID);
-        shardBlock = new BlockShardBlock(BlockIds.shardBlockID);
-        oreShard = new BlockOreShard(BlockIds.oreShardID);
-        chargeBox = new BlockChargeBlock(BlockIds.chargeBoxID);
-        solarPanel = new BlockSolarPanel(BlockIds.solarPanelID);
-        crystalFactory = new BlockCrystalFactory(BlockIds.crystalFactoryID);
+        smeltry = new BlockSmelter();
+        crystalizer = new BlockCrystalizer();
+        shardBlock = new BlockShardBlock();
+        oreShard = new BlockOreShard();
+        chargeBox = new BlockChargeBlock();
+        solarPanel = new BlockSolarPanel();
+        crystalFactory = new BlockCrystalFactory();
 
         registerBlock();
     }
@@ -55,7 +53,7 @@ public class ModBlocks {
             oreShards[i] = new ItemStack(oreShard, 1, i);
         }
 
-        MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
+        //MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
 
         OreDictionary.registerOre("oreFireShard", oreShards[0]);
         OreDictionary.registerOre("oreWaterShard", oreShards[1]);

@@ -3,7 +3,10 @@ package net.lomeli.cb.block;
 import java.util.LinkedList;
 import java.util.Random;
 
+import net.lomeli.cb.core.ModUtil;
+
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -13,9 +16,10 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGen implements IWorldGenerator {
 
     public class OreData {
-        public int maxHeight, minHeight, maxCluster, minCluster, clusterPerChunk, oreType, meta;
+        public int maxHeight, minHeight, maxCluster, minCluster, clusterPerChunk, meta;
+        public Block oreType;
 
-        public OreData(int maxHeight, int minHeight, int maxCluster, int minCluster, int clusterPerChunk, int oreType, int meta) {
+        public OreData(int maxHeight, int minHeight, int maxCluster, int minCluster, int clusterPerChunk, Block oreType, int meta) {
             this.maxHeight = maxHeight;
             this.minHeight = minHeight;
             this.maxCluster = maxCluster;
@@ -25,7 +29,7 @@ public class WorldGen implements IWorldGenerator {
             this.meta = meta;
         }
 
-        public OreData(int maxHeight, int minHeight, int maxCluster, int minCluster, int clusterPerChunk, int oreType) {
+        public OreData(int maxHeight, int minHeight, int maxCluster, int minCluster, int clusterPerChunk, Block oreType) {
             this.maxHeight = maxHeight;
             this.minHeight = minHeight;
             this.maxCluster = maxCluster;
@@ -42,21 +46,20 @@ public class WorldGen implements IWorldGenerator {
         oreList = new LinkedList<OreData>();
         OreData data;
 
-        data = new OreData(255, 1, 1, 1, 2, ModBlocks.crystal.blockID);
+        data = new OreData(255, 1, 1, 1, 2, ModBlocks.crystal);
         oreList.add(data);
-        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard.blockID, 0);
+        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard, 0);
         oreList.add(data);
-        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard.blockID, 1);
+        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard, 1);
         oreList.add(data);
-        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard.blockID, 2);
+        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard, 2);
         oreList.add(data);
-        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard.blockID, 3);
+        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard, 3);
         oreList.add(data);
-        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard.blockID, 4);
+        data = new OreData(255, 1, 1, 1, 5, ModBlocks.oreShard, 4);
         oreList.add(data);
     }
 
-    @SuppressWarnings("unused")
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int x, y, z;
@@ -86,19 +89,18 @@ public class WorldGen implements IWorldGenerator {
         }
     }
 
-    private void generateOre(World world, Random rand, int x, int y, int z, int blockID, int meta, int ntg) {
+    private void generateOre(World world, Random rand, int x, int y, int z, Block blockID, int meta, int ntg) {
         int lx, ly, lz;
         lx = x;
         ly = y;
         lz = z;
-        int id;
-        id = world.getBlockId(lx, ly, lz);
-        if (id != Block.stone.blockID && id != Block.dirt.blockID)
+        Block id = world.getBlock(lx, ly, lz);
+        if (!ModUtil.areBlocksTheSame(id, Blocks.stone) && !ModUtil.areBlocksTheSame(id, Blocks.dirt))
             return;
 
         for (int i = 0; i < ntg; i++) {
 
-            id = world.getBlockId(lx, ly, lz);
+            id = world.getBlock(lx, ly, lz);
 
             world.setBlock(lx, ly, lz, blockID, meta, 2);
             switch (rand.nextInt(3)) {

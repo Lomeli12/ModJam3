@@ -1,11 +1,12 @@
 package net.lomeli.cb.core;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class DirectionUtil {
+public class ModUtil {
     public static ForgeDirection getDirectionFromTile(TileEntity baseTile, TileEntity targetTile) {
         int x = (targetTile.xCoord - baseTile.xCoord), z = (targetTile.zCoord - baseTile.zCoord);
         if (x != 0) {
@@ -24,10 +25,14 @@ public class DirectionUtil {
 
     public static TileEntity[] getSurroundingTiles(World world, int x, int y, int z) {
         TileEntity[] tiles = new TileEntity[4];
-        tiles[0] = world.getBlockTileEntity(x + 1, y, z);
-        tiles[1] = world.getBlockTileEntity(x - 1, y, z);
-        tiles[2] = world.getBlockTileEntity(x, y, z + 1);
-        tiles[3] = world.getBlockTileEntity(x, y, z - 1);
+        tiles[0] = world.getTileEntity(x + 1, y, z);
+        tiles[1] = world.getTileEntity(x - 1, y, z);
+        tiles[2] = world.getTileEntity(x, y, z + 1);
+        tiles[3] = world.getTileEntity(x, y, z - 1);
         return tiles;
+    }
+    
+    public static boolean areBlocksTheSame(Block baseBlock, Block targetBlock) {
+        return baseBlock.getUnlocalizedName().equals(targetBlock.getUnlocalizedName());
     }
 }

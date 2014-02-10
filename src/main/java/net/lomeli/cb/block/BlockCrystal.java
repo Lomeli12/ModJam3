@@ -6,6 +6,7 @@ import net.lomeli.cb.tile.TileCrystal;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -14,14 +15,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCrystal extends BlockCB implements ITileEntityProvider {
 
-    public BlockCrystal(int par1) {
-        super(par1, Material.glass, "blank");
+    public BlockCrystal() {
+        super(Material.glass, "blank");
         this.setHardness(7.0F);
         this.setResistance(50.0F);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileCrystal();
     }
 
@@ -47,14 +48,14 @@ public class BlockCrystal extends BlockCB implements ITileEntityProvider {
     }
 
     @Override
-    public int idDropped(int par1, Random par2Random, int par3) {
-        return 0;
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+        return null;
     }
 
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int par5, float par6, float par7, float par8, int par9) {
         Random rand = new Random();
-        TileCrystal tile = (TileCrystal) world.getBlockTileEntity(x, y, z);
+        TileCrystal tile = (TileCrystal) world.getTileEntity(x, y, z);
         if (tile != null) {
             if (tile.red == 0)
                 tile.red = rand.nextFloat();

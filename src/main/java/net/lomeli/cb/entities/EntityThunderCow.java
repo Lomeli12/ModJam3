@@ -1,5 +1,6 @@
 package net.lomeli.cb.entities;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -39,10 +40,10 @@ public class EntityThunderCow extends EntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(6.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
     }
 
     @Override
@@ -56,16 +57,16 @@ public class EntityThunderCow extends EntityMob {
     }
 
     @Override
+    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
+        playSound("mob.cow.step", 0.15F, 1.0F);
+    }
+
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.getDataWatcher().addObject(12, Byte.valueOf((byte) 0));
         this.getDataWatcher().addObject(13, Byte.valueOf((byte) 0));
         this.getDataWatcher().addObject(14, Byte.valueOf((byte) 0));
-    }
-
-    @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
-        this.playSound("mob.cow.step", 0.15F, 1.0F);
     }
 
     @Override
@@ -116,16 +117,16 @@ public class EntityThunderCow extends EntityMob {
 
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if (!super.attackEntityFrom(par1DamageSource, par2))
+        if(!super.attackEntityFrom(par1DamageSource, par2))
             return false;
         else {
             EntityLivingBase entitylivingbase = this.getAttackTarget();
 
-            if (entitylivingbase == null && this.getEntityToAttack() instanceof EntityLivingBase) {
+            if(entitylivingbase == null && this.getEntityToAttack() instanceof EntityLivingBase) {
                 entitylivingbase = (EntityLivingBase) this.getEntityToAttack();
             }
 
-            if (entitylivingbase == null && par1DamageSource.getEntity() instanceof EntityLivingBase) {
+            if(entitylivingbase == null && par1DamageSource.getEntity() instanceof EntityLivingBase) {
                 entitylivingbase = (EntityLivingBase) par1DamageSource.getEntity();
             }
             return true;

@@ -5,10 +5,11 @@ import java.util.List;
 import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.lib.Strings;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
 import net.minecraftforge.fluids.Fluid;
@@ -19,10 +20,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemShard extends ItemCB implements IShard {
 
     @SideOnly(Side.CLIENT)
-    private Icon[] iconArray;
+    private IIcon[] iconArray;
 
-    public ItemShard(int par1) {
-        super(par1, "shard_");
+    public ItemShard() {
+        super("shard_");
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
         this.setUnlocalizedName(Strings.MOD_ID.toLowerCase() + ":shard");
@@ -30,8 +31,8 @@ public class ItemShard extends ItemCB implements IShard {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
-        iconArray = new Icon[5];
+    public void registerIcons(IIconRegister par1IconRegister) {
+        iconArray = new IIcon[5];
         for (int i = 0; i < iconArray.length; i++) {
             iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.itemTexture + i);
         }
@@ -39,7 +40,7 @@ public class ItemShard extends ItemCB implements IShard {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public Icon getIconFromDamage(int meta) {
+    public IIcon getIconFromDamage(int meta) {
         return meta < iconArray.length ? iconArray[meta] : iconArray[0];
     }
 
@@ -50,16 +51,15 @@ public class ItemShard extends ItemCB implements IShard {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
         for (int i = 0; i < 5; i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
     }
 
     @Override
-    public String getItemDisplayName(ItemStack stack) {
-        String unlocalizedName = stack.getUnlocalizedName();
-        return StatCollector.translateToLocal(unlocalizedName + "." + stack.getItemDamage());
+    public String getUnlocalizedName(ItemStack stack) {
+        return this.getUnlocalizedName() + "." + stack.getItemDamage();
     }
 
     @Override

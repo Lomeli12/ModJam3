@@ -1,9 +1,9 @@
 package net.lomeli.cb.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileSolarPanel extends TileEntity implements IEnergy {
@@ -24,7 +24,7 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
             for (int x = xCoord - 1; x < xCoord + 2; x++)
                 for (int z = zCoord - 1; z < zCoord + 2; z++) {
                     if (x != xCoord || z != zCoord) {
-                        TileEntity tile = worldObj.getBlockTileEntity(x, yCoord, z);
+                        TileEntity tile = worldObj.getTileEntity(x, yCoord, z);
                         if (tile != null && tile instanceof IEnergy) {
                             if (!((IEnergy) tile).isGenerator() && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity()) && canCompleteTask(1)) {
                                 ((IEnergy) tile).addCharge(useCharge(1));
@@ -101,16 +101,16 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
 
     @Override
     public Packet getDescriptionPacket() {
-        Packet132TileEntityData packet = (Packet132TileEntityData) super.getDescriptionPacket();
-        NBTTagCompound dataTag = packet != null ? packet.data : new NBTTagCompound();
+        S35PacketUpdateTileEntity packet = (S35PacketUpdateTileEntity) super.getDescriptionPacket();
+        NBTTagCompound dataTag = packet != null ? packet.func_148857_g() : new NBTTagCompound();
         writeTag(dataTag);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, dataTag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, dataTag);
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
-        NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
+        NBTTagCompound tag = pkt != null ? pkt.func_148857_g() : new NBTTagCompound();
         readNBT(tag);
     }
 

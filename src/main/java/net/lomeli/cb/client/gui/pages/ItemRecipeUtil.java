@@ -16,8 +16,8 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ItemRecipeUtil {
 
-    public static ItemStack[] getItemShapedRecipe(ItemStack stack) {
-        ItemStack[] finalRecipe = new ItemStack[9];
+    public static Object[] getItemShapedRecipe(ItemStack stack) {
+        Object[] finalRecipe = new Object[9];
         if (stack != null) {
             List<IRecipe> possibleRecipe = new ArrayList<IRecipe>();
 
@@ -39,7 +39,7 @@ public class ItemRecipeUtil {
                         if (inputs.getType().isArray()) {
                             for (int i = 0; i < Array.getLength(inputs.get(main)); i++) {
                                 if ((Array.get(inputs.get(main), i) instanceof ItemStack) && i < finalRecipe.length)
-                                    finalRecipe[i] = (ItemStack) Array.get(inputs.get(main), i);
+                                    finalRecipe[i] = Array.get(inputs.get(main), i);
                             }
                         }
                     } else if (main instanceof ShapelessRecipes) {
@@ -64,21 +64,18 @@ public class ItemRecipeUtil {
 
                         for (int i = 0; i < inputs.length; i++) {
                             Object obj = inputs[i];
-                            if (obj instanceof ItemStack)
-                                finalRecipe[i] = (ItemStack) obj;
-                            else if (obj instanceof ArrayList<?>) {
-                                Object firstInIndex = ((ArrayList<?>) obj).get(0);
-                                if (firstInIndex instanceof ItemStack)
-                                    finalRecipe[i] = (ItemStack) firstInIndex;
-                            }
+                            if (obj instanceof ArrayList<?>)
+                                finalRecipe[i] = ((ArrayList<?>) obj).get(0);
+                            else
+                                finalRecipe[i] = obj;
                         }
                     } else if (Class.forName("ic2.core.AdvRecipe").isAssignableFrom(main.getClass())
                             || Class.forName("ic2.core.AdvShapelessRecipe").isAssignableFrom(main.getClass())) {
                         Field inputs = fields[2];
                         if (inputs.getType().isArray()) {
                             for (int i = 0; i < Array.getLength(inputs.get(main)); i++) {
-                                if ((Array.get(inputs.get(main), i) instanceof ItemStack) && i < finalRecipe.length)
-                                    finalRecipe[i] = (ItemStack) Array.get(inputs.get(main), i);
+                                if (i < finalRecipe.length)
+                                    finalRecipe[i] = Array.get(inputs.get(main), i);
                             }
                         }
                     }

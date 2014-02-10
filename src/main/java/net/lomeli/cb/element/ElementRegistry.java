@@ -104,7 +104,7 @@ public class ElementRegistry {
     }
 
     public static void setCrystalAbilities(ItemStack stack, World world, int x, int y, int z) {
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        TileEntity tile = world.getTileEntity(x, y, z);
         if (tile != null) {
             if (tile instanceof TileCrystal) {
                 ((TileCrystal) tile).setAbilityOne(getAbilityOne(stack));

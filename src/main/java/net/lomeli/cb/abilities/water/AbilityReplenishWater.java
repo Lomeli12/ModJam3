@@ -26,7 +26,7 @@ public class AbilityReplenishWater extends CrystalAbility {
         for (int x1 = x - radius; x1 <= x + 5; x1++)
             for (int y1 = y - radius; y1 <= y + 5; y1++)
                 for (int z1 = z - radius; z1 <= z + 5; z1++) {
-                    TileEntity tile = worldObj.getBlockTileEntity(x1, y1, z1);
+                    TileEntity tile = worldObj.getTileEntity(x1, y1, z1);
                     if (tile instanceof IFluidHandler) {
                         if (((IFluidHandler) tile).canFill(null, FluidRegistry.WATER))
                             ((IFluidHandler) tile).fill(null, new FluidStack(FluidRegistry.WATER, 500), true);

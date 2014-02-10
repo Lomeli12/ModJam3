@@ -8,9 +8,9 @@ import net.lomeli.cb.core.Config;
 import net.lomeli.cb.element.ElementRegistry;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileCrystal extends TileEntity implements ICrystal {
@@ -184,16 +184,16 @@ public class TileCrystal extends TileEntity implements ICrystal {
 
     @Override
     public Packet getDescriptionPacket() {
-        Packet132TileEntityData packet = (Packet132TileEntityData) super.getDescriptionPacket();
-        NBTTagCompound dataTag = packet != null ? packet.data : new NBTTagCompound();
+        S35PacketUpdateTileEntity packet = (S35PacketUpdateTileEntity) super.getDescriptionPacket();
+        NBTTagCompound dataTag = packet != null ? packet.func_148857_g() : new NBTTagCompound();
         writeTag(dataTag);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, dataTag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, dataTag);
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
-        NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
+        NBTTagCompound tag = pkt != null ? pkt.func_148857_g() : new NBTTagCompound();
         readNBT(tag);
     }
 

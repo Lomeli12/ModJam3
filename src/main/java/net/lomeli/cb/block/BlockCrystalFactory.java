@@ -6,16 +6,17 @@ import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 import net.lomeli.cb.tile.TileCrystalFactory;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -23,25 +24,25 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
-    private Icon[] iconArray;
+    private IIcon[] iconArray;
 
-    public BlockCrystalFactory(int par1) {
-        super(par1, Material.rock, "crystalFactory_");
-        setUnlocalizedName("factory");
+    public BlockCrystalFactory() {
+        super(Material.rock, "crystalFactory_");
+        setBlockName("factory");
         setHardness(2.0F);
         setResistance(10.0F);
     }
 
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
-        iconArray = new Icon[6];
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        iconArray = new IIcon[6];
         for (int i = 0; i < iconArray.length; i++) {
             iconArray[i] = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":" + this.blockTexture + i);
         }
     }
 
     @Override
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         if (par2 == 6) {
             if (par1 < 2)
                 return this.iconArray[3];
@@ -58,7 +59,7 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float g, float t) {
         if (!world.isRemote) {
             if (!player.isSneaking()) {
-                TileCrystalFactory tile = (TileCrystalFactory) world.getBlockTileEntity(x, y, z);
+                TileCrystalFactory tile = (TileCrystalFactory) world.getTileEntity(x, y, z);
                 if (tile != null) {
                     if (tile.hasMaster()) {
                         if (tile.isMaster())
@@ -74,13 +75,13 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileCrystalFactory();
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, int id, int meta) {
-        TileCrystalFactory tile = (TileCrystalFactory) world.getBlockTileEntity(x, y, z);
+    public void breakBlock(World world, int x, int y, int z, Block id, int meta) {
+        TileCrystalFactory tile = (TileCrystalFactory) world.getTileEntity(x, y, z);
         if (tile != null && tile.isMaster())
             dropInventory(world, x, y, z);
         super.breakBlock(world, x, y, z, id, meta);
@@ -90,7 +91,7 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
 
     private void dropInventory(World world, int x, int y, int z) {
 
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (!(tileEntity instanceof IInventory))
             return;
@@ -106,7 +107,7 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
                 float dY = rand.nextFloat() * 0.8F + 0.1F;
                 float dZ = rand.nextFloat() * 0.8F + 0.1F;
 
-                EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.itemID, itemStack.stackSize, itemStack.getItemDamage()));
+                EntityItem entityItem = new EntityItem(world, x + dX, y + dY, z + dZ, new ItemStack(itemStack.getItem(), itemStack.stackSize, itemStack.getItemDamage()));
 
                 if (itemStack.hasTagCompound()) {
                     entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());

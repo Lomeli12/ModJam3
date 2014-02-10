@@ -4,7 +4,7 @@ import net.lomeli.cb.item.ModItems;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 
 public class CreativeTabCrystals extends CreativeTabs {
 
@@ -13,8 +13,8 @@ public class CreativeTabCrystals extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getIconItemStack() {
-        return new ItemStack(ModItems.shard);
+    public Item getTabIconItem() {
+        return ModItems.shard;
     }
 
 }

@@ -14,10 +14,10 @@ public class AbilityShardPowerDark extends CrystalAbility {
 
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
-        TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
+        TileEntity tile = worldObj.getTileEntity(x, y, z);
         if (tile != null) {
             if (tile instanceof TileCrystal) {
-                if (worldObj.getBlockId(x, y - 1, z) == ModBlocks.shardBlock.blockID && worldObj.getBlockMetadata(x, y, z) == 4) {
+                if (worldObj.getBlock(x, y - 1, z).getUnlocalizedName().equals(ModBlocks.shardBlock.getUnlocalizedName()) && worldObj.getBlockMetadata(x, y, z) == 4) {
                     ((TileCrystal) tile).addPower(20);
                     if (rand.nextInt(1000) < 15)
                         worldObj.setBlockToAir(x, y - 1, z);

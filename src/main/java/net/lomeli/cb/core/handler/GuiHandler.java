@@ -18,7 +18,7 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == 99) {
-            TileEntity tile = world.getBlockTileEntity(x, y, z);
+            TileEntity tile = world.getTileEntity(x, y, z);
             if (tile != null) {
                 if (tile instanceof TileCrystalFactory)
                     return new ContainerCrystalFactory(player.inventory, (TileCrystalFactory) tile);
@@ -30,17 +30,16 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == 99) {
-            TileEntity tile = world.getBlockTileEntity(x, y, z);
+            TileEntity tile = world.getTileEntity(x, y, z);
             if (tile != null) {
                 if (tile instanceof TileCrystalFactory)
-                    return new GuiCrystalFactory(player.inventory, (TileCrystalFactory) tile);
+                    return new GuiCrystalFactory(player, (TileCrystalFactory) tile);
             }
         } else if (ID == 0) {
             if (player.getCurrentEquippedItem() != null) {
                 ItemStack stack = player.getCurrentEquippedItem();
-                if (stack.getUnlocalizedName().equals(ModItems.scanner.getUnlocalizedName())) {
+                if (stack.getItem().getUnlocalizedName().equals(ModItems.scanner.getUnlocalizedName())) {
                     if (stack.getItemDamage() == 0) {
-
                     } else if (stack.getItemDamage() == 1) {
                         return new GuiDatabase(player);
                     }

@@ -1,7 +1,5 @@
 package net.lomeli.cb.item;
 
-import net.lomeli.cb.lib.ItemIds;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -15,16 +13,16 @@ public class ModItems {
 
     public static void loadItems() {
         shards = new ItemStack[5];
-        shard = new ItemShard(ItemIds.shardID);
+        shard = new ItemShard();
 
         for (int i = 0; i < shards.length; i++) {
             shards[i] = new ItemStack(shard, 1, i);
         }
 
-        crystalItem = new ItemCrystal(ItemIds.crystalItemID);
-        easterEgg = new ItemChickenRecord(ItemIds.recordID);
-        scanner = new ItemScanner(ItemIds.scannerID);
-        battery = new ItemBattery(ItemIds.crystalBatteryID);
+        crystalItem = new ItemCrystal();
+        easterEgg = new ItemChickenRecord();
+        scanner = new ItemScanner();
+        battery = new ItemBattery();
 
         GameRegistry.registerItem(shard, "crystalShard");
         GameRegistry.registerItem(crystalItem, "crystalItem");

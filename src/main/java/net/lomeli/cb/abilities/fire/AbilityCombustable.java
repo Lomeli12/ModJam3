@@ -21,8 +21,8 @@ public class AbilityCombustable extends CrystalAbility {
         for (int x1 = x - radius; x1 <= x + 5; x1++)
             for (int y1 = y - radius; y1 <= y + 5; y1++)
                 for (int z1 = z - radius; z1 <= z + 5; z1++) {
-                    int id = worldObj.getBlockId(x1, y1, z1);
-                    if (Block.lightValue[id] > 0.5F && rand.nextInt(1000) < 405)
+                    Block id = worldObj.getBlock(x1, y1, z1);
+                    if (id.getLightValue() > 0.5F && rand.nextInt(1000) < 405)
                         worldObj.createExplosion(null, x1, y1, z1, 5F, true);
                 }
     }

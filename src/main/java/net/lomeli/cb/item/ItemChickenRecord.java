@@ -8,9 +8,10 @@ import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockJukeBox;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.block.BlockJukebox;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
@@ -28,8 +29,8 @@ public class ItemChickenRecord extends ItemRecord {
     public final String recordName;
 
     @SuppressWarnings("unchecked")
-    public ItemChickenRecord(int par1) {
-        super(par1, "chickenTechno");
+    public ItemChickenRecord() {
+        super("chickenTechno");
         this.setMaxStackSize(1);
         this.setCreativeTab(CrystalBearers.modTab);
         this.setUnlocalizedName("Record");
@@ -40,9 +41,9 @@ public class ItemChickenRecord extends ItemRecord {
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            if (world.getBlockId(x, y, z) == Block.jukebox.blockID && world.getBlockMetadata(x, y, z) == 0) {
-                ((BlockJukeBox) Block.jukebox).insertRecord(world, x, y, z, itemstack);
-                world.playAuxSFXAtEntity((EntityPlayer) null, 1005, x, y, z, this.itemID);
+            if (world.getBlock(x, y, z).getUnlocalizedName().equals(Blocks.jukebox.getUnlocalizedName()) && world.getBlockMetadata(x, y, z) == 0) {
+                ((BlockJukebox) Blocks.jukebox).func_149926_b(world, x, y, z, itemstack);
+                world.playAuxSFXAtEntity((EntityPlayer) null, 1005, x, y, z, Item.getIdFromItem(this));
                 --itemstack.stackSize;
                 return true;
             }
@@ -52,13 +53,13 @@ public class ItemChickenRecord extends ItemRecord {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IIconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon(Strings.MOD_ID.toLowerCase() + ":musicDisc");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getRecordTitle() {
+    public String getRecordNameLocal() {
         return "This is not a easter egg";
     }
 
@@ -66,7 +67,7 @@ public class ItemChickenRecord extends ItemRecord {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        par3List.add(this.getRecordTitle());
+        par3List.add(this.getRecordNameLocal());
     }
 
     @Override

@@ -5,14 +5,15 @@ import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.item.ModItems;
 
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -34,7 +35,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
         super.updateEntity();
         if (!worldObj.isRemote) {
             if (heldItem == null) {
-                TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+                TileEntity tile = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
                 if (tile != null) {
                     if (tile instanceof IInventory) {
                         for (int slot = 0; slot < ((IInventory) tile).getSizeInventory(); slot++) {
@@ -159,7 +160,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
         tank2.writeToNBT(tag);
         tank3.writeToNBT(tag);
         if (heldItem != null) {
-            tag.setInteger("HeldItemID", heldItem.itemID);
+            tag.setInteger("HeldItemID", Item.getIdFromItem(heldItem.getItem()));
             tag.setInteger("HeldItemMeta", heldItem.getItemDamage());
         }
         tag.setInteger("firstEle", firstEle);
@@ -179,7 +180,7 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
         tank1.readFromNBT(tag);
         tank2.readFromNBT(tag);
         tank3.readFromNBT(tag);
-        heldItem = new ItemStack(tag.getInteger("HeldItemID"), 1, tag.getInteger("HeldItemMeta"));
+        heldItem = new ItemStack(Item.getItemById(tag.getInteger("HeldItemID")), 1, tag.getInteger("HeldItemMeta"));
 
         firstEle = tag.getInteger("firstEle");
         secondEle = tag.getInteger("secondEle");
@@ -190,24 +191,24 @@ public class TileCrystalizer extends TileEntity implements IFluidHandler {
 
     @Override
     public Packet getDescriptionPacket() {
-        Packet132TileEntityData packet = (Packet132TileEntityData) super.getDescriptionPacket();
-        NBTTagCompound dataTag = packet != null ? packet.data : new NBTTagCompound();
+        S35PacketUpdateTileEntity packet = (S35PacketUpdateTileEntity) super.getDescriptionPacket();
+        NBTTagCompound dataTag = packet != null ? packet.func_148857_g() : new NBTTagCompound();
         writeTag(dataTag);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, dataTag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, dataTag);
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
-        NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
+        NBTTagCompound tag = pkt != null ? pkt.func_148857_g() : new NBTTagCompound();
         readNBT(tag);
     }
 
     public void throwCrystalIntoChest(int i, int j, int k) {
         boolean placedItem = false;
-        ItemStack finishedCrystal = new ItemStack(ModItems.crystalItem.itemID, 1, 1);
+        ItemStack finishedCrystal = new ItemStack(ModItems.crystalItem, 1, 1);
         ElementRegistry.writeBasic(finishedCrystal, i, j, k);
-        TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+        TileEntity tile = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
         if (tile != null) {
             if (tile instanceof IInventory) {
                 for (int slot = 0; slot < ((IInventory) tile).getSizeInventory(); slot++) {

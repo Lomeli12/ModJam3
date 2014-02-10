@@ -1,22 +1,23 @@
 package net.lomeli.cb.tile;
 
-import net.lomeli.cb.core.DirectionUtil;
+import net.lomeli.cb.core.ModUtil;
 import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.item.IShard;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -37,8 +38,8 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
     public void updateEntity() {
         super.updateEntity();
         if (!worldObj.isRemote) {
-            int blockID = worldObj.getBlockId(xCoord, yCoord - 1, zCoord);
-            if (blockID == Block.lavaMoving.blockID || blockID == Block.lavaStill.blockID)
+            Block blockID = worldObj.getBlock(xCoord, yCoord - 1, zCoord);
+            if (blockID.getUnlocalizedName().equals(Blocks.lava.getUnlocalizedName()) || blockID.getUnlocalizedName().equals(Blocks.flowing_lava.getUnlocalizedName()))
                 heatUp();
             else {
                 if (heatLevel > 0)
@@ -64,13 +65,13 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
             }
 
             if (tank.getFluid() != null && tank.getFluid().getFluid() != null) {
-                for (TileEntity tile : DirectionUtil.getSurroundingTiles(worldObj, xCoord, yCoord, zCoord)) {
+                for (TileEntity tile : ModUtil.getSurroundingTiles(worldObj, xCoord, yCoord, zCoord)) {
                     if (tile != null) {
                         if (tile instanceof TileCrystalizer) {
-                            if (((TileCrystalizer) tile).canFill(DirectionUtil.getDirectionFromTile(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile), tank.getFluid()
+                            if (((TileCrystalizer) tile).canFill(ModUtil.getDirectionFromTile(worldObj.getTileEntity(xCoord, yCoord, zCoord), tile), tank.getFluid()
                                     .getFluid())) {
                                 tank.drain(
-                                        ((TileCrystalizer) tile).fill(DirectionUtil.getDirectionFromTile(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord), tile),
+                                        ((TileCrystalizer) tile).fill(ModUtil.getDirectionFromTile(worldObj.getTileEntity(xCoord, yCoord, zCoord), tile),
                                                 tank.getFluid(), true), true);
                                 break;
                             }
@@ -171,16 +172,16 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
     @Override
     public void setInventorySlotContents(int i, ItemStack itemstack) {
         this.inventory[i] = itemstack;
-        this.onInventoryChanged();
+        this.markDirty();
     }
 
     @Override
-    public String getInvName() {
+    public String getInventoryName() {
         return "gui." + Strings.MOD_ID.toLowerCase() + ":crystalSmelter";
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -195,17 +196,17 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
     }
 
     @Override
-    public void openChest() {
+    public void openInventory() {
     }
 
     @Override
-    public void closeChest() {
+    public void closeInventory() {
     }
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         if (itemstack != null && itemstack.getItem() instanceof IShard) {
-            if (inventory[i] != null && (itemstack.itemID == inventory[i].itemID && itemstack.getItemDamage() == inventory[i].getItemDamage()))
+            if (inventory[i] != null && (itemstack.getUnlocalizedName().equals(inventory[i].getUnlocalizedName()) && itemstack.getItemDamage() == inventory[i].getItemDamage()))
                 return inventory[i].stackSize < 64;
             else
                 return true;
@@ -246,9 +247,9 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
     }
 
     public void readNBT(NBTTagCompound tag) {
-        NBTTagList nbttaglist = tag.getTagList("Items");
+        NBTTagList nbttaglist = tag.getTagList("Items", this.getSizeInventory());
         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
             int j = nbttagcompound1.getByte("Slot") & 255;
 
             if (j >= 0 && j < this.inventory.length) {
@@ -263,29 +264,29 @@ public class TileCrystalSmelter extends TileEntity implements IInventory, IFluid
 
     @Override
     public Packet getDescriptionPacket() {
-        Packet132TileEntityData packet = (Packet132TileEntityData) super.getDescriptionPacket();
-        NBTTagCompound dataTag = packet != null ? packet.data : new NBTTagCompound();
+        S35PacketUpdateTileEntity packet = (S35PacketUpdateTileEntity) super.getDescriptionPacket();
+        NBTTagCompound dataTag = packet != null ? packet.func_148857_g() : new NBTTagCompound();
         writeTag(dataTag);
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, dataTag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, dataTag);
     }
 
     @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
-        NBTTagCompound tag = pkt != null ? pkt.data : new NBTTagCompound();
+        NBTTagCompound tag = pkt != null ? pkt.func_148857_g() : new NBTTagCompound();
         readNBT(tag);
     }
 
     public void addItemToSlot(ItemStack stack) {
         if (this.isItemValidForSlot(0, stack)) {
             if (inventory[0] != null) {
-                if (stack.itemID == inventory[0].itemID && stack.getItemDamage() == inventory[0].getItemDamage() && inventory[0].stackSize < 64) {
+                if (stack.getUnlocalizedName().equals(inventory[0].getUnlocalizedName()) && stack.getItemDamage() == inventory[0].getItemDamage() && inventory[0].stackSize < 64) {
                     stack.stackSize--;
                     inventory[0].stackSize++;
                 }
             } else {
                 stack.stackSize--;
-                inventory[0] = new ItemStack(stack.itemID, 1, stack.getItemDamage());
+                inventory[0] = new ItemStack(stack.getItem(), 1, stack.getItemDamage());
             }
         }
     }

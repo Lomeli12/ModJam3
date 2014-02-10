@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.lomeli.cb.item.ModItems;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
@@ -21,6 +21,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -53,10 +54,10 @@ public class EntityFireWolf extends EntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.30000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class EntityFireWolf extends EntityMob {
     }
 
     @Override
-    protected void playStepSound(int par1, int par2, int par3, int par4) {
+    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
         this.playSound("mob.wolf.step", 0.15F, 1.0F);
     }
 
@@ -114,8 +115,8 @@ public class EntityFireWolf extends EntityMob {
     }
 
     @Override
-    protected int getDropItemId() {
-        return ModItems.shard.itemID;
+    protected Item getDropItem() {
+        return ModItems.shard;
     }
 
     @Override
@@ -202,12 +203,5 @@ public class EntityFireWolf extends EntityMob {
     @Override
     protected boolean canDespawn() {
         return true;
-    }
-
-    @Override
-    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData) {
-        if (rand.nextInt(100000) < 10) {
-        }
-        return super.onSpawnWithEgg(par1EntityLivingData);
     }
 }

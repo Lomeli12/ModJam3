@@ -16,7 +16,7 @@ public class DebugAbility extends CrystalAbility {
 
     @Override
     public void enviromentalEffect(World worldObj, int x, int y, int z, Random rand) {
-        TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
+        TileEntity tile = worldObj.getTileEntity(x, y, z);
         if (tile != null) {
             if (tile instanceof ICrystal) {
                 ((ICrystal) tile).addPower(10000);

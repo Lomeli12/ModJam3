@@ -8,33 +8,34 @@ import net.lomeli.cb.abilities.CrystalAbility;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import net.minecraftforge.oredict.OreDictionary;
 
 public class AbilityNatureDevourer extends CrystalAbility {
-    private List<Integer> blockList;
+    private List<Block> blockList;
 
     public AbilityNatureDevourer() {
-        this.blockList = new ArrayList<Integer>();
+        this.blockList = new ArrayList<Block>();
 
         for (ItemStack saplings : OreDictionary.getOres("treeSapling")) {
             if (saplings != null)
-                this.blockList.add(saplings.itemID);
+                this.blockList.add(Block.getBlockFromName(saplings.getUnlocalizedName()));
         }
         for (ItemStack log : OreDictionary.getOres("logWood")) {
             if (log != null)
-                this.blockList.add(log.itemID);
+                this.blockList.add(Block.getBlockFromName(log.getUnlocalizedName()));
         }
         for (ItemStack leaf : OreDictionary.getOres("treeLeaves")) {
             if (leaf != null)
-                this.blockList.add(leaf.itemID);
+                this.blockList.add(Block.getBlockFromName(leaf.getUnlocalizedName()));
         }
-        this.blockList.add(Block.grass.blockID);
-        this.blockList.add(Block.tallGrass.blockID);
-        this.blockList.add(Block.plantRed.blockID);
-        this.blockList.add(Block.plantYellow.blockID);
+        this.blockList.add(Blocks.grass);
+        this.blockList.add(Blocks.tallgrass);
+        this.blockList.add(Blocks.red_flower);
+        this.blockList.add(Blocks.yellow_flower);
     }
 
     @Override
@@ -49,13 +50,13 @@ public class AbilityNatureDevourer extends CrystalAbility {
         for (int x1 = x - radius; x1 <= x + 5; x1++)
             for (int y1 = y - radius; y1 <= y + 5; y1++)
                 for (int z1 = z - radius; z1 <= z + 5; z1++) {
-                    int id = worldObj.getBlockId(x1, y1, z1);
+                    Block id = worldObj.getBlock(x1, y1, z1);
                     if (this.blockList.contains(id)) {
                         if (rand.nextInt(10000) < 4500) {
-                            if (id == Block.grass.blockID)
-                                worldObj.setBlock(x1, y1, z1, Block.dirt.blockID);
+                            if (id.getUnlocalizedName().equals(Blocks.grass.getUnlocalizedName()))
+                                worldObj.setBlock(x1, y1, z1, Blocks.dirt);
                             else if (OreDictionary.getOres("logWood").contains(new ItemStack(id, 1, 0)))
-                                worldObj.setBlock(x1, y1, z1, Block.cobblestone.blockID);
+                                worldObj.setBlock(x1, y1, z1, Blocks.cobblestone);
                             else
                                 worldObj.setBlockToAir(x1, y1, z1);
                         }

@@ -7,9 +7,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.lomeli.cb.client.gui.pages.PageBase;
-import net.lomeli.cb.client.gui.pages.PageText;
-import net.lomeli.cb.core.handler.PacketHandler;
-import net.lomeli.cb.lib.PageInfo;
 import net.lomeli.cb.lib.Strings;
 
 import net.minecraft.client.gui.GuiButton;
@@ -19,17 +16,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiDatabase extends GuiScreen {
-    public static List<PageBase> pagesLeft = new ArrayList<PageBase>();
-    public static List<PageBase> pagesRight = new ArrayList<PageBase>();
-    private EntityPlayer player;
+    public List<PageBase> pagesLeft = new ArrayList<PageBase>();
+    public List<PageBase> pagesRight = new ArrayList<PageBase>();
 
     private int bookImageWidth = 256, bookImageHeight = 207, guiLeft, guiTop, currentPage, maxPages;
     public int pageLeftX, pageRightX, pageY;
     private GuiButtonNextPage buttonNextPage, buttonPreviousPage;
 
     public GuiDatabase(EntityPlayer player) {
-        BookPages.setPages(this);
-        this.player = player;
+        BookPages.setPages(this, player);
         this.currentPage = 0;
     }
 
@@ -76,28 +71,12 @@ public class GuiDatabase extends GuiScreen {
         RenderHelper.enableGUIStandardItemLighting();
 
         PageBase leftPage = pagesLeft.get(currentPage);
-        if (leftPage != null) {
-            if (!leftPage.needsTag())
-                leftPage.setPos(pageLeftX, pageY).draw();
-            else {
-                if (PacketHandler.doesPlayerHaveTag(player, leftPage.getTag()))
-                    leftPage.setPos(pageLeftX, pageY).draw();
-                else
-                    new PageText(this, PageInfo.uknown).setPos(pageLeftX, pageY).draw();
-            }
-        }
+        if (leftPage != null)
+            leftPage.setPos(pageLeftX, pageY).draw();
 
         PageBase rightPage = pagesRight.get(currentPage);
-        if (rightPage != null) {
-            if (!rightPage.needsTag())
-                rightPage.setPos(pageRightX, pageY).draw();
-            else {
-                if (PacketHandler.doesPlayerHaveTag(player, rightPage.getTag()))
-                    rightPage.setPos(pageRightX, pageY).draw();
-                else
-                    new PageText(this, PageInfo.uknown).setPos(pageRightX, pageY).draw();
-            }
-        }
+        if (rightPage != null)
+            rightPage.setPos(pageRightX, pageY).draw();
 
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);

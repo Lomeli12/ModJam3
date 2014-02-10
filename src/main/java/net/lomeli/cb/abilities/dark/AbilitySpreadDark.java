@@ -16,17 +16,17 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class AbilitySpreadDark extends CrystalAbility {
 
-    private List<Integer> blockList;
+    private List<Block> blockList;
 
     public AbilitySpreadDark() {
-        this.blockList = new ArrayList<Integer>();
+        this.blockList = new ArrayList<Block>();
         for (ItemStack cobblestone : OreDictionary.getOres("cobblestone")) {
             if (cobblestone != null)
-                this.blockList.add(cobblestone.itemID);
+                this.blockList.add(Block.getBlockFromItem(cobblestone.getItem()));
         }
         for (ItemStack stone : OreDictionary.getOres("stone")) {
             if (stone != null)
-                this.blockList.add(stone.itemID);
+                this.blockList.add(Block.getBlockFromItem(stone.getItem()));
         }
     }
 
@@ -42,13 +42,13 @@ public class AbilitySpreadDark extends CrystalAbility {
         for (int x1 = x - radius; x1 <= x + 5; x1++)
             for (int y1 = y - radius; y1 <= y + 5; y1++)
                 for (int z1 = z - radius; z1 <= z + 5; z1++) {
-                    int id = worldObj.getBlockId(x1, y1, z1);
+                    Block id = worldObj.getBlock(x1, y1, z1);
                     if (this.blockList.contains(id)) {
                         if (rand.nextInt(10000) < 4500) {
-                            if (OreDictionary.getOres("stone").contains(new ItemStack(Block.blocksList[id])))
-                                worldObj.setBlock(x1, y1, z1, ModBlocks.darkStone.blockID);
+                            if (OreDictionary.getOres("stone").contains(new ItemStack(id)))
+                                worldObj.setBlock(x1, y1, z1, ModBlocks.darkStone);
                             else
-                                worldObj.setBlock(x1, y1, z1, ModBlocks.darkCobble.blockID);
+                                worldObj.setBlock(x1, y1, z1, ModBlocks.darkCobble);
                         }
                     }
                 }

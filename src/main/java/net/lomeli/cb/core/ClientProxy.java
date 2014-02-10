@@ -17,6 +17,7 @@ import net.lomeli.cb.item.ModItems;
 import net.lomeli.cb.tile.TileCrystal;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -32,8 +33,8 @@ public class ClientProxy extends CommonProxy {
     public void registerTile() {
         super.registerTile();
         ClientRegistry.bindTileEntitySpecialRenderer(TileCrystal.class, new RenderCrystal());
-        MinecraftForgeClient.registerItemRenderer(ModBlocks.crystal.blockID, new RenderCrystal());
-        MinecraftForgeClient.registerItemRenderer(ModItems.crystalItem.itemID, new RenderCrystal());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.crystal), new RenderCrystal());
+        MinecraftForgeClient.registerItemRenderer(ModItems.crystalItem, new RenderCrystal());
     }
 
     @Override
