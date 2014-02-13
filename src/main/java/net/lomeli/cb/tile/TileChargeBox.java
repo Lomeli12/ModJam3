@@ -14,11 +14,11 @@ import cofh.api.energy.EnergyStorage;
 public class TileChargeBox extends TileEntity implements IEnergy, IEnergyHandler {
     protected EnergyStorage energyStorage;
     private int type;
-    
+
     public TileChargeBox() {
         init(0);
     }
-    
+
     public TileChargeBox(int meta) {
         init(meta);
     }
@@ -26,7 +26,7 @@ public class TileChargeBox extends TileEntity implements IEnergy, IEnergyHandler
     public void init(int meta) {
         type = meta;
         int maxCharge = 50;
-        switch (meta) {
+        switch(meta) {
         case 0:
             maxCharge = 6000;
             break;
@@ -39,11 +39,11 @@ public class TileChargeBox extends TileEntity implements IEnergy, IEnergyHandler
         }
         energyStorage = new EnergyStorage(maxCharge);
     }
-    
+
     public void setType(int meta) {
         type = meta;
         int maxCharge = 50;
-        switch (meta) {
+        switch(meta) {
         case 0:
             maxCharge = 6000;
             break;
@@ -60,31 +60,35 @@ public class TileChargeBox extends TileEntity implements IEnergy, IEnergyHandler
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (!worldObj.isRemote) {
+        if(!worldObj.isRemote) {
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-            if (meta == 2)
+            if(meta == 2)
                 energyStorage.setEnergyStored(energyStorage.getMaxEnergyStored());
 
-            for (int x = xCoord - 1; x < xCoord + 2; x++)
-                for (int z = zCoord - 1; z < zCoord + 2; z++) {
-                    if (x != xCoord || z != zCoord) {
-                        TileEntity tile = worldObj.getTileEntity(x, yCoord, z);
-                        if (tile != null) {
-                            if (tile instanceof ICrystal) {
-                                if (((ICrystal) tile).getPower() < ((ICrystal) tile).getMaxPower()) {
-                                    if (canCompleteTask(20))
-                                        ((ICrystal) tile).addPower(useCharge(20));
-                                }
-                            } else if (tile instanceof IEnergy) {
-                                if (!((IEnergy) tile).isGenerator() && !((IEnergy) tile).isChargeBox()
-                                        && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity())) {
-                                    if (canCompleteTask(1))
-                                        ((IEnergy) tile).addCharge(useCharge(1));
-                                }
-                            }
+            TileEntity[] tiles = new TileEntity[6];
+            tiles[0] = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
+            tiles[1] = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
+            tiles[2] = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
+            tiles[3] = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+            tiles[4] = worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
+            tiles[5] = worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
+
+            for(TileEntity tile : tiles) {
+                if(tile != null) {
+                    if(tile instanceof ICrystal) {
+                        if(((ICrystal) tile).getPower() < ((ICrystal) tile).getMaxPower()) {
+                            if(canCompleteTask(20))
+                                ((ICrystal) tile).addPower(useCharge(20));
+                        }
+                    }else if(tile instanceof IEnergy) {
+                        if(!((IEnergy) tile).isGenerator() && !((IEnergy) tile).isChargeBox()
+                                && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity())) {
+                            if(canCompleteTask(1))
+                                ((IEnergy) tile).addCharge(useCharge(1));
                         }
                     }
                 }
+            }
         }
     }
 

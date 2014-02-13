@@ -23,7 +23,12 @@ public class PageInfo {
     public static final String crystalizer = base + "Crystalizer";
     public static final String smelter = base + "Smelt";
     public static final String power = base + "power";
+    public static final String solar = base + "solar";
     public static final String battery = base + "battery";
+    public static final String charge = base + "charge";
+    public static final String factoryP1 = base + "factory1";
+    public static final String factoryP2 = base + "factory2";
+    public static final String multiBlock = base + "multiBlockName";
 
     // Images
     public static final ResourceLocation imageSheet1 = new ResourceLocation(Strings.MOD_ID.toLowerCase(), "textures/images/imageSheet1.png");

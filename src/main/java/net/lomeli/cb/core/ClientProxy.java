@@ -36,7 +36,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.crystal), new RenderCrystal());
         MinecraftForgeClient.registerItemRenderer(ModItems.crystalItem, new RenderCrystal());
     }
-
+    
     @Override
     public void registerRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFireWolf.class, new RenderFireWolf());

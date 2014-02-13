@@ -145,6 +145,18 @@ book.crystalbearers:Crystal2=All crystals have mystical abilities that affect th
 book.crystalbearers:Crystal3=Contrary to what one by believe, the crystals are incredibly durable, able to withstand explosions. It is recommended one use a something as strong as diamond to mine up this precious stone.
 book.crystalbearers:shard1=Shards are fragments of crystals mined up using a normal mining tool. Crystal Shards are separated into 5 categories: fire, water, earth, air, or dark.
 book.crystalbearers:shard2=Crystal Shards can also be found in ore form, as incompletely crystals that where devoured by the earth. Whereas shards mined from crystals are random, their ore forms are element specific. The following recipes apply to all shards.
+book.crystalbearers:elements=
+book.crystalbearers:powerName=Crystal Energy
+book.crystalbearers:power=Normally, you would have to use natural elements found around the world to power your crystals. However, new developments in crystal technology have found a way to use modern power on the crystals, making them more efficient and less tedious to power.
+book.crystalbearers:battery=A Crystal Battery is the basic component of powering crystals, as it converts basic power into crystal energy, as well as storing energy. There are currently two tiers of battery, with different storage capacities, thought they function identically.
+book.crystalbearers:charge=A Charge Box main function is to act as a bat box as well as convert basic power into crystal energy for your Crystals and Crystal Factory. As of this writing, it can only accept Redstone Flux power, but more power types will be supported in the future.
+book.crystalbearers:solar=A basic form of power generation for those without access to higher power machines. As it's name states, it generates small amounts of energy as long as there is a clear view of the sky above it. It'll output energy to any adjacent blocks.
+book.crystalbearers:factory1=A Crystal Factory block is part of the even bigger Crystal Factory, a sort of upgrade of a Crystallizer and Crystal Smelter, that allows you to have 100% control on the crystal you're making, as well as lowering the cost to form one.
+book.crystalbearers:factory2=A Crystal Factory multiblock requires a lot of power to run all of it's functionalities, mainly it's crystallization process, which can nearly empty out it's internal buffer. All that energy and it's inventory is stored in the bottom center block.
+book.crystalbearers:multiBlockName=Crystal Factory
+book.crystalbearers:gui1=
+book.crystalbearers:gui2=
+book.crystalbearers:gui3=
 
 # Gui
 gui.crystalbearers:modularDevice=Modular Crystal Stand

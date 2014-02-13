@@ -13,25 +13,31 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (!worldObj.isRemote) {
-            if (worldObj.isDaytime() && !(worldObj.isThundering() || worldObj.isRaining()) && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) {
-                if (++tick == 10) {
+        if(!worldObj.isRemote) {
+            if(worldObj.isDaytime() && !(worldObj.isThundering() || worldObj.isRaining())
+                    && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) {
+                if(++tick >= 15) {
                     int possibleCharge = (int) (worldObj.getTotalWorldTime() % 20L);
                     addCharge(possibleCharge);
                     tick = 0;
                 }
             }
-            for (int x = xCoord - 1; x < xCoord + 2; x++)
-                for (int z = zCoord - 1; z < zCoord + 2; z++) {
-                    if (x != xCoord || z != zCoord) {
-                        TileEntity tile = worldObj.getTileEntity(x, yCoord, z);
-                        if (tile != null && tile instanceof IEnergy) {
-                            if (!((IEnergy) tile).isGenerator() && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity()) && canCompleteTask(1)) {
-                                ((IEnergy) tile).addCharge(useCharge(1));
-                            }
-                        }
+            TileEntity[] tiles = new TileEntity[6];
+            tiles[0] = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
+            tiles[1] = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
+            tiles[2] = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
+            tiles[3] = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+            tiles[4] = worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
+            tiles[5] = worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
+
+            for(TileEntity tile : tiles) {
+                if(tile != null && tile instanceof IEnergy) {
+                    if(!((IEnergy) tile).isGenerator()
+                            && (((IEnergy) tile).getCurrentCharge() < ((IEnergy) tile).getChargeCapcity()) && canCompleteTask(1)) {
+                        ((IEnergy) tile).addCharge(useCharge(1));
                     }
                 }
+            }
         }
     }
 
@@ -48,14 +54,14 @@ public class TileSolarPanel extends TileEntity implements IEnergy {
     @Override
     public int addCharge(int charge) {
         currentCharge += charge;
-        if (currentCharge > getChargeCapcity())
+        if(currentCharge > getChargeCapcity())
             currentCharge = getChargeCapcity();
         return getCurrentCharge();
     }
 
     @Override
     public int useCharge(int charge) {
-        if (canCompleteTask(charge)) {
+        if(canCompleteTask(charge)) {
             currentCharge -= charge;
             return charge;
         }

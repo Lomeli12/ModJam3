@@ -17,7 +17,7 @@ public class GuiButtonNextPage extends GuiButton {
 
     @Override
     public void drawButton(Minecraft par1Minecraft, int par2, int par3) {
-        if (this.field_146123_n) {
+        if (this.enabled) {
             boolean flag = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             par1Minecraft.getTextureManager().bindTexture(new ResourceLocation("textures/gui/book.png"));

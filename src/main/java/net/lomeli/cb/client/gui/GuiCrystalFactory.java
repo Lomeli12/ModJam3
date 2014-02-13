@@ -9,9 +9,10 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.lomeli.cb.CrystalBearers;
-import net.lomeli.cb.core.handler.PacketHandler;
 import net.lomeli.cb.inv.ContainerCrystalFactory;
 import net.lomeli.cb.lib.Strings;
+import net.lomeli.cb.network.PacketHandler;
+import net.lomeli.cb.network.PacketTileUpdate;
 import net.lomeli.cb.tile.TileCrystalFactory;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -62,11 +63,12 @@ public class GuiCrystalFactory extends GuiContainer {
     @Override
     protected void actionPerformed(GuiButton button) {
         if(button != null) {
-            System.out.println(button.displayString);
-            if(button.equals(crystalize))
-                CrystalBearers.pktHandler.sendTileCrystalFactoryPacket(tile, 3, true);
+            if(button.id == 3) {
+                CrystalBearers.pktHandler.sendToServer(new PacketTileUpdate(tile.xCoord, tile.yCoord, tile.zCoord, 3, true));
+            }
             else
-                CrystalBearers.pktHandler.sendTileCrystalFactoryPacket(tile, button.id, false);
+                CrystalBearers.pktHandler.sendToServer(new PacketTileUpdate(tile.xCoord, tile.yCoord, tile.zCoord, button.id,
+                        false));
         }
     }
 

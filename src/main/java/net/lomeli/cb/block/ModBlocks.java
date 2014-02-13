@@ -53,7 +53,7 @@ public class ModBlocks {
             oreShards[i] = new ItemStack(oreShard, 1, i);
         }
 
-        //MinecraftForge.setBlockHarvestLevel(oreShard, "pickaxe", 1);
+        crystal.setHarvestLevel("pickaxe", 1);
 
         OreDictionary.registerOre("oreFireShard", oreShards[0]);
         OreDictionary.registerOre("oreWaterShard", oreShards[1]);

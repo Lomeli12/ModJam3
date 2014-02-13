@@ -1,30 +1,24 @@
 package net.lomeli.cb.core.handler;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-
 import java.util.Random;
 
-import net.lomeli.cb.CrystalBearers;
 import net.lomeli.cb.entities.EntityDarkChicken;
 import net.lomeli.cb.entities.EntityFireWolf;
 import net.lomeli.cb.entities.EntityGhostPig;
 import net.lomeli.cb.entities.EntityThunderCow;
-import net.lomeli.cb.item.IShard;
 import net.lomeli.cb.item.ModItems;
-import net.lomeli.cb.lib.PageInfo;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 public class EntityLivingHandler {
     @SubscribeEvent
@@ -56,35 +50,6 @@ public class EntityLivingHandler {
 
                     }
                 }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void itemPickUpEvent(EntityItemPickupEvent event) {
-        if(event.item != null && event.item.getEntityItem() != null && event.entityPlayer != null) {
-            EntityPlayer player = event.entityPlayer;
-            ItemStack item = event.item.getEntityItem();
-            if(item.getUnlocalizedName().equals(ModItems.crystalItem.getUnlocalizedName())) {
-                if(!player.getEntityData().getBoolean(PageInfo.advCrystalTag)
-                        && player.getEntityData().getBoolean(PageInfo.crystalTag))
-                    CrystalBearers.pktHandler.sendPlayerDiscoveryPacket(PageInfo.advCrystalTag, (EntityPlayerMP) player, true);
-            }else if(item.getItem() instanceof IShard) {
-                if(!player.getEntityData().getBoolean(PageInfo.crystalTag))
-                    CrystalBearers.pktHandler.sendPlayerDiscoveryPacket(PageInfo.crystalTag, (EntityPlayerMP) player, true);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if(event.entity != null && (event.entity instanceof EntityPlayerMP)) {
-            EntityPlayerMP player = (EntityPlayerMP) event.entity;
-            if(!player.getEntityData().getBoolean(PageInfo.book)) {
-                // PacketHandler.doesPlayerHaveTag(player, PageInfo.book)) {
-                player.inventory.addItemStackToInventory(new ItemStack(ModItems.scanner, 1, 1));
-                player.getEntityData().setBoolean(PageInfo.book, true);
-                CrystalBearers.pktHandler.sendPlayerDiscoveryPacket(PageInfo.book, (EntityPlayerMP) player, true);
             }
         }
     }

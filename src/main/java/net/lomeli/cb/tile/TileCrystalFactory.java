@@ -603,12 +603,12 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         for(int i = 0; i < tanks.length; i++) {
             tanks[i].readFromNBT(data);
         }
-        NBTTagList tagList = data.getTagList("Inventory", this.getSizeInventory());
-        for(int i = 0; i < tagList.tagCount(); ++i) {
-            NBTTagCompound tagCompound = (NBTTagCompound) tagList.getCompoundTagAt(i);
-            byte slot = tagCompound.getByte("Slot");
-            if(slot >= 0 && slot < this.inventory.length)
-                this.inventory[slot] = ItemStack.loadItemStackFromNBT(tagCompound);
+        NBTTagList localNBTTagList = data.getTagList("Inventory", 10);
+        this.inventory = new ItemStack[getSizeInventory()];
+        for (int i = 0; i < localNBTTagList.tagCount(); i++) {
+          NBTTagCompound localNBTTagCompound = localNBTTagList.getCompoundTagAt(i);
+          int j = localNBTTagCompound.getByte("Slot") & 0xFF;
+          if ((j >= 0) && (j < this.inventory.length)) this.inventory[j] = ItemStack.loadItemStackFromNBT(localNBTTagCompound);
         }
 
         energyStorage.readFromNBT(data);
@@ -635,17 +635,17 @@ public class TileCrystalFactory extends TileEntity implements IEnergy, ISidedInv
         for(int i = 0; i < tanks.length; i++) {
             tanks[i].writeToNBT(data);
         }
-        NBTTagList tagList = new NBTTagList();
-        for(int currentIndex = 0; currentIndex < inventory.length; ++currentIndex) {
-            if(inventory[currentIndex] != null) {
-                NBTTagCompound tagCompound = new NBTTagCompound();
-                tagCompound.setByte("Slot", (byte) currentIndex);
+        NBTTagList localNBTTagList = new NBTTagList();
 
-                inventory[currentIndex].writeToNBT(tagCompound);
-                tagList.appendTag(tagCompound);
-            }
+        for (int i = 0; i < this.inventory.length; i++) {
+          if (this.inventory[i] != null) {
+            NBTTagCompound localNBTTagCompound = new NBTTagCompound();
+            localNBTTagCompound.setByte("Slot", (byte)i);
+            this.inventory[i].writeToNBT(localNBTTagCompound);
+            localNBTTagList.appendTag(localNBTTagCompound);
+          }
         }
-        data.setTag("Inventory", tagList);
+        data.setTag("Inventory", localNBTTagList);
 
         energyStorage.writeToNBT(data);
         data.setInteger("masterX", masterX);

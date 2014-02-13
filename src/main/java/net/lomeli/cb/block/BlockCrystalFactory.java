@@ -30,6 +30,7 @@ public class BlockCrystalFactory extends BlockCB implements ITileEntityProvider 
         super(Material.rock, "crystalFactory_");
         setBlockName("factory");
         setHardness(2.0F);
+        this.slipperiness = 1.3f;
         setResistance(10.0F);
     }
 

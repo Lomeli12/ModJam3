@@ -11,12 +11,12 @@ import net.lomeli.cb.core.ModRecipes;
 import net.lomeli.cb.core.handler.BlockBreakHandler;
 import net.lomeli.cb.core.handler.EntityLivingHandler;
 import net.lomeli.cb.core.handler.GuiHandler;
-import net.lomeli.cb.core.handler.PacketHandler;
 import net.lomeli.cb.element.ElementRegistry;
 import net.lomeli.cb.element.FluidElements;
 import net.lomeli.cb.entities.ModEntities;
 import net.lomeli.cb.item.ModItems;
 import net.lomeli.cb.lib.Strings;
+import net.lomeli.cb.network.PacketHandler;
 
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -43,7 +43,7 @@ public class CrystalBearers {
 
     public static CreativeTabs modTab = new CreativeTabCrystals(CreativeTabs.getNextID());
 
-    public static PacketHandler pktHandler;
+    public static final PacketHandler pktHandler = new PacketHandler();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -57,7 +57,6 @@ public class CrystalBearers {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        pktHandler = new PacketHandler();
         pktHandler.init();
 
         proxy.registerTile();
